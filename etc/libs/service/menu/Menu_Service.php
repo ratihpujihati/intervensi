@@ -667,14 +667,15 @@ class menu_Service {
 		try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 		 
-			$where = " where kode_kelurahan = '$kode_kelurahan' ";
-			$sqlProses = "select * from m_kelurahan";	
+			$where = " where kec.kode_kecamatan = kel.kode_kecamatan and kel.kode_kelurahan = '$kode_kelurahan' ";
+			$sqlProses = "select kel.*, kec.* from m_kelurahan kel, m_kecamatan kec";	
 
 			
 			$sqlData = $sqlProses.$where;
 			$result = $db->fetchRow($sqlData);	
 			
 			$hasilAkhir = array("kode_kelurahan"  	=>(string)$result->kode_kelurahan,
+								"kode_kecamatan"  	=>(string)$result->kode_kecamatan, 
 								"Kelurahan"  	=>(string)$result->Kelurahan);
 			return $hasilAkhir;			
 		
@@ -757,12 +758,14 @@ class menu_Service {
 			$xLimit=$itemPerPage;
 			$xOffset=($pageNumber-1)*$itemPerPage;
 
-			$whereOpt = " where ($kategoriCari like '%$katakunciCari%')";
+			$whereOpt = "  and ($kategoriCari like '%$katakunciCari%')";
 			if($katakunciCari != "") { $where = $whereOpt;} 
-			$order = " order by kode_kelurahan";
-			$sqlProses = "select * from m_kelurahan".$where;	
+			$order = " order by kel.kode_kelurahan";
+			$sqlProses = "select kel.kode_kelurahan, kel.Kelurahan , kec.nama_kecamatan from m_kelurahan kel, m_kecamatan kec 
+						  where kec.kode_kecamatan = kel.kode_kecamatan".$where;	
 			$sqlProses1 = $sqlProses.$order;
 			
+			//var_dump($sqlProses);
 			if(($pageNumber==0) && ($itemPerPage==0)){	
 				$sqlTotal = "select count(*) from ($sqlProses) a";
 				$hasilAkhir = $db->fetchOne($sqlTotal);
@@ -773,6 +776,7 @@ class menu_Service {
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array("kode_kelurahan"  	=>(string)$result[$j]->kode_kelurahan,
+										"nama_kecamatan"  	=>(string)$result[$j]->nama_kecamatan,
 										"Kelurahan"  	=>(string)$result[$j]->Kelurahan);
 			}	
 			return $hasilAkhir;  
@@ -935,6 +939,23 @@ class menu_Service {
 			echo $e->getMessage().'<br>';
 			return 'gagal <br>';
 		}
+	}
+	
+	public function getKecamatanListAll() {
+	
+	   $registry = Zend_Registry::getInstance();
+	   $db = $registry->get('db');
+	   try {
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $db->fetchAll('SELECT * FROM m_kecamatan order by kode_kecamatan');
+				
+		 
+         $jmlResult = count($result);
+		 return $result;
+	    } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+	     return 'gagal';
+	   }
 	}
 	
 	//----------------------------------------------------------------------------------------------------

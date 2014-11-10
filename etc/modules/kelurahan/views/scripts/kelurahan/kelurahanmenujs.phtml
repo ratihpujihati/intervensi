@@ -52,6 +52,10 @@ var tambahKelurahan_opt = {
 			alert('Kode Kelurahan harus Diisi');
 			return false;
 		}
+		if (document.getElementById('kode_kecamatan').value == ''){
+			alert('Kode Kecamatan harus Diisi');
+			return false;
+		}
 		if (document.getElementById('Kelurahan').value == ''){
 			alert('Nama Kelurahan harus Diisi');
 			return false;
@@ -68,6 +72,10 @@ var ubahKelurahan_opt = {
 	beforeSubmit : function() {
 		if (document.getElementById('kode_kelurahan').value == ''){
 			alert('Kode Kelurahan harus Diisi');
+			return false;
+		}
+		if (document.getElementById('kode_kecamatan').value == ''){
+			alert('Kode Kecamatan harus Diisi');
 			return false;
 		}
 		if (document.getElementById('Kelurahan').value == ''){
@@ -93,4 +101,15 @@ function Kelurahanhapus(param1, param2)
 			 });
 	}
 }  
+
+function pilihKecamatan(jenisForm)
+{
+	kode_kecamatan = document.getElementById('kode_kecamatan').value;
+	//jenisForm = document.getElementById('jenisForm').value;
+	var url = '<?php echo $this->basePath; ?>/kelurahan/kelurahan/kelurahanolahdata';
+	var param = {kode_kecamatan:kode_kecamatan,jenisForm:jenisForm};
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
 </script>

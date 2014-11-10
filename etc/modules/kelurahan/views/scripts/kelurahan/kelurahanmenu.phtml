@@ -28,7 +28,7 @@ $numToDisplay = $this->numToDisplay;
 		<div class="search-panel">
 			<form method="post" id="frmCariKelurahan" name="frmCariKelurahan">Kata Kunci :
 				<?
-				$kategoriCari = array("Kelurahan" => "Kelurahan",  "kode_kelurahan" => "Kode Kelurahan");
+				$kategoriCari = array("kel.Kelurahan" => "Kelurahan",  "kel.kode_kelurahan" => "Kode Kelurahan");
 										
 				echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
 				?>
@@ -57,6 +57,7 @@ $numToDisplay = $this->numToDisplay;
 			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
 				<th width=5%  class="nosort">No</th> 
 				<th width=7% class="sorted order2 sortable">Kode Kelurahan</th> 
+				<th width=7% class="sorted order2 sortable">Kecamatan</th> 
 				<th width=15% class="sorted order2 sortable">Kelurahan</th> 
 				<th width=10% colspan="2"  class="nosort">Tindakan</th>
 				
@@ -72,6 +73,7 @@ $numToDisplay = $this->numToDisplay;
 						<tr class="event2">
 					<? } 
 					$kode_kelurahan = $this->escape($val['kode_kelurahan']); 
+					$nama_kecamatan = $this->escape($val['nama_kecamatan']); 
 					$Kelurahan = $this->escape($val['Kelurahan']); 
 					$Urut = $this->escape($val['Urut']); 
 				
@@ -82,6 +84,7 @@ $numToDisplay = $this->numToDisplay;
 					
 					<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
 					<td class="clleft">&nbsp;<? echo $kode_kelurahan;?></td>
+					<td class="clleft">&nbsp;<? echo $nama_kecamatan;?></td>
 					<td class="clleft">&nbsp;<? echo $Kelurahan;?></td>						
 					<td><div onClick="kelurahanForm('update','<? echo $kode_kelurahan;?>');" class="edit" title="Ubah Data"></div></td>
 					<td><div class="delete" title="Hapus Data" onClick="Kelurahanhapus('kode_kelurahan', '<? echo $kode_kelurahan; ?>')" ></td>

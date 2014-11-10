@@ -88,12 +88,13 @@ class Kelurahan_KelurahanController extends Zend_Controller_Action {
 		$this->view->totKelurahan = $this->menu_serv->getcarikelurahan($dataMasukan,0,0,0);
 		$this->view->kelurahanMenu = $this->menu_serv->getcarikelurahan($dataMasukan,$currentPage, $numToDisplay,$this->view->totKelurahan);
 	
-	
+		//var_dump($this->view->kelurahanMenu);
 	}
 	
 	public function kelurahanolahdataAction(){
 		$this->view->jenisForm = $_REQUEST['jenisForm'];
 		$kode_kelurahan= $_REQUEST['kode_kelurahan'];
+		$this->view->kecamatanList = $this->menu_serv->getKecamatanListAll();
 		$this->view->kelurahanMenu = $this->menu_serv->getkelurahanedit($kode_kelurahan);
 	}
 	
@@ -102,6 +103,7 @@ class Kelurahan_KelurahanController extends Zend_Controller_Action {
 		$Kelurahan = $_POST['Kelurahan'];
 		
 		$dataMasukan = array("kode_kelurahan" => $kode_kelurahan,
+							 "kode_kecamatan" => $kode_kecamatan,
 							 "Kelurahan" => $Kelurahan);
 									 
 		$this->view->kelurahanInsert = $this->menu_serv->getsimpankelurahan($dataMasukan);
@@ -118,6 +120,7 @@ class Kelurahan_KelurahanController extends Zend_Controller_Action {
 		$Kelurahan = $_POST['Kelurahan'];
 		
 		$dataMasukan = array("kode_kelurahan" => $kode_kelurahan,
+							 "kode_kecamatan" => $kode_kecamatan,
 							 "Kelurahan" => $Kelurahan);
 									 
 		$this->view->ubahKelurahan = $this->menu_serv->getsimpankelurahanedit($dataMasukan);

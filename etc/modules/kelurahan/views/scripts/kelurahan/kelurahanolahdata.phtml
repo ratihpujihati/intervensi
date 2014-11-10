@@ -47,7 +47,22 @@ $ctrlFrm = new Zend_View();
 		?>
 					</td>
 				</tr>
-				
+				<tr>
+				    <td align="right" width="180">* Kecamatan :</td>
+					<td>
+						<?
+						$jmlKecamatanList = count($this->kecamatanList);
+						$kecamatanList['-'] = '--Pilih--';
+						for ($i = 0; $i < $jmlKecamatanList; $i++) {
+						    $kecamatanList[$this->kecamatanList[$i]->kode_kecamatan] = (string)$this->kecamatanList[$i]->nama_kecamatan;			 
+						}
+						
+						$kecamatanAtrib = array("id"=>"kode_kecamatan", "tabindex"=>"17", "onchange"=>"javascript:pilihKecamatan($this->jenisForm);");
+						echo $ctrlFrm->formSelect('kode_kecamatan', $this->kecamatanSubMenu['kode_kecamatan'], $kecamatanAtrib, $kecamatanList);
+
+						?>
+					</td>
+				</tr>
 				<tr>
 				    <td align="right" width="180">* Kelurahan:</td>
 					<td>
