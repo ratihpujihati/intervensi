@@ -55,7 +55,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->indikatorMin = $this->menu_serv->getIndikatorMin();
 	}
 	
-	//INDIKATOR MAXIMUM
+	//------------------------------------------------------------------------INDIKATOR MAXIMUM
 	public function indikatormaxjsAction(){
 		header('content-type : text/javascript');
 		$this->render('indikatormaxjs');
@@ -84,8 +84,42 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->currentPage = $currentPage;
 		$this->view->totIndikatorMax = $this->menu_serv->getcariindikatormax($dataMasukan,0,0,0);
 		$this->view->indikatorMaxMenu = $this->menu_serv->getcariindikatormax($dataMasukan,$currentPage, $numToDisplay,$this->view->totIndikatorMax); 		
-		$this->view->indikatorMaxList = $this->menu_serv->getIndikatorMax();
+		$this->view->indikatorMaxList = $this->menu_serv->getindikatorMaxListAll();
 	}
+	//------------------------------------------------------------------------END MAXIMUM
+	
+	//------------------------------------------------------------------------INDIKATOR MINIMUM
+	public function indikatorminjsAction(){
+		header('content-type : text/javascript');
+		$this->render('indikatorminjs');
+    }
+	
+	public function indikatorminmenuAction(){
+		$currentPage = $_REQUEST['currentPage']; 
+			
+		if((!$currentPage) || ($currentPage == 'undefined'))
+		{
+			$currentPage = 1;
+		} 
+		
+		$kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$katakunciCari 	= $_POST['carii'];
+		$sortBy			= 'id_indikator';
+		$sort			= 'asc';
+		
+		$dataMasukan = array("kategoriCari" => $kategoriCari,
+							"katakunciCari" => $katakunciCari,
+							"sortBy" => $sortBy,
+							"sort" => $sort);
+							 
+		$numToDisplay = 10;
+		$this->view->numToDisplay = $numToDisplay;
+		$this->view->currentPage = $currentPage;
+		$this->view->totIndikatorMin = $this->menu_serv->getcariindikatormin($dataMasukan,0,0,0);
+		$this->view->indikatorMinMenu = $this->menu_serv->getcariindikatormin($dataMasukan,$currentPage, $numToDisplay,$this->view->totIndikatorMin); 		
+		$this->view->indikatorMinList = $this->menu_serv->getindikatorMinListAll();
+	}
+	//------------------------------------------------------------------------END MINIMUM
 	
 	public function kotaolahdataAction(){
 		$this->view->jenisForm = $_REQUEST['jenisForm'];

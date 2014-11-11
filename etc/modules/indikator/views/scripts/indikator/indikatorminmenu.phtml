@@ -4,7 +4,7 @@ require_once 'share/format_date.php';
 require_once 'share/format_page.php';
 require_once "share/share_message.php";
 require_once "share/oa_dec_cur_conv.php";
-require_once "indikatormaxjs.phtml";
+require_once "indikatorminjs.phtml";
 $referensi = Menu_Service::getInstance();
 
 $ctrlFrm = new Zend_View();
@@ -23,18 +23,18 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">Indikator Maximum</h2>
+		<h2 class="title">Indikator Minimum</h2>
 		<div class="search-panel">
-			<form method="post" id="frmPilihIndikatorMax" name="frmCariIndikatorMax"> Pilih Indikator : <br/><br/><br/>
+			<form method="post" id="frmPilihIndikatorMin" name="frmCariIndikatorMin"> Pilih Indikator : <br/><br/><br/>
 				<?
-					$jmlIndikatorMaxList = count($this->indikatorMaxList);
-					$indikatorMaxList['-'] = '--Pilih--';
-					for ($i = 0; $i < $jmlIndikatorMaxList; $i++) {
-						$indikatorMaxList[$this->indikatorMaxList[$i]->id_indikator] = (string)$this->indikatorMaxList[$i]->kode_indikator .".  ". (string)$this->indikatorMaxList[$i]->nama_indikator;			 
+					$jmlIndikatorMinList = count($this->indikatorMinList);
+					$indikatorMinList['-'] = '--Pilih--';
+					for ($i = 0; $i < $jmlIndikatorMinList; $i++) {
+						$indikatorMinList[$this->indikatorMinList[$i]->id_indikator] = (string)$this->indikatorMinList[$i]->kode_indikator .".  ". (string)$this->indikatorMinList[$i]->nama_indikator;			 
 					}
 					
-					$indikatorMaxAtrib = array("height"=>"10", "width"=>"10", "id"=>"id_indikator", "tabindex"=>"17", "onchange"=>"javascript:pilihIndikatorMax($this->jenisForm);");
-					echo $ctrlFrm->formSelect('id_indikator', $this->indikatorMaxMenu['id_indikator'], $indikatorMaxAtrib, $indikatorMaxList);
+					$indikatorMinAtrib = array("height"=>"10", "width"=>"10", "id"=>"id_indikator", "tabindex"=>"17", "onchange"=>"javascript:pilihIndikatorMin($this->jenisForm);");
+					echo $ctrlFrm->formSelect('id_indikator', $this->indikatorMinMenu['id_indikator'], $indikatorMinAtrib, $indikatorMinList);
 
 				?>
 			</form>

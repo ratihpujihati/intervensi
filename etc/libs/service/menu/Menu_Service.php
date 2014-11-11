@@ -1532,7 +1532,7 @@ class menu_Service {
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------------
-	//INDIKATOR MINIMUM
+	//INDIKATOR MINIMUM 0
 	public function getIndikatorMin(){
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -1544,6 +1544,67 @@ class menu_Service {
 	         echo $e->getMessage().'<br>';
 		     return 'Data tidak ada <br>';
 		   }
+	}
+	
+	public function getindikatorMinListAll() {	
+	   $registry = Zend_Registry::getInstance();
+	   $db = $registry->get('db');
+	   try {
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $db->fetchAll('select * from m_indikator where kategori = 0');
+				
+		 
+         $jmlResult = count($result);
+		 return $result;
+	    } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+	     return 'gagal';
+	   }
+	}	
+	
+	public function getcariindikatormin(array $dataMasukan, $pageNumber, $itemPerPage,$total){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		$kategoriCari 	= $dataMasukan['kategoriCari'];
+		$katakunciCari 	= $dataMasukan['katakunciCari'];
+		$sortBy			= $dataMasukan['sortBy'];
+		$sort			= $dataMasukan['sort'];
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		 
+			$xLimit=$itemPerPage;
+			$xOffset=($pageNumber-1)*$itemPerPage;
+
+			$whereOpt = " and ($kategoriCari like '%$katakunciCari%')";
+			if($katakunciCari != "") { $where = $whereOpt;} 
+			$order = " order by kode_indikator ";
+			$sqlProses = "select * from m_indikator where kategori = 0".$where;	
+			$sqlProses1 = $sqlProses.$order;
+			
+			if(($pageNumber==0) && ($itemPerPage==0)){	
+				$sqlTotal = "select count(*) from ($sqlProses) a";
+				$hasilAkhir = $db->fetchOne($sqlTotal);
+			}else{
+				$sqlData = $sqlProses.$order." limit $xLimit offset $xOffset";
+				$result = $db->fetchAll($sqlData);				
+			}
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array("id_indikator"  	=>(string)$result[$j]->id_indikator,
+										"nama_indikator"  	=>(string)$result[$j]->nama_indikator,
+										"definisi"  	=>(string)$result[$j]->definisi,
+										"manfaat"  	=>(string)$result[$j]->manfaat,
+										"sumber_data"  	=>(string)$result[$j]->sumber_data,
+										"nilai_target"  	=>(string)$result[$j]->nilai_target,
+										"kategori"  	=>(string)$result[$j]->kategori,
+										"kota"  	=>(string)$result[$j]->kota);
+			}	
+			return $hasilAkhir;  
+		} catch (Exception $e) {
+			echo $e->getMessage().'<br>';
+			return 'gagal <br>';
+		}
 	}
 
 }
