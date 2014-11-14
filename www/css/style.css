@@ -6,7 +6,10 @@ Date Modified:04/08/2009
 @import "ui.theme.css";
 @import "ui.datepicker.css";
 body {
-	background: none repeat scroll 0% 0% rgb(218, 218, 218);
+	/*background: none repeat scroll 0% 0% #BBDEFB;*/
+	/* background-color: #b84d45; */
+	/* background-image: url(/images/bg.png) repeat; */
+	background: #DBDBEA url(/images/header-bg.jpg) repeat;
 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
 	font-size:12px;
 	COLOR: #333;
@@ -201,6 +204,7 @@ select {
     line-height: 24px;
     padding: 2px 8px;
 	margin-bottom: 10px;
+	width: 300px;
 }
 
 
@@ -482,7 +486,7 @@ option.disabled-option {
 div#container {
 	padding: 0;
 	margin:0 auto;
-	border:8px solid #173653;
+	border:3px solid #00796B;
 	border-top:none;
 	width:982px;
 		
@@ -492,8 +496,8 @@ div#header {
 	color: #E3EAEE;
 	padding:0;
 	margin:0;
-	height:82px;
-	background:#418FCC url('../images/headerx.jpg') no-repeat;            
+	height: 120px ;/*82px;*/
+	background:#418FCC url('../images/header.png') no-repeat;            
 	width:982px;
 }
 /* Content*/
@@ -709,7 +713,7 @@ div#content .contentdata-modul {
 	padding-right:10px;
 	height:20px;
 	line-height:20px;
-	background:#777;
+	background:#004D40;
 	font-size: 12px;
 	margin:0 auto;
 	color:#FFF;
@@ -1308,7 +1312,7 @@ P.text {
 	float:right;
 	margin:0 3px 0 0;
 	}	  
-
+/* 
 .add {
 	float:right;
 	background: transparent url(../images/icon/add.png) no-repeat;
@@ -1320,12 +1324,12 @@ P.text {
 	border:0px solid;
 	cursor:pointer;
 	}
-	
+	 */
 .edit, .delete, .disposisi, .unread, .read, .reply, .unit, .konsep, .chgpasswd, .respasswd, .view, .filedoc, .prt, .pdf{
 	
 	display:inline;
-	width:24px;
-	height:24px;
+	width:32px;
+	height:32px;
 	padding:0 1px;
 	cursor:pointer;
 	 display: block;
@@ -1349,8 +1353,8 @@ P.text {
 	border:0px solid;
 	cursor:pointer;
 	}	
-.edit {	margin:0 auto;center; background: transparent url(../images/icon/minus.png) no-repeat;}
-.delete{ background: transparent url(../images/icon/delete.png) no-repeat;}
+.edit {	margin:0 auto;center; background: transparent url(../icon/edit.png) no-repeat;}
+.delete{ background:  url(../icon/garbage3.png) no-repeat;}
 .disposisi { background: transparent url(../images/disposisi.gif) no-repeat;}
 .reply { background: transparent url(../images/page_reply.png) no-repeat;}
 .filedoc { background: transparent url(../images/icon_file.gif) no-repeat;}
@@ -2398,7 +2402,7 @@ button.mouseOut    { background-color: #FFFFFF; border: 1px solid #FFFFFF; paddi
    position:relative;
     width:auto;
     float:right;
-    margin:57px 20px 0 0;
+    margin:94px 20px 0 0;
     background-image: url('../images/bar_mod.gif');
     height:22px;
     color:#666;
@@ -2445,6 +2449,54 @@ button.mouseOut    { background-color: #FFFFFF; border: 1px solid #FFFFFF; paddi
 .rw2  {float:left;width:140px}	
 .foto{float:left;border:1px solid #CCC;padding:2px;margin-right:5px; }	
 
+.add {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 12px;
+    border: 0px solid #1e8076;
+    border-radius: 0px;
+    background: #009687;
+    background: -webkit-gradient(linear, left top, left bottom, from(#009687), to(#00786c));
+    background: -moz-linear-gradient(top, #009687, #00786c);
+    background: linear-gradient(to bottom, #009687, #00786c);
+    text-shadow: #004b44 1px 1px 1px;
+    font: normal normal bold 14px arial;
+    color: #ffffff;
+    text-decoration: none;
+	float:right;
+	margin-bottom: 5px;
+}
+.add:hover,
+.add:focus {
+    border: 0px solid #30cdbd;
+    background: #00b4a2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#00b4a2), to(#009082));
+    background: -moz-linear-gradient(top, #00b4a2, #009082);
+    background: linear-gradient(to bottom, #00b4a2, #009082);
+    color: #ffffff;
+    text-decoration: none;
+	cursor:pointer;
+}
+.add:active {
+    background: #005a51;
+    background: -webkit-gradient(linear, left top, left bottom, from(#005a51), to(#00786c));
+    background: -moz-linear-gradient(top, #005a51, #00786c);
+    background: linear-gradient(to bottom, #005a51, #00786c);
+}
+.add:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAEn0lEQVRIie2Vz29UVRTHP/e9Nz87Le30Bx2YobT8ECxCAUFAVEJQWZmY6MKVSty5UJcYF12oiTEx0Y1xReLGBQtjSIwpBCGoEJXyGxSQUlpaaJnS6bzOvHn3l4tpa3/Q6B/gSU7uzT3nfr/vfO9958L/9i8mFgvs+6jes9rNNqaSG1saG19zRGyDtU4HgBDmlrGVyyP5/Dd5v3TR8fTg0ffH1X8meLUbR9Vl39iQa3u9vWX19q6VG+INqTSJSAKAQJYZ88c4f/ty2Ddy88yVgduH3Im7Xx/uxszHcucvPPNxTTy0DW+/tK3rwxc37VnXmVvjue5dSvIsheAUxUovyg5TE4uwtrXT7ViaaYt64e7egYlw9Z7J3r9OoBetYG93QypdGzv43MZV7+574slkoO4yEfQS6vtYzLxyHaJuC3XxrcS95Ry7+Hvpx0s3PxsrBp+c6C7401ne7C3JGM+uz8UOdK1sTuYnzzIZ/okyPmAfIaQmVPcI5Elqouvoam9OjowPvNV7o/Iz8MMjCRKefmdVJtGq7H0mStcwJpiJnT4a4UxPFIAdL4TsfF4ClpAigbpEXWw9HZlk67X+8fdmE8ycwdMH67sey4lPH2+P4VeGqKhJlLEoA8pAYWgNldHt1CY6yLRr6rMPZuJSKyrKJ5WIkC8Eq6Kd8e/unAruzanAVXp/psmlLMuEahJj7ZTmFgtIqVGqehOl1IRyWrbqKMUkUS9Kpgncq3o/cH6+RFtTKUUpDJC6ehHOHY/QezwCQCrmkopJAM70uBw7kgRgy17J5r0S0CgTkEopDGLrgjMQxjRZoSmFoLUFAZ5YTjreMfMFYRgCEBUZ0vFMFUDcIpB9gEXqECsUwrhNCwissWEpsHiuQU9VH0qDlJL5Zq1FCDGTU5EAAkdYtLFYY8OFBMoMTviCVMpBTTGs35Zm25Y1AFw4PcKFX0YB2LSrmU07WwDw3SK+vF0FcwW+L7DKDD5CIn1keNg70NYeQWqJsYoyZxnlLAB5vQwpl0/Nf6OPoepGXXVHeFgbYWhYY1DfTuM60xMpxIkHo3qkXHaBGiqKOT4tl5SyKst0TFoqCqCGUtkhP6pHjBE/TePO/AeDv+ogt5XGWCKyu2FJE4EKkFqhtUUbWJFdzVO7NrNxVyu12SKT5h7agLYCRyRIRlq4P+zz4F7w+ckv1PcLJAKQvvhy6HalqyZp9qUbV3uF0jCT8iHaKIY5xzDnZmULXOGRjDZQn8gw9qCohvrDnoovvpqNOaebtneYYsU4t8ol1Vlfn8411C0j6qXQBowV1RtiXVwnQTzSQLqmjSWJLMWC5PqVoV8K+fADOS6vDV79p3kteA92v4JjUu7a5tYlh9o6cjtyuRVEIhGkriB1tTdF3DgRN4aUkoGBO/TfGjgzOlJ40xb19dOH574J8wk8IA7U1TazYsVmXm7MJva3r8lm6xuWJJM1qSgWSiU/HH9YKPXdGBzMD5R7+ns54ue5A4wDJSBcjMABkkAdkAaSqTTpzDqxLl5rl3ox6gBUwERQEqN3r9k/SvkZ0DHAn/JFCaZJnKlqnFlrjzIza1RT4xyJ/gboeUjbJp80UAAAAABJRU5ErkJggg==") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
 
 
 										

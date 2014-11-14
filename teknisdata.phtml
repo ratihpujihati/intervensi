@@ -1,0 +1,339 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+?>
+
+
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Data Sarana Air Bersih
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$("#tabs").tabs();
+	});
+
+
+	function getJenisSistem(jenis){
+	//var jenis   = new String('<?echo trim($this->detailSumur['c_jenis_sistem'])?>'); 
+	//document.getElementById('c_jenis_sistem').value;
+	if(jenis=='Artesis'){	
+	//alert(jenis);
+	document.getElementById('tr_v_dalam_sumur').style.display = '';
+	document.getElementById('tr_n_tahun_buat_sistem').style.display = '';				
+	document.getElementById('tr_n_merk_pompa_submer').style.display = '';
+	document.getElementById('tr_n_tahun_pompa_subm').style.display = '';
+	document.getElementById('tr_v_kap_pompa_submer').style.display = '';
+	document.getElementById('tr_n_tahun_pasang_pompa').style.display = '';
+	document.getElementById('tr_n_merk_pompa_dorong').style.display = '';
+	document.getElementById('tr_v_kap_pompa_dorong').style.display = '';
+	
+	document.getElementById('tr_v_luas_area_tangkap').style.display = 'none';
+	document.getElementById('tr_v_kap_reservoir_gt').style.display = '';
+	document.getElementById('tr_v_kap_reservoir_rt').style.display = '';
+	document.getElementById('tr_c_water_meter_induk').style.display = '';
+	document.getElementById('tr_c_water_meter_konsumen').style.display = '';
+	document.getElementById('tr_c_filter_air').style.display = '';
+	document.getElementById('tr_v_daya_listrik_pasang').style.display = '';
+	document.getElementById('tr_v_kap_reservoir_gt').style.display = '';
+	document.getElementById('tr_v_kap_reservoir_rt').style.display = '';
+	document.getElementById('tr_c_water_meter_induk').style.display = '';
+	document.getElementById('tr_c_water_meter_konsumen').style.display = '';
+	document.getElementById('tr_c_filter_air').style.display = '';
+	document.getElementById('tr_v_daya_listrik_pasang').style.display = '';
+	}
+	if(jenis=='Broncaptering' || jenis=='Absah'){	
+	//alert(jenis);
+	document.getElementById('tr_v_dalam_sumur').style.display = 'none';
+	document.getElementById('tr_n_tahun_buat_sistem').style.display = 'none';				
+	document.getElementById('tr_n_merk_pompa_submer').style.display = 'none';
+	document.getElementById('tr_n_tahun_pompa_subm').style.display = 'none';
+	document.getElementById('tr_v_kap_pompa_submer').style.display = 'none';
+	document.getElementById('tr_n_tahun_pasang_pompa').style.display = 'none';
+	document.getElementById('tr_n_merk_pompa_dorong').style.display = 'none';
+	document.getElementById('tr_v_kap_pompa_dorong').style.display = 'none';
+	
+	document.getElementById('tr_v_luas_area_tangkap').style.display = '';
+	document.getElementById('tr_v_kap_reservoir_gt').style.display = '';
+	document.getElementById('tr_v_kap_reservoir_rt').style.display = '';
+	document.getElementById('tr_c_water_meter_induk').style.display = '';
+	document.getElementById('tr_c_water_meter_konsumen').style.display = '';
+	document.getElementById('tr_c_filter_air').style.display = '';
+	document.getElementById('tr_v_daya_listrik_pasang').style.display = '';
+	
+	}
+}
+</script>
+
+	<tr >
+	<td align="left" width="180" colspan ="3">
+	<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">LOKASI</a></li>
+		<li><a href="#tabs-2">LEMBAGA</a></li>
+		<li><a href="#tabs-3" onclick="javascript:getJenisSistemAwal('<? echo $this->jenisForm;?>','<?echo $this->detailSumur['c_jenis_sitem'];?>');">TEKNIS</a></li>
+		<li><a href="#tabs-4">PELAYANAN</a></li>
+		<li><a href="#tabs-5">OPERASIONAL</a></li>
+		<li><a href="#tabs-6">KEUANGAN</a></li>
+	</ul>
+	</div>
+<div id="tabs-3">
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">FORM DATA SARANA AIR BERSIH</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahteknis'; }
+			else if (strtolower($this->jenisForm) == 'update') {
+			?>
+			<script type="text/javascript">
+				getJenisSistem('<?echo trim($this->detailSumur['c_jenis_sistem'])?>');
+			</script>
+			<?
+			$namaForm = 'frmubahteknis'; }
+			else {$namaForm = 'frmhapusteknis'; }
+		?>
+
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std" onload="getJenisSistem();">
+	<input name="id_airbersih" id="id_airbersih" type="hidden" value="<?echo $this->id_airbersih;?>" />
+	<input name="id_sumur" id="id_sumur" type="hidden" value="<?echo $this->id_sumur;?>" />
+	<tr>
+	<td align="right" width="250">* Jenis Sistem :</td>
+	<td>
+	<?
+if($this->detailSumur['c_jenis_sistem']){
+echo $this->detailSumur['c_jenis_sistem'];
+?>
+<input name="c_jenis_sistem" id="c_jenis_sistem" type="hidden" value="<?echo trim($this->detailSumur['c_jenis_sistem'])?>" />	
+	<?
+	} else {
+	$c_jenis_ssitemList['-'] = '--Pilih--';
+	$c_jenis_sistemList['Artesis'] = 'Artesis';
+	$c_jenis_sistemList['Broncaptering'] = 'Broncaptering';
+	$c_jenis_sistemList['Absah'] = 'Absah';
+	$c_jenis_sistemAtrib = array("id"=>"c_jenis_sistem", "tabindex"=>"17", "onchange" =>"javascript:getJenisSistem(this.value);");
+	echo $ctrlFrm->formSelect('c_jenis_sistem', trim($this->detailSumur['c_jenis_sistem']), $c_jenis_sistemAtrib, $c_jenis_sistemList);
+	}
+	
+	?>
+	</td>
+	</tr>
+
+	<tr id="tr_c_kode_sumur" >
+	<td align="right" width="180"> Kode Sumur :</td>
+	<td>
+	<? 
+	$c_kode_sumurAttrib = array("id"=>"c_kode_sumur","size" => 3,"maxlength" => 3 );
+	echo $ctrlFrm->formText("c_kode_sumur", $this->detailSumur['c_kode_sumur'], $c_kode_sumurAttrib);
+	?> 
+	</td>
+	</tr>
+	
+	<tr id="tr_v_dalam_sumur" >
+	<td align="right" width="180"> Kedalaman Sumur :</td>
+	<td>
+	<? 
+	$v_dalam_sumurAttrib = array("id"=>"v_dalam_sumur","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_dalam_sumur", $this->detailSumur['v_dalam_sumur'], $v_dalam_sumurAttrib);
+	?> Meter
+	</td>
+	</tr>
+
+	<tr id="tr_v_kap_debit_produksi" >
+	<td align="right" width="180"> Kapasitas Debit Produksi :</td>
+	<td>
+	<? 
+	$v_kap_debit_produksiAttrib = array("id"=>"v_kap_debit_produksi","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_kap_debit_produksi", $this->detailSumur['v_kap_debit_produksi'], $v_kap_debit_produksiAttrib);
+	?> M<sup>3</sup>
+	</td>
+	</tr>
+	
+	
+	<tr id="tr_n_tahun_buat_sistem" >
+	<td align="right" width="180"> Tahun Pembuatan Sistem :</td>
+	<td>
+	<? 
+	$n_tahun_buat_sistemAttrib = array("id"=>"n_tahun_buat_sistem","size" => 6,"maxlength" => 4 , "onKeyUp" => "checkIsValidNumber('n_tahun_buat_sistem')"  );
+	echo $ctrlFrm->formText("n_tahun_buat_sistem", $this->detailSumur['n_tahun_buat_sistem'], $n_tahun_buat_sistemAttrib);
+	?>
+	</td>
+	</tr>
+
+	<tr  id="tr_n_merk_pompa_submer">
+	<td align="right" width="180"> Merk Pompa Submersible :</td>
+	<td>
+	<? 
+	$n_merk_pompa_submerAttrib = array("id"=>"n_merk_pompa_submer","size" => 52,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_merk_pompa_submer", $this->detailSumur['n_merk_pompa_submer'], $n_merk_pompa_submerAttrib);
+	?>
+	</td>
+	</tr>
+	<tr id="tr_n_tahun_pompa_subm">
+	<td align="right" width="180"> Tahun Pemasangan Pompa Submersible:</td>
+	<td>
+	<? 
+	$n_tahun_pompa_submAttrib = array("id"=>"n_tahun_pompa_subm","size" => 6,"maxlength" => 4 , "onKeyUp" => "checkIsValidNumber('n_tahun_pasang_pompa')");
+	echo $ctrlFrm->formText("n_tahun_pompa_subm", $this->detailSumur['n_tahun_pompa_subm'], $n_tahun_pompa_submAttrib);
+	?>
+	</td>
+	</tr>
+	<tr id="tr_v_kap_pompa_submer">
+	<td align="right" width="180"> Kapasitas Pompa Submersible :</td>
+	<td>
+	<? 
+	$v_kap_pompa_submerAttrib = array("id"=>"v_kap_pompa_submer","size" => 6,"maxlength" => 4 , "onKeyUp" => "checkIsValidNumber('v_kap_pompa_submer')" );
+	echo $ctrlFrm->formText("v_kap_pompa_submer", $this->detailSumur['v_kap_pompa_submer'], $v_kap_pompa_submerAttrib);
+	?> M<sup>3</sup>
+	</td>
+	</tr>
+
+	<tr  id="tr_n_merk_pompa_dorong">
+	<td align="right" width="180"> Merk Pompa Pendorong :</td>
+	<td>
+	<? 
+	$n_merk_pompa_dorongAttrib = array("id"=>"n_merk_pompa_dorong","size" => 52,"maxlength" => 50 );
+	echo $ctrlFrm->formText("n_merk_pompa_dorong", $this->detailSumur['n_merk_pompa_dorong'], $n_merk_pompa_dorongAttrib);
+	?>
+	</td>
+	</tr>
+
+	<tr id="tr_n_tahun_pasang_pompa">
+	<td align="right" width="180"> Tahun Pemasangan Pompa pendorong:</td>
+	<td>
+	<? 
+	$n_tahun_pasang_pompaAttrib = array("id"=>"n_tahun_pasang_pompa","size" => 6,"maxlength" => 4 , "onKeyUp" => "checkIsValidNumber('n_tahun_pasang_pompa')");
+	echo $ctrlFrm->formText("n_tahun_pasang_pompa", $this->detailSumur['n_tahun_pasang_pompa'], $n_tahun_pasang_pompaAttrib);
+	?>
+	</td>
+	</tr>
+
+	<tr id="tr_v_kap_pompa_dorong">
+	<td align="right" width="180"> Kapasitas Pompa Pendorong :</td>
+	<td>
+	<? 
+	$v_kap_pompa_dorongAttrib = array("id"=>"v_kap_pompa_dorong","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_kap_pompa_dorong", $this->detailSumur['v_kap_pompa_dorong'], $v_kap_pompa_dorongAttrib);
+	?> M<sup>3</sup>
+	</td>
+	</tr>
+
+	
+	<tr id="tr_v_kap_reservoir_gt">
+	<td align="right" width="180"> Kapasitas Reservoir (Ground Tank):</td>
+	<td>
+	<? 
+	$v_kap_reservoir_gtAttrib = array("id"=>"v_kap_reservoir_gt","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_kap_reservoir_gt", $this->detailSumur['v_kap_reservoir_gt'], $v_kap_reservoir_gtAttrib);
+	?> M<sup>3</sup>
+	</td>
+	</tr>
+
+	<tr id="tr_v_kap_reservoir_rt">
+	<td align="right" width="180"> Kapasitas reservoir (Roof Tank):</td>
+	<td>
+	<? 
+	$v_kap_reservoir_rtAttrib = array("id"=>"v_kap_reservoir_rt","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_kap_reservoir_rt", $this->detailSumur['v_kap_reservoir_rt'], $v_kap_reservoir_rtAttrib);
+	?> M<sup>3</sup>
+	</td>
+	</tr>
+
+	<tr id="tr_c_water_meter_induk">
+	<td align="right" width="180">* Water Meter Induk (Ada/Tidak):</td>
+	<td>
+	<?
+	$c_water_meter_indukList['-'] = '--Pilih--';
+	$c_water_meter_indukList['Ada'] = 'Ada';
+	$c_water_meter_indukList['Tidak'] = 'Tidak';
+	$c_water_meter_indukAtrib = array("id"=>"c_water_meter_induk", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_water_meter_induk', trim($this->detailSumur['c_water_meter_induk']), $c_water_meter_indukAtrib, $c_water_meter_indukList);
+	?>
+	</td>
+	</tr>
+
+	<tr id="tr_c_water_meter_konsumen">
+	<td align="right" width="180">* Water Meter Konsumen (Ada/Tidak):</td>
+	<td>
+	<?
+	$c_water_meter_konsumenList['-'] = '--Pilih--';
+	$c_water_meter_konsumenList['Ada'] = 'Ada';
+	$c_water_meter_konsumenList['Tidak'] = 'Tidak';
+	$c_water_meter_konsumenAtrib = array("id"=>"c_water_meter_konsumen", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_water_meter_konsumen', trim($this->detailSumur['c_water_meter_konsumen']), $c_water_meter_konsumenAtrib, $c_water_meter_konsumenList);
+	?>
+	</td>
+	</tr>
+
+	<tr id="tr_c_filter_air">
+	<td align="right" width="180">* Filter Air (Ada/Tidak):</td>
+	<td>
+	<?
+	$c_filter_airList['-'] = '--Pilih--';
+	$c_filter_airList['Ada'] = 'Ada';
+	$c_filter_airList['Tidak'] = 'Tidak';
+	$c_filter_airAtrib = array("id"=>"c_filter_air", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_filter_air', trim($this->detailSumur['c_filter_air']), $c_filter_airAtrib, $c_filter_airList);
+	?>
+	</td>
+	</tr>
+
+	<tr id="tr_v_daya_listrik_pasang">
+	<td align="right" width="180"> Daya Listrik Terpasang:</td>
+	<td>
+	<? 
+	$v_daya_listrik_pasangAttrib = array("id"=>"v_daya_listrik_pasang","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_daya_listrik_pasang", $this->detailSumur['v_daya_listrik_pasang'], $v_daya_listrik_pasangAttrib);
+	?> KW
+	</td>
+	</tr>
+		
+
+	<tr id="tr_v_luas_area_tangkap">
+	<td align="right" width="180"> Luas Area Tangkap:</td>
+	<td>
+	<? 
+	$v_luas_area_tangkapAttrib = array("id"=>"v_luas_area_tangkap","size" => 6,"maxlength" => 4 );
+	echo $ctrlFrm->formText("v_luas_area_tangkap", $this->detailSumur['v_luas_area_tangkap'], $v_luas_area_tangkapAttrib);
+	?> M<sup>2</sup>
+	</td>
+	</tr>
+	<tr id="tr_v_luas_area_tangkap">
+	<td colspan=2>
+	<div class="right">
+		<input type="button" value="Kembali" onclick="airbersihlist();"> 
+		<input type="reset" value="Ulangi"> 
+		<input type="submit" value="Simpan">
+		</div>
+	
+	</td>
+	</tr>
+	<tr colspan=2>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>			
+</table>
+</form>
+</div>
+</td>
+	</tr>
+
+				
+			</table>
+

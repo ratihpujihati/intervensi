@@ -1,10 +1,10 @@
 .ddcolortabs{
 position: relative;
 top: 0px;
-padding: 2px 0;
+padding: 5px 0;
 width: 100%;
-background:#333 url('../images/bar_nav.gif') bottom repeat-x; 
-height:22px;
+background:#004D40 url('../images/bar_nav.gif') bottom repeat-x; 
+height:25px;
 voice-family: "\"}\"";
 voice-family: inherit;
 }
@@ -27,7 +27,7 @@ text-transform:uppercase;
 .ddcolortabs a{
 float:left;
 color: white;
-background:#333 url('../images/bar_nav.gif') bottom repeat-x; 
+background:#004D40 url('../images/bar_nav.gif') bottom repeat-x; 
 /*margin:0 1px 0 0;*/
 /*padding:0 0 1px 3px;*/
 text-decoration:none;
