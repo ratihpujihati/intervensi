@@ -5,15 +5,16 @@ Date Modified:04/08/2009
 */
 @import "ui.theme.css";
 @import "ui.datepicker.css";
+@import "ubuntu.css";
 body {
 	/*background: none repeat scroll 0% 0% #BBDEFB;*/
 	/* background-color: #b84d45; */
 	/* background-image: url(/images/bg.png) repeat; */
 	background: #DBDBEA url(/images/header-bg.jpg) repeat;
-	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-family: 'Roboto','Ubuntu','lucida grande',tahoma,verdana,arial;
 	font-size:12px;
-	COLOR: #333;
-    line-height: 120%;
+	color: #333;
+    ine-height: 1.7em;
     word-spacing : .03em;
 
 	}
@@ -60,7 +61,7 @@ td {
         line-height: 1.5em;
 		margin: 0 0 0.5em 0;
 		padding: 0;
-        font-family:Arial, Geneva, Helvetica, sans-serif;
+        font-family: 'Ubuntu',Arial, Geneva, Helvetica, sans-serif;
 	}
 	h3 {
 		font-size: 1.3em;
@@ -68,7 +69,7 @@ td {
 		margin: 0 0 0.5em 0;
 		padding:0;
         color: black;
-        font-family:Arial, Geneva, Helvetica, sans-serif;
+        font-family: 'Ubuntu',Arial, Geneva, Helvetica, sans-serif;
 	}
 	h4 {
 		font-size: 12px;
@@ -84,7 +85,7 @@ td {
 		font-size: 12px;
 		margin: 10px;
 		padding: 0;
-		line-height:1.4em;
+		line-height: 1.7em;
 	}
 	blockquote {
 		border-left:10px solid #D0D8DC;
@@ -269,7 +270,7 @@ input[readonly="readonly"]{
 	cursor: no-drop;
 	
 	color: rgb(98, 98, 98);
-	font-family: "Helvetica";
+	font-family: 'Ubuntu';
 	font-size: 1em;
 	background: none repeat scroll 0% 0% rgb(228, 228, 228);
 	border: 1px solid rgb(192, 192, 192);
@@ -306,7 +307,7 @@ input[type="submit"] {
         
         display:inline-block;
         color:#ffffff;
-        font-family:arial;
+        font-family:'Ubuntu',arial;
         font-size:12px;
         font-weight:bold;
         padding:4px 15px;
@@ -357,7 +358,7 @@ input[type="button"]{
         
         display:inline-block;
         color:#ffffff;
-        font-family:arial;
+        font-family:'Ubuntu',arial;
         font-size:12px;
         font-weight:bold;
         padding:4px 15px;
@@ -508,7 +509,7 @@ div#content {
 	border-bottom:5px solid #AAA;
 	border-top:none;
 	min-height:200px;
-	background:#FFF url(../images/bg_content.gif) repeat-x;
+	/* background:#FFF url(../images/bg_content.gif) repeat-x; */
 	text-align:justify;
 }
 div#footer {
@@ -718,17 +719,17 @@ div#content .contentdata-modul {
 	margin:0 auto;
 	color:#FFF;
 	text-align:right;
-	font-family: Helvetica, Arial, Sans-serif;
+	font-family: 'Ubuntu',Helvetica, Arial, Sans-serif;
 	} 
 .desc a:link,.desc a:visited {color:#FCF3AB}
 
 h2.title{
   	padding:0px;
-	font-family:Georgia,"Bitstream Vera Serif","Times New Roman",Times,serif;
+	font-family:'Ubuntu',Georgia,"Bitstream Vera Serif","Times New Roman",Times,serif;
   	font-weight:normal;
 	color:#224167;
 	text-align:left;
-	border-bottom: 2px solid #AAA;
+	border-bottom: 2px solid #004D40;
 }
 .info{
   	padding:0px;
@@ -1104,7 +1105,8 @@ table.popcal a.empty:visited {
 
 /* a 'standard' table */
 table.std {
-        border: solid #E1E7E5 2px; /*#08245b 2px;*/
+        border: solid 1px #DDEEEE;
+		color: #336B6B;
         background: #E1E7E5;
 		margin-bottom:5px;
 }
@@ -1119,7 +1121,7 @@ div.ref {
 table.tbl2{    background-color: #f5f5f5}
 
 table.tbl th {background:#C1CEE2;}
-table.tbl2 th {background:#d3d3d3; border:1px solid #999}
+table.tbl2 th {background:#d3d3d3; border-bottom:solid 2px #DDEEEE}
 table.tbl3 th {background:#C1CEE2}
 
 table.tbl td a:hover,table.tbl2 td a:hover {
@@ -1128,7 +1130,12 @@ table.tbl td a:hover,table.tbl2 td a:hover {
 }
 table.tbl tr:hover,table.sortable tr:hover  {
 	text-decoration: none;
-	background:#D3D3D3;
+	background:#FFEFBF;
+	color: #333;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 table.tbl th.sorted {
     background-color: #DDD;   /*707634    4AA5FF #666699;*/
@@ -1138,14 +1145,15 @@ table.tbl th.sorted {
 	background-color: #F4F4F4;
 }
 .event, .bg1 {
-	background-color: #E5E5E5;
+	background-color: #80CBC4;
 }
 .event3 {
 	background-color: #F2F9B8;
 }
 
 .selesai{
-	background-color: #D3D3D3;
+	background-color: #009688;
+	color: #eee;
 }
 
 
@@ -1194,13 +1202,13 @@ table.tbl th,table.tbl3 th, td {
 /*style for  sort table*/
 * {margin:0; padding:0}
 #wrapper {width:100%; margin:0px auto}
-.sortable {width:100%; border:1px solid #999;}
-.sortable th {padding:4px 6px 6px; background:#C1CEE2 url(../images/bg_head_login.gif) repeat-x scroll center top; color:#28313F; text-align:center;}
-.sortable td {padding:2px 4px 4px; border-bottom:0px solid #ccc}
-.sortable .head {background:#C1CEE2 url(../images/bg_head_login.gif) repeat-x scroll center top; cursor:pointer; padding-left:18px}
+.sortable {width:100%;/*  border:1px solid #B2DFDB; */}
+.sortable th {padding:4px 6px 6px; background:#004D40 /* url(../images/bg_head_login.gif) repeat-x scroll center top */; color:#FFFFF2; text-align:center;}
+.sortable td {padding: 8px 2px 15px 4px; border-bottom: 1px dashed #eee}
+.sortable .head {background:#004D40 /* url(../images/bg_head_login.gif) repeat-x scroll center top */; cursor:pointer; padding-left:18px}
 .sortable .desc {background:#AAA url(../images/arrow_down.png) 6px center no-repeat; cursor:pointer; padding-left:18px}
 .sortable .asc {background:#AAA url(../images/arrow_up.png) 6px  center no-repeat; cursor:pointer; padding-left:18px}
-.sortable .head:hover, .sortable .desc:hover, .sortable .asc:hover {color:#444}
+.sortable .head:hover, .sortable .desc:hover, .sortable .asc:hover {color:#FFFFF2}
 
 table.tbl th.sorted a,table.tbl3 th.sorted a, th.sortable a, th.order1 a, th.order2 a {
 	background-position: right;
@@ -1877,9 +1885,17 @@ div.pagination span.disabled {
 	text-align:center;
 	font-weight:bold;
 	line-height:10px;
-	border:1px solid #CCC;
+	/* border:1px solid #CCC; */
 	vertical-align:middle;
+
+	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: white;
 	}
+	
 *html .search-panel {
 	}
 .search-panel2 {

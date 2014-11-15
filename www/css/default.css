@@ -107,7 +107,7 @@ Date Modified:04/08/2009
 	
 		
  /* END NAV */
-#content {background:#6CA6B2;}
+#content {background:#FAFAFA;}
 .bottom {position:relative;clear:both;float:left;width:994px;height:6px;background:url(../images/bot_container.gif) no-repeat;}
 #content-main {background:#E7EBEA;}
 .bt {margin:0 auto;clear:both;height:7px;width:974px;background:url(../images/bot_content.gif) no-repeat;}
@@ -572,7 +572,7 @@ table td.default {border: 1px solid #FADE36/*{borderColorHighlight}*/; backgroun
 
 /* PANEL FORM */
 .panel {
-	background-color:#DBDBEA;
+	/* background-color:#DCEDC8; */
 	color:#28313F;
 	padding:0 10px;
 	border:0px solid;
