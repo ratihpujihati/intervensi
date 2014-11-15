@@ -1885,7 +1885,7 @@ div.pagination span.disabled {
 	text-align:center;
 	font-weight:bold;
 	line-height:10px;
-	/* border:1px solid #CCC; */
+	border-bottom: 3px solid #009688;
 	vertical-align:middle;
 
 	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
