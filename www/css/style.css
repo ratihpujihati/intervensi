@@ -2211,14 +2211,18 @@ a.word { background-image: url("../images/icon_word.gif");}
 .m-fwd {background: transparent url(../images/read.fwd.gif) no-repeat;}
 	
 .updated, .confirm {
-	background: #DDE5E9 url(../images/notice.gif) no-repeat 1em;
-	border: 1px solid #2580B2;
+	background-color: #dff0d8;
+	border : 2px solid #d6e9c6;
+	border-radius: 4px;
 	margin: 1em 5% 10px;
 	padding: 20px 1em 20px 3em;
 	font-weight:bold;
 	font-size:12px;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	color:#0360A2;
+	transition:background .3s;
+	-webkit-transition:background .3s;
+	-moz-transition:background .3s;
 }
 .wide {
 	overflow:auto;
