@@ -31,7 +31,7 @@
 			<div id="tableview">
 			<?
 				$pengguna=$this->pengguna;
-				$vFoto1 = "http://".$_SERVER['SERVER_NAME'].$this->basePath.'/util/tampilfoto/tampilfoto?f='.$i_nip;
+				$vFoto1 = "http://".$_SERVER['SERVER_NAME'].$this->basePath.'/util/tampilfoto/tampilfoto?f='.$pengguna;
 				$filename = trim($pengguna).".jpg"; 
 				$a = "../etc/data/kp/photo/".$filename;
 				$fullpath= "/util/tampilfoto/tampilfoto?f=$pengguna";
@@ -276,7 +276,8 @@ var today="<?=$today?>";
 
 </div><!-- end container -->
      <div id="footer" class="clear"><!--start footer-->
-     <div class="copyright">Copyright &copy; Sistem Intervensi Kemiskinan Kota Cimahi 2013. All Rights Reserved.</div>
+     <div class="copyright" style="font-size:14px" >Copyright &copy; Sistem Intervensi Kemiskinan Pemerintah Kota Cimahi <?php echo date('Y')?>. All Rights Reserved.</div>
+     <div class="copyright" style="font-style:italic">Developed by Ratih Pujihati & Riza Fauzi Rahman</div>
      </div><!-- end footer --> 
 </div>	 
 </body>

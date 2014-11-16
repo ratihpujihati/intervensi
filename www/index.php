@@ -25,7 +25,7 @@ Zend_Loader::loadClass('Zend_Session_Namespace');
 Zend_Loader::loadClass('Zend_Paginator');
 
 //require_once '../etc/oa_service_loader.php';
-
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 Zend_Session::start();
 
 // load configuration

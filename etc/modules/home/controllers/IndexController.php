@@ -32,8 +32,10 @@ class Home_IndexController extends Zend_Controller_Action {
     }
 	
     public function indexAction() {
-		$this->view->p = $_REQUEST['p'];
-		$this->view->penggguna = $_REQUEST['u'];
+		$p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
+		$u = isset($_REQUEST['u']) ? $_REQUEST['u'] : '';
+		$this->view->p = $p;
+		$this->view->penggguna = $u;
 		$this->view->pengguna = $this->sso_serv->getUsername($this->view->penggguna);
 		$request = $this->getRequest();   
 		$ns = new Zend_Session_Namespace('HelloWorld'); 
@@ -47,8 +49,11 @@ class Home_IndexController extends Zend_Controller_Action {
 	
 	
 	public function homeAction(){
-		$pengguna = $_POST['pengguna'];
-		$password = $_POST['password'];
+		/// jika variable global $_POST['pengguna'] ada isinya, maka $_POST['pengguna'] akan disalin ke $pengguna ,
+		//jika tidak maka $pengguna akan berisi string kosong.
+		
+		$pengguna = isset($_POST['pengguna']) ? $_POST['pengguna'] : ''; 
+		$password = isset($_POST['password']) ? $_POST['password'] : '';
 		
 		if ($pengguna && $password) {				
 			$hasiluser = $this->sso_serv->getDataUser1($pengguna,$password);
