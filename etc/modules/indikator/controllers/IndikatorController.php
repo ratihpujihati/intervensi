@@ -121,26 +121,69 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 	}
 	//------------------------------------------------------------------------END MINIMUM
 	
-	public function kotaolahdataAction(){
+	public function indikatorjsAction(){
+		header('content-type : text/javascript');
+		$this->render('indikatorjs');
+    }
+	
+	public function indikatormenuAction(){
+		$currentPage = $_REQUEST['currentPage']; 
+			
+		if((!$currentPage) || ($currentPage == 'undefined'))
+		{
+			$currentPage = 1;
+		} 
+		
+		$kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$katakunciCari 	= $_POST['carii'];
+		$sortBy			= 'id_indikator';
+		$sort			= 'asc';
+		
+		$dataMasukan = array("kategoriCari" => $kategoriCari,
+							"katakunciCari" => $katakunciCari,
+							"sortBy" => $sortBy,
+							"sort" => $sort);
+							 
+		$numToDisplay = 10;
+		$this->view->numToDisplay = $numToDisplay;
+		$this->view->currentPage = $currentPage;
+		$this->view->totIndikator = $this->menu_serv->getcariindikator($dataMasukan,0,0,0);
+		$this->view->indikatorMenu = $this->menu_serv->getcariindikator($dataMasukan,$currentPage, $numToDisplay,$this->view->totIndikator); 		
+		
+	}
+	public function indikatorolahdataAction(){
 		$this->view->jenisForm = $_REQUEST['jenisForm'];
-		$kode_kota= $_REQUEST['kode_kota'];
-		$this->view->kotaMenu = $this->menu_serv->getkotaedit($kode_kota);
+		$id_indikator= $_REQUEST['id_indikator'];
+		$this->view->indikatorMenu = $this->menu_serv->getindikatoredit($id_indikator);
+		$this->view->goalList = $this->menu_serv->getGoalListAll();
 	}
 	
-	public function simpankotaAction(){
-		$kode_kota = $_POST['kode_kota'];
-		$kota = $_POST['kota'];
+	public function simpanindikatorAction(){
+		$kode_indikator = $_POST['kode_indikator'];
+		$id_goal = $_POST['id_goal'];
+		$nama_indikator = $_POST['nama_indikator'];
+		$definisi = $_POST['definisi'];
+		$manfaat = $_POST['manfaat'];
+		$sumber_data = $_POST['sumber_data'];
+		$nilai_target = $_POST['nilai_target'];
+		$kategori = $_POST['kategori'];
 		
-		$dataMasukan = array("kode_kota" => $kode_kota,
-							 "kota" => $kota);
+		$dataMasukan = array("kode_indikator" => $kode_indikator,
+							 "id_goal" => $id_goal,
+							 "nama_indikator" => $nama_indikator,
+							 "definisi" => $definisi,
+							 "manfaat" => $manfaat,
+							 "sumber_data" => $sumber_data,
+							 "nilai_target" => $nilai_target,
+							 "kategori" => $kategori);
 									 
-		$this->view->kotaInsert = $this->menu_serv->getsimpankota($dataMasukan);
+		$this->view->indikatorInsert = $this->menu_serv->getsimpanindikator($dataMasukan);
 		$this->view->proses = "1";	
-		$this->view->keterangan = "Kota";		
-		$this->view->hasil = $this->view->kotaInsert;
+		$this->view->keterangan = "Indikator";		
+		$this->view->hasil = $this->view->indikatorInsert;
 		
-		$this->kotamenuAction();
-		$this->render('kotamenu');	
+		$this->indikatormenuAction();
+		$this->render('indikatormenu');	
 	}
 	
 	public function simpankotaeditAction(){

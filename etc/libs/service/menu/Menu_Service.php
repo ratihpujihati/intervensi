@@ -1456,6 +1456,206 @@ class menu_Service {
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------------
+	//MENU INDIKATOR
+	public function getIndikator(){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchAll("select * from m_indikator");
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
+	public function getGoalListAll() {	
+	   $registry = Zend_Registry::getInstance();
+	   $db = $registry->get('db');
+	   try {
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $db->fetchAll('select * from m_goal');
+				
+		 
+         $jmlResult = count($result);
+		 return $result;
+	    } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+	     return 'gagal';
+	   }
+	}
+	
+	public function getsimpanindikator(array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array("kode_indikator" => $dataMasukan['kode_indikator'],
+								"id_goal" => $dataMasukan['id_goal'],
+								"nama_indikator" => $dataMasukan['nama_indikator'],
+								"definisi" => $dataMasukan['definisi'],
+								"manfaat" => $dataMasukan['manfaat'],
+								"sumber_data" => $dataMasukan['sumber_data'],
+								"nilai_target" => $dataMasukan['nilai_target'],
+								"kategori" => $dataMasukan['kategori']					
+								);
+			
+			$db->insert('m_indikator',$paramInput);
+			$db->commit();
+			return 'sukses';
+		} catch (Exception $e) {
+			 $db->rollBack();
+			 echo $e->getMessage().'<br>';
+			 return 'gagal';
+		}
+	}	
+	
+	public function getindikatoredit($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " where id_indikator = '$id_indikator' ";
+			$sqlProses = "select * from m_indikator";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchRow($sqlData);
+			
+			$hasilAkhir = array("kode_indikator"  	=>(string)$result->kode_indikator,
+								"id_goal"  	=>(string)$result->id_goal,
+								"nama_indikator"  	=>(string)$result->nama_indikator,
+								"definisi"  	=>(string)$result->definisi,
+								"manfaat"  	=>(string)$result->manfaat,
+								"sumber_data"  	=>(string)$result->sumber_data,
+								"nilai_target"  	=>(string)$result->nilai_target,
+								"kategori"  	=>(string)$result->kategori						
+								);
+			return $hasilAkhir;			
+		
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	public function getsimpanindikatoredit(array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array("kode_indikator" => $dataMasukan['kode_indikator'],
+								"id_goal" => $dataMasukan['id_goal'],
+								"nama_indikator" => $dataMasukan['nama_indikator'],
+								"definisi" => $dataMasukan['definisi'],
+								"manfaat" => $dataMasukan['manfaat'],
+								"sumber_data" => $dataMasukan['sumber_data'],
+								"nilai_target" => $dataMasukan['nilai_target'],
+								"kategori" => $dataMasukan['kategori']					
+								);
+			
+			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
+			
+			$db->update('m_indikator',$paramInput, $where);
+			$db->commit();			
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			
+			$errMsg = $errmsgArr[0];
+
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "sukses";
+			}
+	   }
+	}	
+	
+	public function gethapusindikator($id_indikator) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$where[] = " id_indikator = '".$id_indikator."'";
+			
+			$db->delete('m_indikator', $where);
+			$db->commit();
+			
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			
+			$errMsg = $errmsgArr[0];
+
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "sukses";
+			}
+	   }
+	}
+	
+	public function getcariindikator(array $dataMasukan, $pageNumber, $itemPerPage,$total){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		$kategoriCari 	= $dataMasukan['kategoriCari'];
+		$katakunciCari 	= $dataMasukan['katakunciCari'];
+		$sortBy			= $dataMasukan['sortBy'];
+		$sort			= $dataMasukan['sort'];
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		 
+			$xLimit=$itemPerPage;
+			$xOffset=($pageNumber-1)*$itemPerPage;
+
+			$whereOpt = "and ($kategoriCari like '%$katakunciCari%')";
+			if($katakunciCari != "") { $where = $whereOpt;} 
+			$order = " order by kode_indikator ";
+			$sqlProses = "select i.*, g.goal from m_indikator i, m_goal g where i.id_goal=g.id_goal ".$where;	
+			$sqlProses1 = $sqlProses.$order;
+			
+			if(($pageNumber==0) && ($itemPerPage==0)){	
+				$sqlTotal = "select count(*) from ($sqlProses) a";
+				$hasilAkhir = $db->fetchOne($sqlTotal);
+			}else{
+				$sqlData = $sqlProses.$order." limit $xLimit offset $xOffset";
+				$result = $db->fetchAll($sqlData);				
+			}
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array("id_indikator"  	=>(string)$result[$j]->id_indikator,
+										"kode_indikator"  	=>(string)$result[$j]->kode_indikator,
+										"goal"  	=>(string)$result[$j]->goal,
+										"nama_indikator"  	=>(string)$result[$j]->nama_indikator,
+										"definisi"  	=>(string)$result[$j]->definisi,
+										"manfaat"  	=>(string)$result[$j]->manfaat,
+										"sumber_data"  	=>(string)$result[$j]->sumber_data,
+										"nilai_target"  	=>(string)$result[$j]->nilai_target,
+										"kategori"  	=>(string)$result[$j]->kategori,
+										);
+			}	
+			return $hasilAkhir;  
+		} catch (Exception $e) {
+			echo $e->getMessage().'<br>';
+			return 'gagal <br>';
+		}
+	}
+	
+	//---------------------------------------------------------------------------------------------------------------------
 	//INDIKATOR MAXIMUM 1
 	public function getIndikatorMax(){
 		$registry = Zend_Registry::getInstance();

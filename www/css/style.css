@@ -1361,7 +1361,7 @@ P.text {
 	cursor:pointer;
 	}	
 .edit {	margin:0 auto;center; background: transparent url(../icon/edit.png) no-repeat;}
-.delete{ background:  url(../icon/garbage3.png) no-repeat;}
+.delete{ margin:0 auto;center; background:  transparent url(../icon/trash.png) no-repeat;}
 .disposisi { background: transparent url(../images/disposisi.gif) no-repeat;}
 .reply { background: transparent url(../images/page_reply.png) no-repeat;}
 .filedoc { background: transparent url(../images/icon_file.gif) no-repeat;}
@@ -1371,7 +1371,7 @@ P.text {
 .chgpasswd { background: transparent url(../images/chg_passwd.gif) no-repeat;}
 .respasswd { background: transparent url(../images/res_passwd.gif) no-repeat;}
 .unread  { background: transparent url(../images/page_unread.png) no-repeat;}
-.view, .read  { background: transparent url(../images/icon/view.png) no-repeat;}
+.view, .read  { background: transparent url(../icon/penerima.png) no-repeat;}
 .bounder {	background: transparent url(../images/garuda.gif) no-repeat;}
 
 .proceed{

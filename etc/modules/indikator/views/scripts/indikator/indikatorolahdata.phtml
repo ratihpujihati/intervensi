@@ -1,0 +1,136 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+
+$ctrlFrm = new Zend_View();
+?>
+<? if(strtolower($this->jenisForm) == 'insert') {
+		$namaForm = 'frmtambahindikator'; 
+		$jenisAksi = 'Tambah';
+		}
+    else if (strtolower($this->jenisForm) == 'update') {
+		$namaForm = 'frmubahindikator';  
+		$jenisAksi = 'Ubah';
+		}
+	  else {	
+	        $namaForm = 'frmhapusindikator';  
+			$jenisAksi = 'Hapus';
+		}
+		
+?>
+		
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title"><? echo $jenisAksi;?> Data Indikator</h2>
+	    <div class="spacer"></div> 
+		
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">	
+				<tr>
+				    <td align="right" width="180">* Goal :</td>
+					<td>
+						<?
+						echo $jmlGoalList = count($this->goalList);
+						$goalList['-'] = '--Pilih--';
+						for ($i = 0; $i < $jmlGoalList; $i++) {
+						    $goalList[$this->goalList[$i]->id_goal] = (string)$this->goalList[$i]->goal;			 
+						}
+						
+						$goalAtrib = array("id"=>"id_goal", "tabindex"=>"17", "onchange"=>"javascript:pilihGoal($this->jenisForm);");
+						echo $ctrlFrm->formSelect('id_goal', $this->goalMenu['id_goal'], $goalAtrib, $goalList);
+
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Kode Indikator :</td>
+					<td>						
+						<?
+						if($jenisAksi == "Ubah"){
+							$KodeIndikatorAttrib = array("readonly" => "true","size" => 50,"maxlength" => 50);
+						}else{
+							$KodeIndikatorAttrib = array("size" => 50,"maxlength" => 50);
+						}
+						echo $ctrlFrm->formText('kode_indikator', $this->indikatorMenu['kode_indikator'], $KodeIndikatorAttrib);
+						
+						?>
+					</td>
+				</tr>				
+				<tr>
+				    <td align="right" width="180">* Indikator :</td>
+					<td>
+						<?
+						$IndikatorAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('nama_indikator', $this->indikatorMenu['nama_indikator'], $IndikatorAttrib);
+						?>
+						
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">Definisi :</td>
+					<td>
+						<textarea id="definisi" name="definisi">
+						<? echo $this->indikatorMenu['definisi']; ?></textarea>						
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">Manfaat :</td>
+					<td>
+						<textarea id="manfaat" name="manfaat">
+						<? echo $this->indikatorMenu['manfaat']; ?></textarea>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">Sumber Data :</td>
+					<td>
+						<?
+						$SumberDataAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('sumber_data', $this->indikatorMenu['sumber_data'], $SumberDataAttrib);
+						?>						
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Nilai Target :</td>
+					<td>
+						<?
+						$NilaiTargetAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('nilai_target', $this->indikatorMenu['nilai_target'], $NilaiTargetAttrib);
+						?>						
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Kategori :</td>
+					<td>
+						<?
+						$kategoriList = array("0" => "Minimum", "1" => "Maximum");
+						$kategoriAtrib = array("id"=>"kategori", "tabindex"=>"17", "onchange"=>"javascript:pilihKategori($this->jenisForm);");
+						echo $ctrlFrm->formSelect('kategori', $this->indikatorMenu['kategori'], $kategoriAtrib, $kategoriList);
+
+						?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="kotaMenu();"> 
+							<input type="reset" value="Ulangi"> 
+							<input type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
