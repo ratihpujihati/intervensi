@@ -125,16 +125,40 @@ var tambahIndikator_opt = {
 	resetForm: false
 };
 
-var ubahKota_opt = {
+var ubahIndikator_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/kota/kota/simpankotaedit',
+	url: '<?php echo $this->basePath; ?>/indikator/indikator/simpanindikatoredit',
 	beforeSubmit : function() {
-		if (document.getElementById('kode_kota').value == ''){
-			alert('Kode Kota harus Diisi');
+		if (document.getElementById('id_goal').value == ''){
+			alert('Goal harus dipilih');
 			return false;
 		}
-		if (document.getElementById('kota').value == ''){
-			// alert('Nama Kota harus Diisi');
+		if (document.getElementById('kode_indikator').value == ''){
+			alert('Kode Indikator harus Diisi');
+			return false;
+		}
+		if (document.getElementById('nama_indikator').value == ''){
+			alert('Nama Indikator harus Diisi');
+			return false;
+		}
+		if (document.getElementById('definisi').value == ''){
+			//alert('Nama Indikator harus Diisi');
+			return false;
+		}
+		if (document.getElementById('manfaat').value == ''){
+			//alert('Nama Indikator harus Diisi');
+			return false;
+		}
+		if (document.getElementById('sumber_data').value == ''){
+			//alert('Nama Indikator harus Diisi');
+			return false;
+		}
+		if (document.getElementById('nilai_target').value == ''){
+			alert('Nilai Target harus Diisi');
+			return false;
+		}
+		if (document.getElementById('kategori').value == ''){
+			alert('Kategori harus dipilih');
 			return false;
 		}
 	},
@@ -143,13 +167,13 @@ var ubahKota_opt = {
 	resetForm: false
 };
 
-function Kotahapus(param1, param2)
+function indikatorHapus(param1, param2)
 { 
 	
 	if(ConfirmDelete(param1, param2))
-	{	//alert("test");
-		handler = '<?php echo $this->basePath; ?>/kota/kota/kotahapus';
-		var opt = {kode_kota : param2};
+	{	
+		handler = '<?php echo $this->basePath; ?>/indikator/indikator/indikatorhapus';
+		var opt = {id_indikator : param2};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
 				doCount(5);

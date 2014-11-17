@@ -78,6 +78,7 @@ $numToDisplay = $this->numToDisplay;
 					<? } else if ($key%2==1) { ?>
 						<tr class="event2">
 					<? } 
+					$id_indikator = $this->escape($val['id_indikator']); 
 					$goal = $this->escape($val['goal']); 
 					$kode_indikator = $this->escape($val['kode_indikator']); 
 					$nama_indikator = $this->escape($val['nama_indikator']); 				

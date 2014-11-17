@@ -32,18 +32,19 @@ $ctrlFrm = new Zend_View();
 		
 		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">	
+				<input type="hidden" name="id_indikator" value="<?php echo $this->id_indikator; ?>"/>
 				<tr>
 				    <td align="right" width="180">* Goal :</td>
 					<td>
 						<?
-						echo $jmlGoalList = count($this->goalList);
+						$jmlGoalList = count($this->goalList);
 						$goalList['-'] = '--Pilih--';
 						for ($i = 0; $i < $jmlGoalList; $i++) {
 						    $goalList[$this->goalList[$i]->id_goal] = (string)$this->goalList[$i]->goal;			 
 						}
 						
-						$goalAtrib = array("id"=>"id_goal", "tabindex"=>"17", "onchange"=>"javascript:pilihGoal($this->jenisForm);");
-						echo $ctrlFrm->formSelect('id_goal', $this->goalMenu['id_goal'], $goalAtrib, $goalList);
+						$goalAtrib = array("id"=>"id_goal", "tabindex"=>"17");
+						echo $ctrlFrm->formSelect('id_goal', $this->indikatorMenu['id_goal'], $goalAtrib, $goalList);
 
 						?>
 					</td>
@@ -109,7 +110,7 @@ $ctrlFrm = new Zend_View();
 					<td>
 						<?
 						$kategoriList = array("0" => "Minimum", "1" => "Maximum");
-						$kategoriAtrib = array("id"=>"kategori", "tabindex"=>"17", "onchange"=>"javascript:pilihKategori($this->jenisForm);");
+						$kategoriAtrib = array("id"=>"kategori", "tabindex"=>"17");
 						echo $ctrlFrm->formSelect('kategori', $this->indikatorMenu['kategori'], $kategoriAtrib, $kategoriList);
 
 						?>

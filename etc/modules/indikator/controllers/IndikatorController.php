@@ -154,6 +154,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 	public function indikatorolahdataAction(){
 		$this->view->jenisForm = $_REQUEST['jenisForm'];
 		$id_indikator= $_REQUEST['id_indikator'];
+		$this->view->id_indikator = $id_indikator;
 		$this->view->indikatorMenu = $this->menu_serv->getindikatoredit($id_indikator);
 		$this->view->goalList = $this->menu_serv->getGoalListAll();
 	}
@@ -186,34 +187,48 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->render('indikatormenu');	
 	}
 	
-	public function simpankotaeditAction(){
-		$kode_kota = $_POST['kode_kota'];
-		$kota = $_POST['kota'];
+	public function simpanindikatoreditAction(){
+		$id_indikator = $_POST['id_indikator'];
+		$kode_indikator = $_POST['kode_indikator'];
+		$id_goal = $_POST['id_goal'];
+		$nama_indikator = $_POST['nama_indikator'];
+		$definisi = $_POST['definisi'];
+		$manfaat = $_POST['manfaat'];
+		$sumber_data = $_POST['sumber_data'];
+		$nilai_target = $_POST['nilai_target'];
+		$kategori = $_POST['kategori'];
 		
-		$dataMasukan = array("kode_kota" => $kode_kota,
-							 "kota" => $kota);
-									 
-		$this->view->ubahKota = $this->menu_serv->getsimpankotaedit($dataMasukan);
+		$dataMasukan = array("kode_indikator" => $kode_indikator,
+							"id_indikator" => $id_indikator,
+							 "id_goal" => $id_goal,
+							 "nama_indikator" => $nama_indikator,
+							 "definisi" => $definisi,
+							 "manfaat" => $manfaat,
+							 "sumber_data" => $sumber_data,
+							 "nilai_target" => $nilai_target,
+							 "kategori" => $kategori);
+		var_dump($dataMasukan);
+		$this->view->ubahIndikator = $this->menu_serv->getsimpanindikatoredit($dataMasukan);
 		$this->view->proses = "2";	
-		$this->view->keterangan = "Kota";
-		$this->view->hasil = $this->view->ubahKota;
+		$this->view->keterangan = "Indikator";
+		$this->view->hasil = $this->view->ubahIndikator;
 		
-		$this->kotamenuAction();
-		$this->render('kotamenu');	
+		$this->indikatormenuAction();
+		$this->render('indikatormenu');	
 	}
 	
-	public function kotahapusAction(){
-		$kode_kota= $_REQUEST['kode_kota'];
+	public function indikatorhapusAction(){
+		$id_indikator= $_REQUEST['id_indikator'];
 		//echo $user_id;
-		$dataMasukan = array("kode_kota" => $kode_kota);
+		$dataMasukan = array("id_indikator" => $id_indikator);
 		
-		$this->view->kotaUpdate = $this->menu_serv->gethapuskota($kode_kota);
+		$this->view->indikatorUpdate = $this->menu_serv->gethapusindikator($id_indikator);
 		$this->view->proses = "3";	
-		$this->view->keterangan = "Kota";
-		$this->view->hasil = $this->view->kotaUpdate;		
+		$this->view->keterangan = "Indikator";
+		$this->view->hasil = $this->view->indikatorUpdate;		
 		
-		$this->kotamenuAction();
-		$this->render('kotamenu');	
+		$this->indikatormenuAction();
+		$this->render('indikatormenu');	
 	}
 }
 ?>

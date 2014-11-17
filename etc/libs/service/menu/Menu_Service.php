@@ -1526,6 +1526,7 @@ class menu_Service {
 			$result = $db->fetchRow($sqlData);
 			
 			$hasilAkhir = array("kode_indikator"  	=>(string)$result->kode_indikator,
+								"id_indikator"  	=>(string)$result->id_indikator,
 								"id_goal"  	=>(string)$result->id_goal,
 								"nama_indikator"  	=>(string)$result->nama_indikator,
 								"definisi"  	=>(string)$result->definisi,
