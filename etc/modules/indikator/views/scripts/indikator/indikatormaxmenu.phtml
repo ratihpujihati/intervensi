@@ -23,20 +23,20 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">Indikator Maximum</h2>
+		<h2 class="title">Indikator Maksimum</h2>
 		<div class="search-panel">
-			<form method="post" id="frmPilihIndikatorMax" name="frmCariIndikatorMax"> Pilih Indikator : <br/><br/><br/>
+			<form method="post" id="frmCariIndikatorMax" name="frmCariIndikatorMax">Kata Kunci :
 				<?
-					$jmlIndikatorMaxList = count($this->indikatorMaxList);
-					$indikatorMaxList['-'] = '--Pilih--';
-					for ($i = 0; $i < $jmlIndikatorMaxList; $i++) {
-						$indikatorMaxList[$this->indikatorMaxList[$i]->id_indikator] = (string)$this->indikatorMaxList[$i]->kode_indikator .".  ". (string)$this->indikatorMaxList[$i]->nama_indikator;			 
-					}
-					
-					$indikatorMaxAtrib = array("height"=>"10", "width"=>"10", "id"=>"id_indikator", "tabindex"=>"17", "onchange"=>"javascript:pilihIndikatorMax($this->jenisForm);");
-					echo $ctrlFrm->formSelect('id_indikator', $this->indikatorMaxMenu['id_indikator'], $indikatorMaxAtrib, $indikatorMaxList);
-
+				$kategoriCari = array("kode_indikator" => "Kode Indikator Maksimum");
+										
+				echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
 				?>
+				<input type="text" name="carii">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:cariIndikatorMax();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;"; ?>
+					 <div onClick="javascript:cariIndikatorMax('cari','<? echo $id_indikator;?>');" class="search" title="Cari Indikator"></div>
+				
 			</form>
 		</div>
 		<div class="space-line"></div>		
@@ -44,18 +44,69 @@ $numToDisplay = $this->numToDisplay;
 			<div class="spacer"> </div>
 			<? 
 			
-			// $status = $this->hasil;
-			// $proses = $this->proses;
-			// $keterangan = $this->keterangan;
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$keterangan = $this->keterangan;
 			
-			// $pesan->show_message($proses, $keterangan, "$status" ); ?>
-			// <div class="spacer"> </div>	
-			// <div class="blank"></div>		
+			$pesan->show_message($proses, $keterangan, "$status" ); ?>
+			<div class="spacer"> </div>				
+			<div class="blank"></div>	
 			
-			// <?	
-			// $totalData = $this->totIndikatorMax;
-			// $modul = $this->basePath."/indikator/indikator/indikatormaxmenu";			
-			// echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			<table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
+				<th width=3%  class="nosort">No</th> 
+				<th width=15% class="sorted order2 sortable">Goal</th> 
+				<th width=5% class="sorted order2 sortable">Kode Indikator</th> 
+				<th width=20% class="sorted order2 sortable">Indikator</th>  
+				<th width=30% class="sorted order2 sortable">Definisi</th> 
+				<th width=30% class="sorted order2 sortable">Manfaat</th> 
+				<th width=5% class="sorted order2 sortable">Sumber Data</th> 
+				<th width=5% class="sorted order2 sortable">Nilai Target</th> 
+				<th width=20% colspan="2"  class="nosort">Tindakan</th>
+				
+				<?php
+					if (count($this->indikatorMaxMenu) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {					
+					foreach ($this->indikatorMaxMenu as $key => $val): 
+					if ($key%2==0) { ?>
+						<tr class="event">
+					<? } else if ($key%2==1) { ?>
+						<tr class="event2">
+					<? } 
+					$id_indikator = $this->escape($val['id_indikator']); 
+					$goal = $this->escape($val['goal']); 
+					$kode_indikator = $this->escape($val['kode_indikator']); 
+					$nama_indikator = $this->escape($val['nama_indikator']); 				
+					$definisi = $this->escape($val['definisi']); 				
+					$manfaat = $this->escape($val['manfaat']); 				
+					$sumber_data = $this->escape($val['sumber_data']); 				
+					$nilai_target = $this->escape($val['nilai_target']); 		
+					$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;					
+					$name = $this->escape($val['name']);	
+					
+					?>
+					
+					<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+					<td class="clleft">&nbsp;<? echo $goal;?></td>
+					<td class="clleft">&nbsp;<? echo $kode_indikator;?></td>
+					<td class="clleft">&nbsp;<? echo $nama_indikator;?></td>
+					<td class="clleft">&nbsp;<? echo $definisi;?></td>								
+					<td class="clleft">&nbsp;<? echo $manfaat;?></td>								
+					<td class="clleft">&nbsp;<? echo $sumber_data;?></td>								
+					<td class="clleft">&nbsp;<? echo $nilai_target;?></td>						
+					<td><div onClick="tampilkanFormMax('formMax','<? echo $id_indikator;?>');" class="tampilForm" title="Tampilkan Form"></div></td>
+					<td><div onClick="Popup('<? echo $id_indikator;?>');" class="hasil" title="Hasil"></div></td>
+					</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+			<?	
+			$totalData = $this->totIndikatorMax;
+			$modul = $this->basePath."/indikator/indikator/indikatormaxmenu";			
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
 			?>
 		</fieldset>		 
 		

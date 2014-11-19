@@ -1704,7 +1704,7 @@ class menu_Service {
 			$whereOpt = " and ($kategoriCari like '%$katakunciCari%')";
 			if($katakunciCari != "") { $where = $whereOpt;} 
 			$order = " order by kode_indikator ";
-			$sqlProses = "select * from m_indikator where kategori = 1".$where;	
+			$sqlProses = "select i.*, g.goal from m_indikator i, m_goal g where i.id_goal=g.id_goal and i.kategori = 1".$where;	
 			$sqlProses1 = $sqlProses.$order;
 			
 			if(($pageNumber==0) && ($itemPerPage==0)){	
@@ -1717,13 +1717,15 @@ class menu_Service {
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array("id_indikator"  	=>(string)$result[$j]->id_indikator,
+										"kode_indikator"  	=>(string)$result[$j]->kode_indikator,
+										"goal"  	=>(string)$result[$j]->goal,
 										"nama_indikator"  	=>(string)$result[$j]->nama_indikator,
 										"definisi"  	=>(string)$result[$j]->definisi,
 										"manfaat"  	=>(string)$result[$j]->manfaat,
 										"sumber_data"  	=>(string)$result[$j]->sumber_data,
 										"nilai_target"  	=>(string)$result[$j]->nilai_target,
 										"kategori"  	=>(string)$result[$j]->kategori,
-										"kota"  	=>(string)$result[$j]->kota);
+										);
 			}	
 			return $hasilAkhir;  
 		} catch (Exception $e) {
@@ -1780,7 +1782,7 @@ class menu_Service {
 			$whereOpt = " and ($kategoriCari like '%$katakunciCari%')";
 			if($katakunciCari != "") { $where = $whereOpt;} 
 			$order = " order by kode_indikator ";
-			$sqlProses = "select * from m_indikator where kategori = 0".$where;	
+			$sqlProses = "select i.*, g.goal from m_indikator i, m_goal g where i.id_goal=g.id_goal and i.kategori = 0".$where;	
 			$sqlProses1 = $sqlProses.$order;
 			
 			if(($pageNumber==0) && ($itemPerPage==0)){	
@@ -1793,13 +1795,15 @@ class menu_Service {
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array("id_indikator"  	=>(string)$result[$j]->id_indikator,
+										"kode_indikator"  	=>(string)$result[$j]->kode_indikator,
+										"goal"  	=>(string)$result[$j]->goal,
 										"nama_indikator"  	=>(string)$result[$j]->nama_indikator,
 										"definisi"  	=>(string)$result[$j]->definisi,
 										"manfaat"  	=>(string)$result[$j]->manfaat,
 										"sumber_data"  	=>(string)$result[$j]->sumber_data,
 										"nilai_target"  	=>(string)$result[$j]->nilai_target,
 										"kategori"  	=>(string)$result[$j]->kategori,
-										"kota"  	=>(string)$result[$j]->kota);
+										);
 			}	
 			return $hasilAkhir;  
 		} catch (Exception $e) {

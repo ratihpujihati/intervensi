@@ -1338,7 +1338,7 @@ P.text {
 	cursor:pointer;
 	}
 	 */
-.edit, .delete, .disposisi, .unread, .read, .reply, .unit, .konsep, .chgpasswd, .respasswd, .view, .filedoc, .prt, .pdf{
+.edit, .delete, .disposisi, .unread, .read, .reply, .unit, .konsep, .chgpasswd, .respasswd, .view, .filedoc, .prt, .pdf, .tampilForm, .search,.hasil{
 	
 	display:inline;
 	width:32px;
@@ -1368,6 +1368,9 @@ P.text {
 	}	
 .edit {	margin:0 auto;center; background: transparent url(../icon/edit.png) no-repeat;}
 .delete{ margin:0 auto;center; background:  transparent url(../icon/trash.png) no-repeat;}
+.tampilForm{ margin:0 auto;center; background:  transparent url(../icon/lihat.png) no-repeat;}
+.hasil{ margin:0 auto;center; background:  transparent url(../icon/hasil.png) no-repeat;}
+.search{ margin:0 auto;center; background:  transparent url(../icon/search.png) no-repeat;}
 .disposisi { background: transparent url(../images/disposisi.gif) no-repeat;}
 .reply { background: transparent url(../images/page_reply.png) no-repeat;}
 .filedoc { background: transparent url(../images/icon_file.gif) no-repeat;}

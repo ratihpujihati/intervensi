@@ -43,17 +43,34 @@ function indikatorForm(jenisForm, id_indikator)
 	
 }
 
-// function cariKota(){
-	// $("#frmCariKota").ajaxForm(frmCariKota_opt);
-// }
+function cariIndikatorMax(){
+	$("#frmCariIndikatorMax").ajaxForm(frmCariIndikatorMax_opt);
+}
 
-// var frmCariKota_opt = {
-		// target : '#tableview',
-		// url: '<?php echo $this->basePath; ?>/kota/kota/kotamenu',
-		// type: 'post', 
-		// resetForm: false
-// };
+var frmCariIndikatorMax_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatormaxmenu',
+		type: 'post', 
+		resetForm: false
+};
 
+
+function Popup(id_indikator){
+	url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/indikatormaxform';
+	var param = {id_indikator:id_indikator};
+	BukaWindows();
+}
+
+function BukaWindows(){
+	var w = 0; 
+	var h = 0;
+	w = screen.availWidth;
+	h = screen.availHeight;
+	var popW = 800, popH = 600;
+	var leftc = (w-popW)/2;
+	var topc = (h-popH)/2;
+	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
 
 
 // var tambahKota_opt = {

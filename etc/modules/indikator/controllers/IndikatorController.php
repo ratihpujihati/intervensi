@@ -86,6 +86,14 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->indikatorMaxMenu = $this->menu_serv->getcariindikatormax($dataMasukan,$currentPage, $numToDisplay,$this->view->totIndikatorMax); 		
 		$this->view->indikatorMaxList = $this->menu_serv->getindikatorMaxListAll();
 	}
+	
+	public function indikatormaxformAction() {
+		$id_indikator = $this->_getParam("id_indikator");
+	
+		$dataMasukan = array("id_indikator"  => $id_indikator);
+		$this->view->id_indikator = $id_indikator;
+		$this->view->form = $this->kegiatan_serv->getFormMax($dataMasukan);
+    }
 	//------------------------------------------------------------------------END MAXIMUM
 	
 	//------------------------------------------------------------------------INDIKATOR MINIMUM
@@ -121,6 +129,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 	}
 	//------------------------------------------------------------------------END MINIMUM
 	
+	//------------------------------------------------------------------------INDIKATOR AJA	
 	public function indikatorjsAction(){
 		header('content-type : text/javascript');
 		$this->render('indikatorjs');
@@ -230,5 +239,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->indikatormenuAction();
 		$this->render('indikatormenu');	
 	}
+	
+	
 }
 ?>
