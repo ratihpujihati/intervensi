@@ -2,12 +2,12 @@
 require_once 'Zend/View.php';
 require_once 'share/format_date.php'; 
 require_once "share/oa_dec_cur_conv.php";
-require_once "indikatormaxjs.phtml";
+require_once "indikatorminjs.phtml";
 
 $ctrlFrm = new Zend_View();
 ?>
 <? if(strtolower($this->jenisForm) == 'form') {
-		$namaForm = 'frmmaxindikator'; 
+		$namaForm = 'frmminindikator'; 
 		$jenisAksi = 'Form';
 	}
 ?>
@@ -19,7 +19,7 @@ $ctrlFrm = new Zend_View();
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title"><? echo $jenisAksi;?> Indikator Maksimum <br/> 
+		<h2 class="title"><? echo $jenisAksi;?> Indikator Minimum <br/> 
 		<? echo $this->namaIndikator['kode_indikator'] ." . ". $this->namaIndikator['nama_indikator'] ?></h2>
 	    <div class="spacer"></div> 		
 	
@@ -31,7 +31,7 @@ $ctrlFrm = new Zend_View();
 					<td>
 						<?
 						$TargetAttrib = array("size" => 100,"maxlength" => 100);
-						echo $ctrlFrm->formText('target', $this->dataIndikatorMaxTarget['target'], $TargetAttrib);
+						echo $ctrlFrm->formText('target', $this->dataIndikatorMinTarget['target'], $TargetAttrib);
 						?>						
 					</td>
 					<td>&nbsp;&nbsp;</td>
@@ -39,7 +39,7 @@ $ctrlFrm = new Zend_View();
 					<td>
 						<?
 						$JabarAttrib = array("size" => 100,"maxlength" => 100);
-						echo $ctrlFrm->formText('jawa_barat', $this->dataIndikatorMaxTarget['jawa_barat'], $JabarAttrib);
+						echo $ctrlFrm->formText('jawa_barat', $this->dataIndikatorMinTarget['jawa_barat'], $JabarAttrib);
 						?>						
 					</td>
 				</tr>
@@ -48,7 +48,7 @@ $ctrlFrm = new Zend_View();
 					<td>
 						<?
 						$NasionalAttrib = array("size" => 100,"maxlength" => 100);
-						echo $ctrlFrm->formText('nasional', $this->dataIndikatorMaxTarget['nasional'], $NasionalAttrib);
+						echo $ctrlFrm->formText('nasional', $this->dataIndikatorMinTarget['nasional'], $NasionalAttrib);
 						?>						
 					</td>
 					<td>&nbsp;&nbsp;</td>
@@ -56,7 +56,7 @@ $ctrlFrm = new Zend_View();
 					<td>
 						<?
 						$CimahiAttrib = array("size" => 100,"maxlength" => 100);
-						echo $ctrlFrm->formText('cimahi', $this->dataIndikatorMaxTarget['cimahi'], $CimahiAttrib);
+						echo $ctrlFrm->formText('cimahi', $this->dataIndikatorMinTarget['cimahi'], $CimahiAttrib);
 						?>						
 					</td>
 				</tr>			
@@ -68,7 +68,7 @@ $ctrlFrm = new Zend_View();
 				<th width=5% class="sorted order2 sortable">Nilai Kelurahan</th>
 				
 				<? $i = 1;
-				foreach ($this->dataIndikatorMaxKelurahan as $key => $val): 					
+				foreach ($this->dataIndikatorMinKelurahan as $key => $val): 					
 					$id_indikator = $this->escape($val['id_indikator']); 
 					$Kelurahan = $this->escape($val['Kelurahan']); 
 					$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 

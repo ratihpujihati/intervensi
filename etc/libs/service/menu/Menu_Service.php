@@ -106,7 +106,6 @@ class menu_Service {
 								"Urut"  	        =>(string)$result->Urut
 								
 								);
-			//var_dump($hasilAkhir);
 			return $hasilAkhir;			
 		
 			
@@ -765,7 +764,6 @@ class menu_Service {
 						  where kec.kode_kecamatan = kel.kode_kecamatan".$where;	
 			$sqlProses1 = $sqlProses.$order;
 			
-			//var_dump($sqlProses);
 			if(($pageNumber==0) && ($itemPerPage==0)){	
 				$sqlTotal = "select count(*) from ($sqlProses) a";
 				$hasilAkhir = $db->fetchOne($sqlTotal);
@@ -1776,7 +1774,6 @@ class menu_Service {
 
 			
 			$sqlData = $sqlProses.$where;
-			var_dump($sqlData);
 			$result = $db->fetchAll($sqlData);
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
@@ -1934,6 +1931,93 @@ class menu_Service {
 		} catch (Exception $e) {
 			echo $e->getMessage().'<br>';
 			return 'gagal <br>';
+		}
+	}
+	
+	public function getDataIndikatorMinTarget($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " where id_indikator = '$id_indikator' ";
+			$sqlProses = "select * from form_isian_target";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchRow($sqlData);
+			
+			$hasilAkhir = array("id_form_isian_target"  	=>(string)$result->id_form_isian_target,
+								"id_indikator"  	=>(string)$result->id_indikator,
+								"target"  	=>(string)$result->target,
+								"nasional"  	=>(string)$result->nasional,
+								"jawa_barat"  	=>(string)$result->jawa_barat,
+								"cimahi"  	=>(string)$result->cimahi					
+								);
+			return $hasilAkhir;			
+		
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	public function getDataIndikatorMinKelurahan($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " and f.id_indikator = '$id_indikator' ";
+			$sqlProses = "select f.*, k.Kelurahan as Kelurahan from form_isian_kelurahan f, m_kelurahan k where f.kode_kelurahan = k.kode_kelurahan ";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchAll($sqlData);
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+			$hasilAkhir[$j] = array("id_form_isian_kelurahan"  	=>(string)$result[$j]->id_form_isian_kelurahan,
+								"id_indikator"  	=>(string)$result[$j]->id_indikator,
+								"Kelurahan"  	=>(string)$result[$j]->Kelurahan,
+								"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan			
+								);
+			}
+			return $hasilAkhir;			
+			
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	public function getNamaIndikatorMin($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " where id_indikator = '$id_indikator' ";
+			$sqlProses = "select * from m_indikator";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchRow($sqlData);
+			
+			$hasilAkhir = array("id_indikator"  	=>(string)$result->id_indikator,
+								"kode_indikator"  	=>(string)$result->kode_indikator,
+								"nama_indikator"  	=>(string)$result->nama_indikator					
+								);
+			return $hasilAkhir;			
+		
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
 		}
 	}
 

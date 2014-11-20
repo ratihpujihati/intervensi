@@ -129,6 +129,15 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->indikatorMinMenu = $this->menu_serv->getcariindikatormin($dataMasukan,$currentPage, $numToDisplay,$this->view->totIndikatorMin); 		
 		$this->view->indikatorMinList = $this->menu_serv->getindikatorMinListAll();
 	}
+	
+	public function indikatorminformAction(){
+		$this->view->jenisForm = $_REQUEST['jenisForm'];
+		$id_indikator= $_REQUEST['id_indikator'];
+		$this->view->id_indikator = $id_indikator;
+		$this->view->namaIndikator = $this->menu_serv->getNamaIndikatorMin($id_indikator);
+		$this->view->dataIndikatorMinTarget = $this->menu_serv->getDataIndikatorMinTarget($id_indikator);
+		$this->view->dataIndikatorMinKelurahan = $this->menu_serv->getDataIndikatorMinKelurahan($id_indikator);
+	}
 	//------------------------------------------------------------------------END MINIMUM
 	
 	//------------------------------------------------------------------------INDIKATOR AJA	
@@ -218,7 +227,6 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 							 "sumber_data" => $sumber_data,
 							 "nilai_target" => $nilai_target,
 							 "kategori" => $kategori);
-		var_dump($dataMasukan);
 		$this->view->ubahIndikator = $this->menu_serv->getsimpanindikatoredit($dataMasukan);
 		$this->view->proses = "2";	
 		$this->view->keterangan = "Indikator";
