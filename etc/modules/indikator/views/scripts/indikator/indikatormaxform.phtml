@@ -1,69 +1,100 @@
-<?php
+<?
 require_once 'Zend/View.php';
 require_once 'share/format_date.php'; 
-require_once 'share/format_page.php';
-require_once "share/share_message.php";
 require_once "share/oa_dec_cur_conv.php";
-require_once "indikatormaxmenujs.phtml";
-$referensi = Menu_Service::getInstance();
+require_once "indikatormaxjs.phtml";
 
 $ctrlFrm = new Zend_View();
-$pesan = new share_message();
-$halaman = new format_page();
-$dec_cur = new oa_dec_cur_conv();
-		
-$currentPage = $this->currentPage;
-$numToDisplay = $this->numToDisplay;
-
-   // $jmldata = count($this->namaPenduduk);
-   // for ($j = 0; $j < $jmldata; $j++) {
-		// $datalist[$j] = array("NIK" =>(string)$this->namaPenduduk[$j]['NIK'],								
-				      // "NamaLengkap" =>(string)$this->namaPenduduk[$j]['NamaLengkap'],
-				      // "Alamat" =>(string)$this->namaPenduduk[$j]['Alamat'],
-				      // "RT" =>(string)$this->namaPenduduk[$j]['RT'],
-				      // "RW" =>(string)$this->namaPenduduk[$j]['RW'],
-				      // "Dusun" =>(string)$this->namaPenduduk[$j]['Dusun'],
-				      // "KodePos" =>(string)$this->namaPenduduk[$j]['KodePos'],
-				      // "JK" =>(string)$this->namaPenduduk[$j]['JK'],
-				      // "TempatLahir" =>(string)$this->namaPenduduk[$j]['TempatLahir'],
-				      // "TglLahir" =>(string)$this->namaPenduduk[$j]['TglLahir'],
-				      // "NoAkta" =>(string)$this->namaPenduduk[$j]['NoAkta'],
-				      // "GolDarah" =>(string)$this->namaPenduduk[$j]['GolDarah'],
-				      // "Agama" =>(string)$this->namaPenduduk[$j]['Agama'],
-				      // "Pekerjaan" =>(string)$this->namaPenduduk[$j]['Pekerjaan'],
-				      // "NamaIbu" =>(string)$this->namaPenduduk[$j]['NamaIbu'],
-				      // "NamaAyah" =>(string)$this->namaPenduduk[$j]['NamaAyah'],
-				      // "Status" =>(string)$this->namaPenduduk[$j]['Status'],
-				      // "Kelurahan" =>(string)$this->namaPenduduk[$j]['Kelurahan']								
-				// );
-		// }  
-
-// $par=$this->par;	
 ?>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Form Indikator Maksimum</title>
-<link href="<? echo $this->basePath;?>/css/tools.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="<? echo $this->basePath;?>/css/thickbox.css" type="text/css" media="screen" />
-<link href="<? echo $this->basePath;?>/css/main.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="<? echo $this->basePath;?>/css/style.css" type="text/css" title="Nice Blue style" />
-<SCRIPT src="<? echo $this->basePath;?>/js/jquery.js" type="text/javascript"></SCRIPT>
-<SCRIPT src="<? echo $this->basePath;?>/js/jquery.form.js" type="text/javascript"></SCRIPT>
-</head>
-
-<body>
-<div class="popups" >
-<div class="space-line"></div>
-<div id="tableview">
-<div class="blank"></div>
-	<h3 class="title">Data Indikator Maksimum</h3>
-
-	
+<? if(strtolower($this->jenisForm) == 'form') {
+		$namaForm = 'frmmaxindikator'; 
+		$jenisAksi = 'Form';
+	}
+?>
 		
-		<fieldset class="fields1" >	
-			<input type="button" onclick="window.close()" value="Tutup"/>
-		</fieldset>		
+<div class="navlink">
+<a href="#" class="home" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/home');">Halaman Utama</a>
 </div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title"><? echo $jenisAksi;?> Indikator Maksimum <br/> 
+		<? echo $this->namaIndikator['kode_indikator'] ." . ". $this->namaIndikator['nama_indikator'] ?></h2>
+	    <div class="spacer"></div> 		
+	
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">	
+				<input type="hidden" name="id_indikator" value="<?php echo $this->id_indikator; ?>"/>
+				<tr>
+				    <td align="right" width="180">Target 2015 :</td>
+					<td>
+						<?
+						$TargetAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('target', $this->dataIndikatorMaxTarget['target'], $TargetAttrib);
+						?>						
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td align="right" width="180">Jawa Barat :</td>
+					<td>
+						<?
+						$JabarAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('jawa_barat', $this->dataIndikatorMaxTarget['jawa_barat'], $JabarAttrib);
+						?>						
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">Nasional :</td>
+					<td>
+						<?
+						$NasionalAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('nasional', $this->dataIndikatorMaxTarget['nasional'], $NasionalAttrib);
+						?>						
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td align="right" width="180">Cimahi :</td>
+					<td>
+						<?
+						$CimahiAttrib = array("size" => 100,"maxlength" => 100);
+						echo $ctrlFrm->formText('cimahi', $this->dataIndikatorMaxTarget['cimahi'], $CimahiAttrib);
+						?>						
+					</td>
+				</tr>			
+			</table>
+			
+			<table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
+				<th width=3%  class="nosort">No</th> 
+				<th width=15% class="sorted order2 sortable">Kelurahan</th> 
+				<th width=5% class="sorted order2 sortable">Nilai Kelurahan</th>
+				
+				<? $i = 1;
+				foreach ($this->dataIndikatorMaxKelurahan as $key => $val): 					
+					$id_indikator = $this->escape($val['id_indikator']); 
+					$Kelurahan = $this->escape($val['Kelurahan']); 
+					$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 
+					
+				?>
+				
+				<tr>
+					<td class="clleft"><? echo $i ?></td>
+					<td><input type="text" name="Kelurahan <? echo $i ?>" value="<? echo $this->escape($val['Kelurahan'])?>" id="Kelurahan" ></td>
+					<td><input type="text" name="nilai_kelurahan <? echo $i ?>" value="<? echo $nilai_kelurahan ?>" id="nilai_kelurahan" ></td>
+				</tr>
+				
+				<? $i++;
+				endforeach; ?>
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="kotaMenu();"> 
+							<input type="reset" value="Ulangi"> 
+							<input type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				
+			</table>
+		</form>
+	</div>
 </div>
-</body>
-</html>

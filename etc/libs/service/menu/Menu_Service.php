@@ -1734,6 +1734,131 @@ class menu_Service {
 		}
 	}
 	
+	public function getDataIndikatorMaxTarget($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " where id_indikator = '$id_indikator' ";
+			$sqlProses = "select * from form_isian_target";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchRow($sqlData);
+			
+			$hasilAkhir = array("id_form_isian_target"  	=>(string)$result->id_form_isian_target,
+								"id_indikator"  	=>(string)$result->id_indikator,
+								"target"  	=>(string)$result->target,
+								"nasional"  	=>(string)$result->nasional,
+								"jawa_barat"  	=>(string)$result->jawa_barat,
+								"cimahi"  	=>(string)$result->cimahi					
+								);
+			return $hasilAkhir;			
+		
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	public function getDataIndikatorMaxKelurahan($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " and f.id_indikator = '$id_indikator' ";
+			$sqlProses = "select f.*, k.Kelurahan as Kelurahan from form_isian_kelurahan f, m_kelurahan k where f.kode_kelurahan = k.kode_kelurahan ";	
+
+			
+			$sqlData = $sqlProses.$where;
+			var_dump($sqlData);
+			$result = $db->fetchAll($sqlData);
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+			$hasilAkhir[$j] = array("id_form_isian_kelurahan"  	=>(string)$result[$j]->id_form_isian_kelurahan,
+								"id_indikator"  	=>(string)$result[$j]->id_indikator,
+								"Kelurahan"  	=>(string)$result[$j]->Kelurahan,
+								"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan			
+								);
+			}
+			return $hasilAkhir;			
+			
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	public function getNamaIndikatorMax($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " where id_indikator = '$id_indikator' ";
+			$sqlProses = "select * from m_indikator";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchRow($sqlData);
+			
+			$hasilAkhir = array("id_indikator"  	=>(string)$result->id_indikator,
+								"kode_indikator"  	=>(string)$result->kode_indikator,
+								"nama_indikator"  	=>(string)$result->nama_indikator					
+								);
+			return $hasilAkhir;			
+		
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}	
+	
+	// public function getsimpanindikatoredit(array $dataMasukan) {
+		// $registry = Zend_Registry::getInstance();
+		// $db = $registry->get('db');
+		// try {
+			// $db->beginTransaction();
+			// $paramInput = array("kode_indikator" => $dataMasukan['kode_indikator'],
+								// "id_goal" => $dataMasukan['id_goal'],
+								// "nama_indikator" => $dataMasukan['nama_indikator'],
+								// "definisi" => $dataMasukan['definisi'],
+								// "manfaat" => $dataMasukan['manfaat'],
+								// "sumber_data" => $dataMasukan['sumber_data'],
+								// "nilai_target" => $dataMasukan['nilai_target'],
+								// "kategori" => $dataMasukan['kategori']					
+								// );
+			
+			// $where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
+			
+			// $db->update('m_indikator',$paramInput, $where);
+			// $db->commit();			
+			// return 'sukses';
+		// } catch (Exception $e) {
+			// $db->rollBack();
+			// $errmsgArr = explode(":",$e->getMessage());
+			
+			// $errMsg = $errmsgArr[0];
+
+			// if($errMsg == "SQLSTATE[23000]")
+			// {
+				// return "gagal.Data Sudah Ada.";
+			// }
+			// else
+			// {
+				// return "sukses";
+			// }
+	   // }
+	// }
+	
 	//---------------------------------------------------------------------------------------------------------------------
 	//INDIKATOR MINIMUM 0
 	public function getIndikatorMin(){

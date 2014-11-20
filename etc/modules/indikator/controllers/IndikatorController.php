@@ -87,13 +87,15 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->indikatorMaxList = $this->menu_serv->getindikatorMaxListAll();
 	}
 	
-	public function indikatormaxformAction() {
-		$id_indikator = $this->_getParam("id_indikator");
-	
-		$dataMasukan = array("id_indikator"  => $id_indikator);
+	public function indikatormaxformAction(){
+		$this->view->jenisForm = $_REQUEST['jenisForm'];
+		$id_indikator= $_REQUEST['id_indikator'];
 		$this->view->id_indikator = $id_indikator;
-		$this->view->form = $this->kegiatan_serv->getFormMax($dataMasukan);
-    }
+		$this->view->namaIndikator = $this->menu_serv->getNamaIndikatorMax($id_indikator);
+		$this->view->dataIndikatorMaxTarget = $this->menu_serv->getDataIndikatorMaxTarget($id_indikator);
+		$this->view->dataIndikatorMaxKelurahan = $this->menu_serv->getDataIndikatorMaxKelurahan($id_indikator);
+		//$this->view->goalList = $this->menu_serv->getGoalListAll();
+	}
 	//------------------------------------------------------------------------END MAXIMUM
 	
 	//------------------------------------------------------------------------INDIKATOR MINIMUM
