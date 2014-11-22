@@ -1,7 +1,7 @@
  jQuery(document).ready(function () {
 	var loaderParm = document.getElementById('loading');
 	if (loaderParm == null) {
-	  var loader = jQuery('<div id="loading"><div class="image"><img alt="Loading..." src="../../images/loading.gif"/></div><div class="load">Processing</div></div>')
+	  var loader = jQuery('<div id="loading"><div class="image"><img alt="Loading..." src="../../images/loadingAnimation.gif"/></div><div class="load">Sedang Memuat..</div></div>')
 		 // .css({position: "relative", top: "1em", left: "1em"})
 		  .hide()
 		  .appendTo("body");

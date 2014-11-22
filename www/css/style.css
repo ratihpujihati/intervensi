@@ -1468,29 +1468,33 @@ margin:10px 0;
 	width:90px;
 	z-index:1000;
 	padding:0;
-	text-align:center;
-	/*background-color:rgba(255,255,255,0.75);*/
+	text-align:center;	
 	
-	}
+	
+}
 *html #loading {
 	width:200px;
+	
 	}
 #loading .image {
 	float:left;
 	margin:0 auto;
 	margin-left:5px;
 	text-align:center;
+	
 	}
 #loading .load {
-	float:left;
 	margin:0;
 	font-size: 12px;
-	padding:7px 10px 0 0;
+	padding:14px 10px 0 0;
 	line-height:13px;
-	text-align:left;
+	text-align:center;
 	margin-left:10px;
+	width:190px;
 	font-family:  Arial, Helvetica, sans-serif;
 	color:#333;
+	
+	
 	}
 .bullet {
    clear:left;
