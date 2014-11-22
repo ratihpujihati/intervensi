@@ -1349,6 +1349,21 @@ P.text {
     margin-left: auto;
     margin-right: auto
 }	
+
+.edit:hover, .delete:hover, .disposisi:hover, .unread:hover, .read:hover, .reply:hover, .unit:hover, .konsep, .chgpasswd, .respasswd, .view:hover, .filedoc:hover, .prt:hover, .pdf:hover, .tampilForm:hover, .search:hover,.hasil:hover{
+	box-shadow: 0 0 0 4px #ffcc80;
+	background-color: #ffcc80;
+	-webkit-background-clip: padding-box;
+	-moz-border-radius: 700px;
+	-moz-background-clip: padding;
+	border-radius: 700px;
+	background-clip: padding-box;
+	transition: background 0.2s, color 0.2s;    
+	-webkit-transition: background 0.2s, color 0.2s;    
+	-moz-transition: background 0.2s, color 0.2s;    
+	-o-transition: background 0.2s, color 0.2s;    
+}	
+
 .bounder {
 	display:inline;
 	width:18px;
