@@ -80,27 +80,17 @@ function FormMax(jenisForm, id_indikator)
 	var param = { jenisForm:jenisForm, id_indikator:id_indikator};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmmaxindikator").ajaxForm(tambahIndikator_opt);		
+		jQuery("#frmmaxindikator").ajaxForm(formMaxIndikator_opt);		
 		});	
 }
 
-// var tambahKota_opt = {
-	// target : '#tableview',
-	// url: '<?php echo $this->basePath; ?>/kota/kota/simpankota',
-	// beforeSubmit : function() {
-		// if (document.getElementById('kode_kota').value == ''){
-			// alert('Kode Kota harus Diisi');
-			// return false;
-		// }
-		// if (document.getElementById('kota').value == ''){
-			// // alert('Nama Kota harus Diisi');
-			// return false;
-		// }
-	// },
-	// success: function(){doCount(5);},
-	// type: 'post', 
-	// resetForm: false
-// };
+
+var formMaxIndikator_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatormaxform',
+		type: 'post', 
+		resetForm: false
+};
 
 // var ubahKota_opt = {
 	// target : '#tableview',

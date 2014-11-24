@@ -79,9 +79,17 @@ function FormMin(jenisForm, id_indikator)
 	var param = { jenisForm:jenisForm, id_indikator:id_indikator};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmminindikator").ajaxForm(tambahIndikator_opt);		
+		jQuery("#frmminindikator").ajaxForm(formMinIndikator_opt);		
 		});	
 }
+
+var formMinIndikator_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatorminform',
+		type: 'post', 
+		resetForm: false
+};
+
 // var tambahKota_opt = {
 	// target : '#tableview',
 	// url: '<?php echo $this->basePath; ?>/kota/kota/simpankota',
