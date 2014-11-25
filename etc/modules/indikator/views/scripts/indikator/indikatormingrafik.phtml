@@ -1,0 +1,90 @@
+<?php
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+require_once "indikatormaxjs.phtml";
+$referensi = Menu_Service::getInstance();
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+		
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Popup</title>
+<link href="<? echo $this->basePath;?>/css/tools.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<? echo $this->basePath;?>/css/thickbox.css" type="text/css" media="screen" />
+<link href="<? echo $this->basePath;?>/css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<? echo $this->basePath;?>/css/style.css" type="text/css" title="Nice Blue style" />
+<SCRIPT src="<? echo $this->basePath;?>/js/jquery.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="<? echo $this->basePath;?>/js/jquery.form.js" type="text/javascript"></SCRIPT>
+<script src="<? echo $this->basePath;?>/js/jquery.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/exporting.js" ></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/highcharts.js" ></script>
+
+<script type="text/javascript">
+var chart1; // globally available
+$(document).ready(function() {
+      chart1 = new Highcharts.Chart({
+         chart: {
+            renderTo: 'container',
+            type: 'column'
+         },   
+         title: {
+            text: 'Hasil'
+         },
+         xAxis: {
+            categories: ['Kelurahan']
+         },
+         yAxis: {
+            title: {
+               text: 'Nilai Kelurahan'
+            }
+         },
+              series:             
+            [
+            <?php 
+			foreach ($this->grafik as $key => $val): 
+				$Kelurahan = $this->escape($val['Kelurahan']); 
+				$hasil = $this->escape($val['hasil']); 
+				$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 
+			?>
+				 {
+                      name: '<?php echo $Kelurahan; ?>',
+                      data: [<?php echo $nilai_kelurahan; ?>]
+                 },
+			<?	endforeach; ?>
+        ]
+      });
+   });	
+</script>
+
+</head>
+
+<body>	
+	<div class="popups" >
+	<div class="space-line"></div>
+	<div id="tableview">
+	<div class="blank"></div>
+	
+	<fieldset class="fields">
+		<div id='container'></div>		
+	</fieldset>
+	
+	<fieldset class="fields1" >	
+		<input type="button" onclick="window.close()" value="Tutup"/>
+	</fieldset>
+	</div>
+	</div>
+</body>
+</html>

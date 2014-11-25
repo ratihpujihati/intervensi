@@ -96,7 +96,15 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->dataIndikatorMaxKelurahan = $this->menu_serv->getDataIndikatorMaxKelurahan($id_indikator);
 		//$this->view->goalList = $this->menu_serv->getGoalListAll();
 	}
+
+	public function indikatormaxgrafikAction() {
+		$id_indikator = $this->_getParam("id_indikator");
 	
+		$id_indikator = $_REQUEST["id_indikator"];
+		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
+    }
 	public function indikatormaxformeditAction(){
 			
 			//table form_isian_target
@@ -193,6 +201,15 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->dataIndikatorMinTarget = $this->menu_serv->getDataIndikatorMinTarget($id_indikator);
 		$this->view->dataIndikatorMinKelurahan = $this->menu_serv->getDataIndikatorMinKelurahan($id_indikator);
 	}
+	
+	public function indikatormingrafikAction() {
+		$id_indikator = $this->_getParam("id_indikator");
+	
+		$id_indikator = $_REQUEST["id_indikator"];
+		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
+    }
 	//------------------------------------------------------------------------END MINIMUM
 	
 	//------------------------------------------------------------------------INDIKATOR AJA	
