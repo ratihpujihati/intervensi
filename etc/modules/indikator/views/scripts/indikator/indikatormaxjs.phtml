@@ -87,10 +87,31 @@ function FormMax(jenisForm, id_indikator)
 
 var formMaxIndikator_opt = {
 		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatormaxform',
-		type: 'post', 
-		resetForm: false
+	url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatormaxformedit',
+	beforeSubmit : function() {
+		if (document.getElementById('target').value == ''){
+			alert('Target harus Diisi');
+			return false;
+		}
+		if (document.getElementById('jawa_barat').value == ''){
+			alert('Jawa Barat harus Diisi');
+			return false;
+		}
+		if (document.getElementById('nasional').value == ''){
+			alert('Nasional harus Diisi');
+			return false;
+		}
+		if (document.getElementById('cimahi').value == ''){
+			alert('Cimahi harus Diisi');
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
 };
+
 
 // var ubahKota_opt = {
 	// target : '#tableview',
