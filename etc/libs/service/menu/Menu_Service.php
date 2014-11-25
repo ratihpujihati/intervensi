@@ -1933,7 +1933,7 @@ class menu_Service {
 								"warna_indikator" => $dataMasukan['warna_indikator']
 								);
 			
-			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
+			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."' and id_form_isian_kelurahan='".$dataMasukan['id_form_isian_kelurahan']."' ";
 			
 			$db->update('form_isian_kelurahan',$paramInput, $where);
 			

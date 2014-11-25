@@ -77,10 +77,11 @@ $ctrlFrm = new Zend_View();
 				
 				<tr>
 					<input type="hidden" name="form_isian_kelurahan[]" value="<?php echo $i; ?>">
-					<input type="hidden" name="kategori_<?php echo $i; ?>" value="<?php echo $kategori ?>">
+					<input type="hidden" name="id_form_isian_kelurahan[<?php echo $i; ?>]" value="<?php echo $id_form_isian_kelurahan ?>">
+					<input type="hidden" name="kategori[<?php echo $i; ?>]" value="<?php echo $kategori ?>">
 					<td class="clleft"><? echo $i ?></td>
 					<td class="clcenter"><? echo $Kelurahan ?>
-					<td><input type="text" name="nilai_kelurahan_<?php echo $i; ?>" value="<? echo $nilai_kelurahan ?>" id="nilai_kelurahan" required title="Nilai Kelurahan Harus diisi"></td>
+					<td><input type="text" name="nilai_kelurahan[<?php echo $i; ?>]" value="<? echo $nilai_kelurahan ?>" id="nilai_kelurahan" required title="Nilai Kelurahan Harus diisi"></td>
 				</tr>
 				
 				<? $i++;

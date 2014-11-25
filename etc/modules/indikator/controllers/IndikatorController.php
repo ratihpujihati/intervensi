@@ -135,9 +135,9 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
 					*/
 					
-					$id_form_isian_kelurahan = $_POST['id_form_isian_kelurahan_'.$i];
-					$nilai_kelurahan = $_POST['nilai_kelurahan_'.$i];
-					$kategori = $_POST['kategori_'.$i];
+					$id_form_isian_kelurahan = $_POST['id_form_isian_kelurahan'][$i];
+					$nilai_kelurahan = $_POST['nilai_kelurahan'][$i];
+					$kategori = $_POST['kategori'][$i];
 					
 					
 					
@@ -158,12 +158,13 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					}
 					
 					$datamasukanformisiankelurahan = array(
+						"id_form_isian_kelurahan" 		=> $id_form_isian_kelurahan,
 						"id_indikator" 					=> $id_indikator,
 						"nilai_kelurahan"				=> $nilai_kelurahan,
 						"hasil_nii"						=> $hasil_nii,
 						"warna_indikator"				=> $warna_indikator
 					);
-					var_dump($datamasukanformisiankelurahan);
+					
 					$this->view->formisiankelurahan = $this->menu_serv->getsimpanformisiankelurahanMaxedit($datamasukanformisiankelurahan);
 					
 					
