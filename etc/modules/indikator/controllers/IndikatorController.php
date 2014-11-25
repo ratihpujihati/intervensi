@@ -107,8 +107,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
 	
-	public function indikatormaxformeditAction(){
-			
+	public function indikatormaxformeditAction(){			
 			//table form_isian_target
 			$id_indikator = $_POST['id_indikator'];
 			$target = $_POST['target'];
@@ -130,10 +129,8 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 			
 			
 			// table form_isian_kelurahan
-			if($_POST['form_isian_kelurahan']!="")
-			{
-				foreach($_POST['form_isian_kelurahan'] as $i)
-				{
+			if($_POST['form_isian_kelurahan']!=""){
+				foreach($_POST['form_isian_kelurahan'] as $i){
 					/*query insert ke database taruh disini
 					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
 					*/
@@ -145,7 +142,6 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					
 					
 					//NII	
-					$hasil_nii=0;
 					if($kategori == 1){ //maksimum
 						$hasil_nii = ($target - $nilai_kelurahan) / $target; 
 					}else if($kategori == 0){ //minimum
