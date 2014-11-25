@@ -1770,7 +1770,7 @@ class menu_Service {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 		 
 			$where = " and f.id_indikator = '$id_indikator' ";
-			$sqlProses = "select f.*, k.Kelurahan as Kelurahan from form_isian_kelurahan f, m_kelurahan k where f.kode_kelurahan = k.kode_kelurahan ";	
+			$sqlProses = "select i.kategori, f.*, k.Kelurahan as Kelurahan from form_isian_kelurahan f, m_kelurahan k, m_indikator i  where f.kode_kelurahan = k.kode_kelurahan and i.id_indikator = f.id_indikator ";	
 
 			
 			$sqlData = $sqlProses.$where;
@@ -1780,7 +1780,8 @@ class menu_Service {
 			$hasilAkhir[$j] = array("id_form_isian_kelurahan"  	=>(string)$result[$j]->id_form_isian_kelurahan,
 								"id_indikator"  	=>(string)$result[$j]->id_indikator,
 								"Kelurahan"  	=>(string)$result[$j]->Kelurahan,
-								"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan			
+								"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan,			
+								"kategori"  	=>(string)$result[$j]->kategori			
 								);
 			}
 			return $hasilAkhir;			
@@ -1926,12 +1927,16 @@ class menu_Service {
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$paramInput = array("nilai_kelurahan" => $dataMasukan['nilai_kelurahan']
+			$paramInput = array(
+								"nilai_kelurahan" => $dataMasukan['nilai_kelurahan'],
+								"hasil_nii" => $dataMasukan['hasil_nii'],
+								"warna_indikator" => $dataMasukan['warna_indikator']
 								);
 			
 			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
 			
 			$db->update('form_isian_kelurahan',$paramInput, $where);
+			
 			$db->commit();			
 			return 'sukses';
 		} catch (Exception $e) {

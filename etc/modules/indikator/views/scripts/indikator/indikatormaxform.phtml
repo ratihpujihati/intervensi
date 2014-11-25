@@ -72,12 +72,12 @@ $ctrlFrm = new Zend_View();
 					$Kelurahan = $this->escape($val['Kelurahan']); 
 					$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 
 					$id_form_isian_kelurahan = $this->escape($val['id_form_isian_kelurahan']); 
-					
+					$kategori = $this->escape($val['kategori']); 
 				?>
 				
 				<tr>
 					<input type="hidden" name="form_isian_kelurahan[]" value="<?php echo $i; ?>">
-					<input type="hidden" name="id_form_isian_kelurahan_<?php echo $i; ?>" value="<? echo $id_form_isian_kelurahan ?>">
+					<input type="hidden" name="kategori_<?php echo $i; ?>" value="<?php echo $kategori ?>">
 					<td class="clleft"><? echo $i ?></td>
 					<td class="clcenter"><? echo $Kelurahan ?>
 					<td><input type="text" name="nilai_kelurahan_<?php echo $i; ?>" value="<? echo $nilai_kelurahan ?>" id="nilai_kelurahan" required title="Nilai Kelurahan Harus diisi"></td>

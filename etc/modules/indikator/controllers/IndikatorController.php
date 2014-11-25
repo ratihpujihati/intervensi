@@ -126,7 +126,9 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					
 			// var_dump($datamasukanprogramkelurahan);
 			$this->view->formisiantarget = $this->menu_serv->getsimpanformisiantargetMaxedit($datamasukanformisiantarget);
-					
+			
+			
+			
 			// table form_isian_kelurahan
 			if($_POST['form_isian_kelurahan']!="")
 			{
@@ -135,30 +137,49 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					/*query insert ke database taruh disini
 					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
 					*/
-				
+					
 					$id_form_isian_kelurahan = $_POST['id_form_isian_kelurahan_'.$i];
 					$nilai_kelurahan = $_POST['nilai_kelurahan_'.$i];
-		
+					$kategori = $_POST['kategori_'.$i];
+					
+					
+					
+					//NII	
+					$hasil_nii=0;
+					if($kategori == 1){ //maksimum
+						$hasil_nii = ($target - $nilai_kelurahan) / $target; 
+					}else if($kategori == 0){ //minimum
+						$hasil_nii = ($nilai_kelurahan - $target) / $target;
+					}
+					
+					//warna indikator
+					if($hasil_nii <= 0){ //hijau
+						$warna_indikator = 1;
+					}else if($hasil_nii > 0 || $hasil_nii <= 0.25){ //kuning
+						$warna_indikator = 2; 
+					}else if($hasil_nii > 0.25){ //merah
+						$warna_indikator = 3; 
+					}
 					
 					$datamasukanformisiankelurahan = array(
-						"id_form_isian_kelurahan" 		=> $id_form_isian_kelurahan,
 						"id_indikator" 					=> $id_indikator,
-						"nilai_kelurahan"				=> $nilai_kelurahan
+						"nilai_kelurahan"				=> $nilai_kelurahan,
+						"hasil_nii"						=> $hasil_nii,
+						"warna_indikator"				=> $warna_indikator
 					);
+					var_dump($datamasukanformisiankelurahan);
+					$this->view->formisiankelurahan = $this->menu_serv->getsimpanformisiankelurahanMaxedit($datamasukanformisiankelurahan);
 					
 					
 				}
 				
 			}// END PROGRAM KELURAHAN PUSAT
 				
-				// var_dump($datamasukanprogramkelurahan);
-				$this->view->formisiankelurahan = $this->menu_serv->getsimpanformisiankelurahanMaxedit($datamasukanformisiankelurahan);
-				
-				 var_dump($datamasukanformisiankelurahan);
-				 
+		
+			
 			$this->view->proses = "2";	
 			$this->view->keterangan = "Indikator";
-			$this->view->hasil = $this->view->formisiantarget.$this->view->formisiankelurahan ;
+			$this->view->hasil = $this->view->formisiantarget ;
 			
 			$this->indikatormaxmenuAction();
 			$this->render('indikatormaxmenu');	
