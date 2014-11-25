@@ -243,6 +243,19 @@ label img {
 	vertical-align: middle;
 }
 
+abel.error {
+	/* float: right; 	 */
+	margin-left: 15px;
+	box-shadow: 0 0 10px rgba(100, 100, 100, 0.2) inset,2px 2px 2px #CCC;	
+	background:#D90036;		
+	text-decoration:none;
+	padding:2px 4px;
+	color:#fff;
+   -webkit-transition: opacity 0.5s ease-in;
+	-moz-transition: opacity 0.5s ease-in;
+	-o-transition: opacity 0.5s ease-in;
+			
+}
 
 /* Input field styles
 ---------------------------------------- */

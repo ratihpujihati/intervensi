@@ -21,16 +21,15 @@ $ctrlFrm = new Zend_View();
 		<span class="corners-top"><span></span></span>
 		<h2 class="title"><? echo $jenisAksi;?> Indikator Maksimum <br/> 
 		<? echo $this->namaIndikator['kode_indikator'] ." . ". $this->namaIndikator['nama_indikator'] ?></h2>
-	    <div class="spacer"></div> 		
-	
-		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+	    <div class="spacer"></div> 	
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">	
 				<input type="hidden" name="id_indikator" value="<?php echo $this->id_indikator; ?>"/>
 				<tr>
 				    <td align="right" width="180">Target 2015 :</td>
 					<td>
 						<?
-						$TargetAttrib = array("size" => 100,"maxlength" => 100);
+						$TargetAttrib = array("size" => 100,"maxlength" => 100,"required"=>"true","title"=>"Target 2015 harus diisi");
 						echo $ctrlFrm->formText('target', $this->dataIndikatorMaxTarget['target'], $TargetAttrib);
 						?>						
 					</td>
@@ -38,7 +37,7 @@ $ctrlFrm = new Zend_View();
 					<td align="right" width="180">Jawa Barat :</td>
 					<td>
 						<?
-						$JabarAttrib = array("size" => 100,"maxlength" => 100);
+						$JabarAttrib = array("size" => 100,"maxlength" => 100,"required"=>"true","title"=>"Target Jawa Barat harus diisi");
 						echo $ctrlFrm->formText('jawa_barat', $this->dataIndikatorMaxTarget['jawa_barat'], $JabarAttrib);
 						?>						
 					</td>
@@ -47,7 +46,7 @@ $ctrlFrm = new Zend_View();
 				    <td align="right" width="180">Nasional :</td>
 					<td>
 						<?
-						$NasionalAttrib = array("size" => 100,"maxlength" => 100);
+						$NasionalAttrib = array("size" => 100,"maxlength" => 100,"required"=>"true","title"=>"Target Nasional harus diisi");
 						echo $ctrlFrm->formText('nasional', $this->dataIndikatorMaxTarget['nasional'], $NasionalAttrib);
 						?>						
 					</td>
@@ -55,7 +54,7 @@ $ctrlFrm = new Zend_View();
 					<td align="right" width="180">Cimahi :</td>
 					<td>
 						<?
-						$CimahiAttrib = array("size" => 100,"maxlength" => 100);
+						$CimahiAttrib = array("size" => 100,"maxlength" => 100,"required"=>"true","title"=>"Target Cimahi harus diisi");
 						echo $ctrlFrm->formText('cimahi', $this->dataIndikatorMaxTarget['cimahi'], $CimahiAttrib);
 						?>						
 					</td>
@@ -72,13 +71,16 @@ $ctrlFrm = new Zend_View();
 					$id_indikator = $this->escape($val['id_indikator']); 
 					$Kelurahan = $this->escape($val['Kelurahan']); 
 					$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 
+					$id_form_isian_kelurahan = $this->escape($val['id_form_isian_kelurahan']); 
 					
 				?>
 				
 				<tr>
+					<input type="hidden" name="form_isian_kelurahan[]" value="<?php echo $i; ?>">
+					<input type="hidden" name="id_form_isian_kelurahan_<?php echo $i; ?>" value="<? echo $id_form_isian_kelurahan ?>">
 					<td class="clleft"><? echo $i ?></td>
 					<td class="clcenter"><? echo $Kelurahan ?>
-					<td><input type="text" name="nilai_kelurahan <? echo $i ?>" value="<? echo $nilai_kelurahan ?>" id="nilai_kelurahan" ></td>
+					<td><input type="text" name="nilai_kelurahan_<?php echo $i; ?>" value="<? echo $nilai_kelurahan ?>" id="nilai_kelurahan" required title="Nilai Kelurahan Harus diisi"></td>
 				</tr>
 				
 				<? $i++;

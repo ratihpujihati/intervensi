@@ -96,7 +96,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->dataIndikatorMaxKelurahan = $this->menu_serv->getDataIndikatorMaxKelurahan($id_indikator);
 		//$this->view->goalList = $this->menu_serv->getGoalListAll();
 	}
-	
+
 	public function indikatormaxgrafikAction() {
 		$id_indikator = $this->_getParam("id_indikator");
 	
@@ -106,6 +106,60 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
 		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
+	public function indikatormaxformeditAction(){
+			
+			//table form_isian_target
+			$id_indikator = $_POST['id_indikator'];
+			$target = $_POST['target'];
+			$jawa_barat = $_POST['jawa_barat'];
+			$nasional = $_POST['nasional'];
+			$cimahi = $_POST['cimahi'];
+			
+			$datamasukanformisiantarget = array(
+				"id_indikator" 			=> $id_indikator,
+				"target"				=> $target,
+				"jawa_barat"	       	=> $jawa_barat,
+				"nasional"	       		=> $nasional,
+				"cimahi"	   			=> $cimahi
+			);
+					
+			// var_dump($datamasukanprogramkelurahan);
+			$this->view->formisiantarget = $this->menu_serv->getsimpanformisiantargetedit($datamasukanformisiantarget);
+					
+			// table form_isian_kelurahan
+			if($_POST['form_isian_kelurahan']!="")
+			{
+				foreach($_POST['form_isian_kelurahan'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+				
+					$id_form_isian_kelurahan = $_POST['id_form_isian_kelurahan_'.$i];
+					$nilai_kelurahan = $_POST['nilai_kelurahan_'.$i];
+		
+					
+					$datamasukanformisiankelurahan = array(
+						"id_form_isian_kelurahan" 		=> $id_form_isian_kelurahan,
+						"nilai_kelurahan"				=> $nilai_kelurahan
+					);
+					
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->formisiankelurahan = $this->kegiatan_serv->getsimpandatamasukanformisiankelurahanedit($datamasukanformisiankelurahan);
+				
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			}// END PROGRAM KELURAHAN PUSAT
+			
+			$this->view->proses = "2";	
+			$this->view->keterangan = "Indikator";
+			$this->view->hasil = $this->view->formisiantarget.$this->view->formisiankelurahan ;
+			
+			$this->indikatormaxmenuAction();
+			$this->render('indikatormaxmenu');	
+			
+	}
 	//------------------------------------------------------------------------END MAXIMUM
 	
 	//------------------------------------------------------------------------INDIKATOR MINIMUM
