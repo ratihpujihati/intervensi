@@ -105,6 +105,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->id_indikator = $id_indikator;
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
     }
+	
 	public function indikatormaxformeditAction(){
 			
 			//table form_isian_target
@@ -123,7 +124,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 			);
 					
 			// var_dump($datamasukanprogramkelurahan);
-			$this->view->formisiantarget = $this->menu_serv->getsimpanformisiantargetedit($datamasukanformisiantarget);
+			$this->view->formisiantarget = $this->menu_serv->getsimpanformisiantargetMaxedit($datamasukanformisiantarget);
 					
 			// table form_isian_kelurahan
 			if($_POST['form_isian_kelurahan']!="")
@@ -140,17 +141,20 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					
 					$datamasukanformisiankelurahan = array(
 						"id_form_isian_kelurahan" 		=> $id_form_isian_kelurahan,
+						"id_indikator" 					=> $id_indikator,
 						"nilai_kelurahan"				=> $nilai_kelurahan
 					);
 					
-				// var_dump($datamasukanprogramkelurahan);
-				$this->view->formisiankelurahan = $this->kegiatan_serv->getsimpandatamasukanformisiankelurahanedit($datamasukanformisiankelurahan);
-				
-				// var_dump($this->view->programkelurahanInsert);
+					
 				}
 				
 			}// END PROGRAM KELURAHAN PUSAT
-			
+				
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->formisiankelurahan = $this->menu_serv->getsimpanformisiankelurahanMaxedit($datamasukanformisiankelurahan);
+				
+				 var_dump($datamasukanformisiankelurahan);
+				 
 			$this->view->proses = "2";	
 			$this->view->keterangan = "Indikator";
 			$this->view->hasil = $this->view->formisiantarget.$this->view->formisiankelurahan ;

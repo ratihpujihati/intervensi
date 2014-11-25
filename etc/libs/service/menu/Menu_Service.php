@@ -1852,42 +1852,68 @@ class menu_Service {
 	
 	
 	
-	// public function getsimpanindikatoredit(array $dataMasukan) {
-		// $registry = Zend_Registry::getInstance();
-		// $db = $registry->get('db');
-		// try {
-			// $db->beginTransaction();
-			// $paramInput = array("kode_indikator" => $dataMasukan['kode_indikator'],
-								// "id_goal" => $dataMasukan['id_goal'],
-								// "nama_indikator" => $dataMasukan['nama_indikator'],
-								// "definisi" => $dataMasukan['definisi'],
-								// "manfaat" => $dataMasukan['manfaat'],
-								// "sumber_data" => $dataMasukan['sumber_data'],
-								// "nilai_target" => $dataMasukan['nilai_target'],
-								// "kategori" => $dataMasukan['kategori']					
-								// );
+	public function getsimpanformisiantargetMaxedit (array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array("target" => $dataMasukan['target'],
+								"jawa_barat" => $dataMasukan['jawa_barat'],
+								"nasional" => $dataMasukan['nasional'],
+								"cimahi" => $dataMasukan['cimahi']			
+								);
 			
-			// $where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
+			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
 			
-			// $db->update('m_indikator',$paramInput, $where);
-			// $db->commit();			
-			// return 'sukses';
-		// } catch (Exception $e) {
-			// $db->rollBack();
-			// $errmsgArr = explode(":",$e->getMessage());
+			$db->update('form_isian_target',$paramInput, $where);
+			$db->commit();			
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
 			
-			// $errMsg = $errmsgArr[0];
+			$errMsg = $errmsgArr[0];
 
-			// if($errMsg == "SQLSTATE[23000]")
-			// {
-				// return "gagal.Data Sudah Ada.";
-			// }
-			// else
-			// {
-				// return "sukses";
-			// }
-	   // }
-	// }
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "sukses";
+			}
+	   }
+	}
+	
+	public function getsimpanformisiankelurahanMaxedit (array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array("nilai_kelurahan" => $dataMasukan['nilai_kelurahan']
+								);
+			
+			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
+			
+			$db->update('form_isian_kelurahan',$paramInput, $where);
+			$db->commit();			
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			
+			$errMsg = $errmsgArr[0];
+
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "sukses";
+			}
+	   }
+	}
 	
 	//---------------------------------------------------------------------------------------------------------------------
 	//INDIKATOR MINIMUM 0
