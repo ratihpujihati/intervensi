@@ -104,6 +104,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		
 		$this->view->id_indikator = $id_indikator;
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
+		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
 	//------------------------------------------------------------------------END MAXIMUM
 	
