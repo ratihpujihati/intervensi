@@ -1827,7 +1827,7 @@ class menu_Service {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 		 
 			$where = " and f.id_indikator = '$id_indikator' ";
-			$sqlProses = "select k.Kelurahan, f.hasil, f.nilai_kelurahan, i.id_indikator 
+			$sqlProses = "select k.Kelurahan, f.hasil_nii, f.nilai_kelurahan, i.id_indikator 
 						from m_kelurahan k, form_isian_kelurahan f, m_indikator i 
 						where k.kode_kelurahan = f.kode_kelurahan and i.id_indikator = f.id_indikator";	
 
@@ -1839,6 +1839,42 @@ class menu_Service {
 				$hasilAkhir[$j] = array("Kelurahan"  	=>(string)$result[$j]->Kelurahan,
 										"hasil"  		=>(string)$result[$j]->hasil,
 										"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan	
+									);
+				}
+			return $hasilAkhir;			
+			
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	public function getDataHitung($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " and it.id_indikator = '$id_indikator' ";
+			$sqlProses = "select ik.nilai_kelurahan, ik.hasil_nii, ik.warna_indikator, 
+						it.target, k.Kelurahan, i.kategori
+						from m_kelurahan k, form_isian_kelurahan ik, form_isian_target it, m_indikator i 
+						where k.kode_kelurahan = ik.kode_kelurahan and i.id_indikator = it.id_indikator
+						and i.id_indikator = ik.id_indikator and ik.id_indikator = '$id_indikator' ";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchAll($sqlData);
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array("Kelurahan"  	=>(string)$result[$j]->Kelurahan,
+										"id_indikator"  		=>(string)$result[$j]->id_indikator,
+										"kategori"  		=>(string)$result[$j]->kategori,
+										"nilai_kelurahan"  		=>(string)$result[$j]->nilai_kelurahan,
+										"warna_indikator"  	=>(string)$result[$j]->warna_indikator,
+										"target"  	=>(string)$result[$j]->target									
 									);
 				}
 			return $hasilAkhir;			
