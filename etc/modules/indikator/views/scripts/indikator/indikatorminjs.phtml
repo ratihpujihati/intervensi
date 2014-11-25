@@ -1,15 +1,4 @@
 <script type="text/javascript">
-function BukaWindows(){
-	var w = 0; 
-	var h = 0;
-	w = screen.availWidth;
-	h = screen.availHeight;
-	var popW = 800, popH = 600;
-	var leftc = (w-popW)/2;
-	var topc = (h-popH)/2;
-	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
-}
-
 function pilihIndikatorMin(jenisForm)
 {
 	id_indikator = document.getElementById('id_indikator').value;
@@ -54,21 +43,21 @@ var frmCariIndikatorMin_opt = {
 		resetForm: false
 };
 
-function Popup(id_indikator){
-	url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/indikatorminform';
-	var param = {id_indikator:id_indikator};
-	BukaWindows();
-}
-
 function BukaWindows(){
 	var w = 0; 
 	var h = 0;
 	w = screen.availWidth;
 	h = screen.availHeight;
-	var popW = 800, popH = 600;
+	var popW = 1100, popH = 500;
 	var leftc = (w-popW)/2;
 	var topc = (h-popH)/2;
 	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
+
+function Popup(id_indikator){
+	url = '<?php echo $this->basePath; ?>/indikator/indikator/indikatormingrafik?id_indikator=' + id_indikator;
+	var param = {id_indikator:id_indikator};
+	BukaWindows();
 }
 
 function FormMin(jenisForm, id_indikator)

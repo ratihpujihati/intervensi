@@ -1817,7 +1817,40 @@ class menu_Service {
 	        echo $e->getMessage().'<br>';
 		    return 'Data tidak ada <br>';
 		}
-	}	
+	}
+
+	public function getHasil($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+		 
+			$where = " and f.id_indikator = '$id_indikator' ";
+			$sqlProses = "select k.Kelurahan, f.hasil, f.nilai_kelurahan, i.id_indikator 
+						from m_kelurahan k, form_isian_kelurahan f, m_indikator i 
+						where k.kode_kelurahan = f.kode_kelurahan and i.id_indikator = f.id_indikator";	
+
+			
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchAll($sqlData);
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array("Kelurahan"  	=>(string)$result[$j]->Kelurahan,
+										"hasil"  		=>(string)$result[$j]->hasil,
+										"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan	
+									);
+				}
+			return $hasilAkhir;			
+			
+			
+		} catch (Exception $e) {
+	        echo $e->getMessage().'<br>';
+		    return 'Data tidak ada <br>';
+		}
+	}
+	
+	
 	
 	// public function getsimpanindikatoredit(array $dataMasukan) {
 		// $registry = Zend_Registry::getInstance();
