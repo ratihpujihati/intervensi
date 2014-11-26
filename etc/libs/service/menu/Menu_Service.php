@@ -1828,7 +1828,7 @@ class menu_Service {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 		 
 			$where = " and f.id_indikator = '$id_indikator' ";
-			$sqlProses = "select k.Kelurahan, f.hasil_nii, f.nilai_kelurahan, i.id_indikator 
+			$sqlProses = "select k.Kelurahan, f.warna_indikator, f.hasil_nii, f.nilai_kelurahan, i.id_indikator 
 						from m_kelurahan k, form_isian_kelurahan f, m_indikator i 
 						where k.kode_kelurahan = f.kode_kelurahan and i.id_indikator = f.id_indikator";	
 
@@ -1839,6 +1839,7 @@ class menu_Service {
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array("Kelurahan"  	=>(string)$result[$j]->Kelurahan,
 										"hasil"  		=>(string)$result[$j]->hasil,
+										"warna_indikator"  		=>(string)$result[$j]->warna_indikator,
 										"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan	
 									);
 				}

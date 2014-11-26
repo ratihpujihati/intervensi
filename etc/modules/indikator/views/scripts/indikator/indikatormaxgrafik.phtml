@@ -57,11 +57,42 @@ $(document).ready(function() {
 			foreach ($this->grafik as $key => $val): 
 				$Kelurahan = $this->escape($val['Kelurahan']); 
 				$hasil = $this->escape($val['hasil']); 
-				$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 
+				$nilai_kelurahan = $this->escape($val['nilai_kelurahan']); 				
+				$warna_indikator = $this->escape($val['warna_indikator']);				
 			?>
 				 {
                       name: '<?php echo $Kelurahan; ?>',
-                      data: [<?php echo $nilai_kelurahan; ?>]
+                      data: [<?php echo $nilai_kelurahan; ?>],
+					  
+					 <? if($warna_indikator == 1){ //hijau
+						?>
+						color: {
+							linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+							stops: [
+								[0, '#00B300'],
+								[1, '#00B300']
+							]
+						}
+					<?}else if($warna_indikator == 2){ //kuning
+						?>
+						color: {
+							linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+							stops: [
+								[0, '#FFFF00'],
+								[1, '#FFFF00']
+							]
+						}
+					<? }else if($warna_indikator == 3){ //merah
+						?>
+						color: {
+							linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+							stops: [
+								[0, '#FF0000'],
+								[1, '#FF0000']
+							]
+						}
+					<? } ?>
+					  
                  },
 			<?	endforeach; ?>
         ]
@@ -141,7 +172,7 @@ $(document).ready(function() {
 	<tr>
 		<td width="30px;"><div class="hijau">&nbsp;</td>
 		<td>&nbsp;:&nbsp;</td>
-		<td>Jauh dari arah pencapaian</td>
+		<td>Telah mencapai target</td>
 	</tr>
 	<tr>
 		<td width="30px;"><div class="kuning">&nbsp;</td>
@@ -151,7 +182,7 @@ $(document).ready(function() {
 	<tr>
 		<td width="30px;"><div class="merah">&nbsp;</td>
 		<td>&nbsp;:&nbsp;</td>
-		<td>Telah mencapai target</td>
+		<td>Jauh dari arah pencapaian</td>
 	</tr>
   </table>
 	<fieldset class="fields1" >	
