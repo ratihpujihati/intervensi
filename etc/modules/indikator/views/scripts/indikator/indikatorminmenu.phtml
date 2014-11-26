@@ -27,7 +27,7 @@ $numToDisplay = $this->numToDisplay;
 		<div class="search-panel">
 			<form method="post" id="frmCariIndikatorMin" name="frmCariIndikatorMin">Kata Kunci :
 				<?
-				$kategoriCari = array("kode_indikator" => "Kode Indikator Minimum");
+				$kategoriCari = array("kode_indikator" => "Kode Indikator Minimum",  "nama_indikator" => "Indikator");
 										
 				echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
 				?>
