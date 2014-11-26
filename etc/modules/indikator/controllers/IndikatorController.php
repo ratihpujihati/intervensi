@@ -143,6 +143,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					
 					//NII	
 					//maksimum
+					$hasil_nii = 0; 
 					$hasil_nii = ($target - $nilai_kelurahan) / $target; 
 					
 					
@@ -273,7 +274,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					//NII	
 					$hasil_nii=0;
 					 //minimum
-					$nii = ($nilai_kelurahan - $target) / $target;
+					$hasil_nii = ($nilai_kelurahan - $target) / $target;
 					
 					
 					//warna indikator
@@ -292,7 +293,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 						"hasil_nii"						=> $hasil_nii,
 						"warna_indikator"				=> $warna_indikator
 					);
-					
+					var_dump($datamasukanformisiankelurahan);
 					$this->view->formisiankelurahan = $this->menu_serv->getsimpanformisiankelurahanMinedit($datamasukanformisiankelurahan);
 					
 					
