@@ -1888,7 +1888,7 @@ class menu_Service {
 	}
 	
 	
-	
+	//form target max edit
 	public function getsimpanformisiantargetMaxedit (array $dataMasukan) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -1922,6 +1922,7 @@ class menu_Service {
 	   }
 	}
 	
+	//form kelurahan max edit
 	public function getsimpanformisiankelurahanMaxedit (array $dataMasukan) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -2072,7 +2073,7 @@ class menu_Service {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 		 
 			$where = " and f.id_indikator = '$id_indikator' ";
-			$sqlProses = "select f.*, k.Kelurahan as Kelurahan from form_isian_kelurahan f, m_kelurahan k where f.kode_kelurahan = k.kode_kelurahan ";	
+			$sqlProses = "select i.kategori, f.*, k.Kelurahan as Kelurahan from form_isian_kelurahan f, m_kelurahan k, m_indikator i  where f.kode_kelurahan = k.kode_kelurahan and i.id_indikator = f.id_indikator  ";	
 
 			
 			$sqlData = $sqlProses.$where;
@@ -2082,7 +2083,8 @@ class menu_Service {
 			$hasilAkhir[$j] = array("id_form_isian_kelurahan"  	=>(string)$result[$j]->id_form_isian_kelurahan,
 								"id_indikator"  	=>(string)$result[$j]->id_indikator,
 								"Kelurahan"  	=>(string)$result[$j]->Kelurahan,
-								"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan			
+								"nilai_kelurahan"  	=>(string)$result[$j]->nilai_kelurahan,			
+								"kategori"  	=>(string)$result[$j]->kategori			
 								);
 			}
 			return $hasilAkhir;			
@@ -2119,6 +2121,75 @@ class menu_Service {
 	        echo $e->getMessage().'<br>';
 		    return 'Data tidak ada <br>';
 		}
+	}
+	
+	//form target min edit
+	public function getsimpanformisiantargetMinedit (array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array("target" => $dataMasukan['target'],
+								"jawa_barat" => $dataMasukan['jawa_barat'],
+								"nasional" => $dataMasukan['nasional'],
+								"cimahi" => $dataMasukan['cimahi']			
+								);
+			
+			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."'";
+			
+			$db->update('form_isian_target',$paramInput, $where);
+			$db->commit();			
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			
+			$errMsg = $errmsgArr[0];
+
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "sukses";
+			}
+	   }
+	}
+	
+	//form kelurahan min edit
+	public function getsimpanformisiankelurahanMinedit (array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array(
+								"nilai_kelurahan" => $dataMasukan['nilai_kelurahan'],
+								"hasil_nii" => $dataMasukan['hasil_nii'],
+								"warna_indikator" => $dataMasukan['warna_indikator']
+								);
+			
+			$where[] = " id_indikator = '".$dataMasukan['id_indikator']."' and id_form_isian_kelurahan='".$dataMasukan['id_form_isian_kelurahan']."' ";
+			
+			$db->update('form_isian_kelurahan',$paramInput, $where);
+			
+			$db->commit();			
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			
+			$errMsg = $errmsgArr[0];
+
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "sukses";
+			}
+	   }
 	}
 
 }
