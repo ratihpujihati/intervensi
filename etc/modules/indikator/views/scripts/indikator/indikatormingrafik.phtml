@@ -4,7 +4,7 @@ require_once 'share/format_date.php';
 require_once 'share/format_page.php';
 require_once "share/share_message.php";
 require_once "share/oa_dec_cur_conv.php";
-require_once "indikatormaxjs.phtml";
+require_once "indikatorminjs.phtml";
 $referensi = Menu_Service::getInstance();
 
 $ctrlFrm = new Zend_View();
@@ -68,7 +68,30 @@ $(document).ready(function() {
       });
    });	
 </script>
-
+<style>
+	.merah {				
+		background: #FF0000 !important;
+	
+		color: #424251;
+	}
+	
+	.kuning {				
+		background: #FFFF00 !important;
+	
+		color: #424251;
+	}
+	
+	.hijau {				
+		background: #00B300 !important;
+	
+		color: #424251;
+		
+	}
+	
+	.lama {
+		font-size: 15px;
+	}			
+</style>
 </head>
 
 <body>	
@@ -80,7 +103,24 @@ $(document).ready(function() {
 	<fieldset class="fields">
 		<div id='container'></div>		
 	</fieldset>
-	
+	Keterangan:
+	<table>
+	<tr>
+		<td width="30px;"><div class="hijau">&nbsp;</td>
+		<td>&nbsp;:&nbsp;</td>
+		<td>Jauh dari arah pencapaian</td>
+	</tr>
+	<tr>
+		<td width="30px;"><div class="kuning">&nbsp;</td>
+		<td>&nbsp;:&nbsp;</td>
+		<td>Dalam arah pencapaian</td>
+	</tr>
+	<tr>
+		<td width="30px;"><div class="merah">&nbsp;</td>
+		<td>&nbsp;:&nbsp;</td>
+		<td>Telah mencapai target</td>
+	</tr>
+  </table>
 	<fieldset class="fields1" >	
 		<input type="button" onclick="window.close()" value="Tutup"/>
 	</fieldset>

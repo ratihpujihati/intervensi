@@ -69,6 +69,31 @@ $(document).ready(function() {
    });	
 </script>
 
+<style>
+	.merah {				
+		background: #FF0000 !important;
+	
+		color: #424251;
+	}
+	
+	.kuning {				
+		background: #FFFF00 !important;
+	
+		color: #424251;
+	}
+	
+	.hijau {				
+		background: #00B300 !important;
+	
+		color: #424251;
+		
+	}
+	
+	.lama {
+		font-size: 15px;
+	}			
+</style>
+
 </head>
 
 <body>	
@@ -90,18 +115,18 @@ $(document).ready(function() {
 		
 		//NII		
 		if($kategori == 1){ //maksimum
-			echo "nii : ". $nii = ($target - $nilai_kelurahan) / $target; 
+			$nii = ($target - $nilai_kelurahan) / $target; 
 		}else if($kategori == 0){ //minimum
-			echo "nii : ". $nii = ($nilai_kelurahan - $target) / $target;
+			$nii = ($nilai_kelurahan - $target) / $target;
 		}
 		
 		//warna indikator
 		if($nii <= 0){ //hijau
-			echo "warna : ". $warna_indikator = 1;
+			$warna_indikator = 1;
 		}else if($nii > 0 || $nii <= 0.25){ //kuning
-			echo "warna : ". $warna_indikator = 2; 
+			$warna_indikator = 2; 
 		}else if($nii > 0.25){ //merah
-			echo "warna : ". $warna_indikator = 3; 
+			$warna_indikator = 3; 
 		}
 		
 		//masukin hasil nii dan warna indikator 
@@ -110,7 +135,25 @@ $(document).ready(function() {
 	<fieldset class="fields">
 		<div id='container'></div>		
 	</fieldset>
-	
+	<br/><br/>
+	Keterangan:
+	<table>
+	<tr>
+		<td width="30px;"><div class="hijau">&nbsp;</td>
+		<td>&nbsp;:&nbsp;</td>
+		<td>Jauh dari arah pencapaian</td>
+	</tr>
+	<tr>
+		<td width="30px;"><div class="kuning">&nbsp;</td>
+		<td>&nbsp;:&nbsp;</td>
+		<td>Dalam arah pencapaian</td>
+	</tr>
+	<tr>
+		<td width="30px;"><div class="merah">&nbsp;</td>
+		<td>&nbsp;:&nbsp;</td>
+		<td>Telah mencapai target</td>
+	</tr>
+  </table>
 	<fieldset class="fields1" >	
 		<input type="button" onclick="window.close()" value="Tutup"/>
 	</fieldset>
