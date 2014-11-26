@@ -74,9 +74,29 @@ function FormMin(jenisForm, id_indikator)
 
 var formMinIndikator_opt = {
 		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatorminform',
-		type: 'post', 
-		resetForm: false
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/indikatorminformedit',
+		beforeSubmit : function() {
+		if (document.getElementById('target').value == ''){
+			alert('Target harus Diisi');
+			return false;
+		}
+		if (document.getElementById('jawa_barat').value == ''){
+			alert('Jawa Barat harus Diisi');
+			return false;
+		}
+		if (document.getElementById('nasional').value == ''){
+			alert('Nasional harus Diisi');
+			return false;
+		}
+		if (document.getElementById('cimahi').value == ''){
+			alert('Cimahi harus Diisi');
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
 };
 
 // var tambahKota_opt = {

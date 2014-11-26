@@ -106,7 +106,6 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
 		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
-	
 	public function indikatormaxformeditAction(){			
 			//table form_isian_target
 			$id_indikator = $_POST['id_indikator'];
@@ -129,6 +128,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 			
 			
 			// table form_isian_kelurahan
+			
 			if($_POST['form_isian_kelurahan']!=""){
 				foreach($_POST['form_isian_kelurahan'] as $i){
 					/*query insert ke database taruh disini
@@ -142,11 +142,9 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 					
 					
 					//NII	
-					if($kategori == 1){ //maksimum
-						$hasil_nii = ($target - $nilai_kelurahan) / $target; 
-					}else if($kategori == 0){ //minimum
-						$hasil_nii = ($nilai_kelurahan - $target) / $target;
-					}
+					//maksimum
+					$hasil_nii = ($target - $nilai_kelurahan) / $target; 
+					
 					
 					//warna indikator
 					if($hasil_nii <= 0){ //hijau
@@ -233,6 +231,84 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->id_indikator = $id_indikator;
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
     }
+	
+	public function indikatorminformeditAction(){
+			
+			//table form_isian_target
+			$id_indikator = $_POST['id_indikator'];
+			$target = $_POST['target'];
+			$jawa_barat = $_POST['jawa_barat'];
+			$nasional = $_POST['nasional'];
+			$cimahi = $_POST['cimahi'];
+			
+			$datamasukanformisiantarget = array(
+				"id_indikator" 			=> $id_indikator,
+				"target"				=> $target,
+				"jawa_barat"	       	=> $jawa_barat,
+				"nasional"	       		=> $nasional,
+				"cimahi"	   			=> $cimahi
+			);
+					
+			// var_dump($datamasukanprogramkelurahan);
+			$this->view->formisiantarget = $this->menu_serv->getsimpanformisiantargetMinedit($datamasukanformisiantarget);
+			
+			
+			
+			// table form_isian_kelurahan
+			if($_POST['form_isian_kelurahan']!="")
+			{
+				foreach($_POST['form_isian_kelurahan'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					
+					$id_form_isian_kelurahan = $_POST['id_form_isian_kelurahan'][$i];
+					$nilai_kelurahan = $_POST['nilai_kelurahan'][$i];
+					$kategori = $_POST['kategori'][$i];
+					
+					
+					
+					//NII	
+					$hasil_nii=0;
+					 //minimum
+					$nii = ($nilai_kelurahan - $target) / $target;
+					
+					
+					//warna indikator
+					if($hasil_nii <= 0){ //hijau
+						$warna_indikator = 1;
+					}else if($hasil_nii > 0 || $hasil_nii <= 0.25){ //kuning
+						$warna_indikator = 2; 
+					}else if($hasil_nii > 0.25){ //merah
+						$warna_indikator = 3; 
+					}
+					
+					$datamasukanformisiankelurahan = array(
+						"id_form_isian_kelurahan" 		=> $id_form_isian_kelurahan,
+						"id_indikator" 					=> $id_indikator,
+						"nilai_kelurahan"				=> $nilai_kelurahan,
+						"hasil_nii"						=> $hasil_nii,
+						"warna_indikator"				=> $warna_indikator
+					);
+					
+					$this->view->formisiankelurahan = $this->menu_serv->getsimpanformisiankelurahanMinedit($datamasukanformisiankelurahan);
+					
+					
+				}
+				
+			}// END PROGRAM KELURAHAN PUSAT
+				
+		
+			
+			$this->view->proses = "2";	
+			$this->view->keterangan = "Indikator";
+			$this->view->hasil = $this->view->formisiantarget ;
+			
+			$this->indikatormaxmenuAction();
+			$this->render('indikatormaxmenu');	
+			
+	}
 	//------------------------------------------------------------------------END MINIMUM
 	
 	//------------------------------------------------------------------------INDIKATOR AJA	
