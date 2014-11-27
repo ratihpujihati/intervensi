@@ -61,7 +61,7 @@ $numToDisplay = $this->numToDisplay;
 				<th width=30% class="sorted order2 sortable">Manfaat</th> 
 				<th width=5% class="sorted order2 sortable">Sumber Data</th> 
 				<th width=5% class="sorted order2 sortable">Nilai Target</th> 
-				<th width=20% colspan="2"  class="nosort">Tindakan</th>
+				<th width=20% colspan="3"  class="nosort">Tindakan</th>
 				
 				<?php
 					if (count($this->indikatorMaxMenu) == 0){ 
@@ -97,6 +97,7 @@ $numToDisplay = $this->numToDisplay;
 					<td class="clleft">&nbsp;<? echo $nilai_target;?></td>						
 					<td><div onClick="FormMax('form','<? echo $id_indikator;?>');" class="tampilForm" title="Tampilkan Form"></div></td>
 					<td><div onClick="Popup('<? echo $id_indikator;?>');" class="hasil" title="Hasil"></div></td>
+					<td><div onClick="PopupPeta('<? echo $id_indikator;?>');" class="map" title="Lihat Peta"></div></td>
 					</tr>
 					<?
 					endforeach;

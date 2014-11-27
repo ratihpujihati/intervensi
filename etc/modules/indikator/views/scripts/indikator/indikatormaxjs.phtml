@@ -51,6 +51,12 @@ function Popup(id_indikator){
 	BukaWindows();
 }
 
+function PopupPeta(id_indikator){
+	url = '<?php echo $this->basePath; ?>/indikator/indikator/indikatormaxpeta?id_indikator=' + id_indikator;
+	var param = {id_indikator:id_indikator};
+	BukaWindows();
+}
+
 function BukaWindows(){
 	var w = 0; 
 	var h = 0;

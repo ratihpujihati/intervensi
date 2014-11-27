@@ -106,6 +106,16 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
 		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
+	
+	public function indikatormaxpetaAction() {
+		$id_indikator = $this->_getParam("id_indikator");
+	
+		$id_indikator = $_REQUEST["id_indikator"];
+		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
+		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
+    }
 	public function indikatormaxformeditAction(){			
 			//table form_isian_target
 			$id_indikator = $_POST['id_indikator'];
