@@ -19,16 +19,13 @@ $numToDisplay = $this->numToDisplay;
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Grafik Indikator Maksimum</title>
+<title>Peta Indonesia</title>
 <link href="<? echo $this->basePath;?>/css/tools.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<? echo $this->basePath;?>/css/thickbox.css" type="text/css" media="screen" />
 <link href="<? echo $this->basePath;?>/css/main.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<? echo $this->basePath;?>/css/style.css" type="text/css" title="Nice Blue style" />
 
-
-
-<script type="text/javascript" src="<? echo $this->basePath;?>/js/exporting.js" ></script>
-<script type="text/javascript" src="<? echo $this->basePath;?>/js/highcharts.js" ></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/jquery.js"></script>
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/id-all.js" ></script>
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/highmaps.js" ></script>
 
@@ -38,187 +35,191 @@ $numToDisplay = $this->numToDisplay;
 
 
 <script type="text/javascript">
-$(function () {
+(function($) {
 
-    // Prepare demo data
-    var data = [
-        {
-            "hc-key": "id-3700",
-            "value": 0
-        },
-        {
-            "hc-key": "id-ac",
-            "value": 1
-        },
-        {
-            "hc-key": "id-ki",
-            "value": 2
-        },
-        {
-            "hc-key": "id-jt",
-            "value": 3
-        },
-        {
-            "hc-key": "id-be",
-            "value": 4
-        },
-        {
-            "hc-key": "id-bt",
-            "value": 5
-        },
-        {
-            "hc-key": "id-kb",
-            "value": 6
-        },
-        {
-            "hc-key": "id-bb",
-            "value": 7
-        },
-        {
-            "hc-key": "id-ba",
-            "value": 8
-        },
-        {
-            "hc-key": "id-ji",
-            "value": 9
-        },
-        {
-            "hc-key": "id-ks",
-            "value": 10
-        },
-        {
-            "hc-key": "id-nt",
-            "value": 11
-        },
-        {
-            "hc-key": "id-se",
-            "value": 12
-        },
-        {
-            "hc-key": "id-kr",
-            "value": 13
-        },
-        {
-            "hc-key": "id-ib",
-            "value": 14
-        },
-        {
-            "hc-key": "id-su",
-            "value": 15
-        },
-        {
-            "hc-key": "id-ri",
-            "value": 16
-        },
-        {
-            "hc-key": "id-sw",
-            "value": 17
-        },
-        {
-            "hc-key": "id-la",
-            "value": 18
-        },
-        {
-            "hc-key": "id-sb",
-            "value": 19
-        },
-        {
-            "hc-key": "id-ma",
-            "value": 20
-        },
-        {
-            "hc-key": "id-nb",
-            "value": 21
-        },
-        {
-            "hc-key": "id-sg",
-            "value": 22
-        },
-        {
-            "hc-key": "id-st",
-            "value": 23
-        },
-        {
-            "hc-key": "id-pa",
-            "value": 24
-        },
-        {
-            "hc-key": "id-1024",
-            "value": 25
-        },
-        {
-            "hc-key": "id-jk",
-            "value": 26
-        },
-        {
-            "hc-key": "id-jr",
-            "value": 27
-        },
-        {
-            "hc-key": "id-go",
-            "value": 28
-        },
-        {
-            "hc-key": "id-yo",
-            "value": 29
-        },
-        {
-            "hc-key": "id-kt",
-            "value": 30
-        },
-        {
-            "hc-key": "id-sl",
-            "value": 31
-        },
-        {
-            "hc-key": "id-sr",
-            "value": 32
-        },
-        {
-            "hc-key": "id-ja",
-            "value": 33
-        }
-    ];
+    $.noConflict();
+    $(function () {
 
-    // Initiate the chart
-    $('#container').highcharts('Map', {
+			// Prepare demo data
+			var data = [
+				{
+					"hc-key": "id-3700",
+					"value": 0
+				},
+				{
+					"hc-key": "id-ac",
+					"value": 1
+				},
+				{
+					"hc-key": "id-ki",
+					"value": 2
+				},
+				{
+					"hc-key": "id-jt",
+					"value": 3
+				},
+				{
+					"hc-key": "id-be",
+					"value": 4
+				},
+				{
+					"hc-key": "id-bt",
+					"value": 5
+				},
+				{
+					"hc-key": "id-kb",
+					"value": 6
+				},
+				{
+					"hc-key": "id-bb",
+					"value": 7
+				},
+				{
+					"hc-key": "id-ba",
+					"value": 8
+				},
+				{
+					"hc-key": "id-ji",
+					"value": 9
+				},
+				{
+					"hc-key": "id-ks",
+					"value": 10
+				},
+				{
+					"hc-key": "id-nt",
+					"value": 11
+				},
+				{
+					"hc-key": "id-se",
+					"value": 12
+				},
+				{
+					"hc-key": "id-kr",
+					"value": 13
+				},
+				{
+					"hc-key": "id-ib",
+					"value": 14
+				},
+				{
+					"hc-key": "id-su",
+					"value": 15
+				},
+				{
+					"hc-key": "id-ri",
+					"value": 16
+				},
+				{
+					"hc-key": "id-sw",
+					"value": 17
+				},
+				{
+					"hc-key": "id-la",
+					"value": 18
+				},
+				{
+					"hc-key": "id-sb",
+					"value": 19
+				},
+				{
+					"hc-key": "id-ma",
+					"value": 20
+				},
+				{
+					"hc-key": "id-nb",
+					"value": 21
+				},
+				{
+					"hc-key": "id-sg",
+					"value": 22
+				},
+				{
+					"hc-key": "id-st",
+					"value": 23
+				},
+				{
+					"hc-key": "id-pa",
+					"value": 24
+				},
+				{
+					"hc-key": "id-1024",
+					"value": 25
+				},
+				{
+					"hc-key": "id-jk",
+					"value": 26
+				},
+				{
+					"hc-key": "id-jr",
+					"value": 27
+				},
+				{
+					"hc-key": "id-go",
+					"value": 28
+				},
+				{
+					"hc-key": "id-yo",
+					"value": 29
+				},
+				{
+					"hc-key": "id-kt",
+					"value": 30
+				},
+				{
+					"hc-key": "id-sl",
+					"value": 31
+				},
+				{
+					"hc-key": "id-sr",
+					"value": 32
+				},
+				{
+					"hc-key": "id-ja",
+					"value": 33
+				}
+			];
 
-        title : {
-            text : 'Highmaps basic demo'
-        },
+			// Initiate the chart
+			$('#container').highcharts('Map', {
 
-        subtitle : {
-            text : 'Source map: <a href="http://code.highcharts.com/mapdata/countries/id/id-all.js">Indonesia</a>'
-        },
+				title : {
+					text : 'Peta Pencapaian Indikator'
+				},
 
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
-        },
+				subtitle : {
+					text : 'Source map: <a href="http://code.highcharts.com/mapdata/countries/id/id-all.js">Indonesia</a>'
+				},
 
-        colorAxis: {
-            min: 0
-        },
+				mapNavigation: {
+					enabled: true,
+					buttonOptions: {
+						verticalAlign: 'bottom'
+					}
+				},
 
-        series : [{
-            data : data,
-            mapData: Highcharts.maps['countries/id/id-all'],
-            joinBy: 'hc-key',
-            name: 'Random data',
-            states: {
-                hover: {
-                    color: '#BADA55'
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}'
-            }
-        }]
-    });
+				colorAxis: {
+					min: 0
+				},
+
+				series : [{
+					data : data,
+					mapData: Highcharts.maps['countries/id/id-all'],
+					joinBy: 'hc-key',
+					name: 'Random data',
+					states: {
+						hover: {
+							color: '#BADA55'
+						}
+					},
+					dataLabels: {
+						enabled: true,
+						format: '{point.name}'
+					}
+				}]
+			});
 });
+}(jQuery));	
 
 </script>
 
