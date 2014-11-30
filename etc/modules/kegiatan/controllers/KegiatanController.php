@@ -92,13 +92,22 @@ class Kegiatan_KegiatanController extends Zend_Controller_Action {
 	public function kegiatanolahdataAction(){
 		$this->view->jenisForm = $this->_getParam('jenisForm');
 		$this->view->KodeKegiatan= $_REQUEST['KodeKegiatan'];
+		
+		$this->view->KodeKomponen= $_GET['KodeKomponen'];
+		$this->view->KodeSubKomponen= $_REQUEST['KodeSubKomponen'];
+		$this->view->KodeDetailSubKomponen= $_REQUEST['KodeDetailSubKomponen'];
+		
 		$this->view->KodeInstansi = $this->KodeInstansi;
 		$this->view->kegiatanMenu = $this->kegiatan_serv->getkegiatanedit($this->view->KodeKegiatan, $this->view->KodeInstansi);
 		$this->view->Instansi = $this->kegiatan_serv->getInstansi($this->view->KodeInstansi);
 		$this->view->instansiList = $this->kegiatan_serv->getInstansiListAll();
 		$this->view->komponenList = $this->kegiatan_serv->getKomponenListAll();
-		$this->view->subKomponenList = $this->kegiatan_serv->getSubKomponenListAll();
-		$this->view->subKomponenDetailList = $this->kegiatan_serv->getSubKomponenDetailListAll();
+		
+		// $this->view->subKomponenList = $this->kegiatan_serv->getSubKomponenListAll();
+		// $this->view->subKomponenDetailList = $this->kegiatan_serv->getSubKomponenDetailListAll();
+		
+		$this->view->subKomponenList = $this->kegiatan_serv->getSubKomponenListAll($this->view->KodeKomponen);
+		$this->view->subKomponenDetailList = $this->kegiatan_serv->getSubKomponenDetailListAll($this->view->KodeSubKomponen);
 		
 	}
 	

@@ -36,6 +36,9 @@ function pilihKomponen(){
 	jenisForm = document.getElementById('jenisForm').value;	
 	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/kegiatanolahdata';
 	var param = {KodeKomponen:KodeKomponen, jenisForm:jenisForm};
+	jQuery.get(url, param, function(data) {
+		KodeSubKomponen = document.getElementById('KodeSubKomponen').value;
+	});
 	
 }
 
@@ -44,7 +47,7 @@ function pilihSubKomponen(){
 	jenisForm = document.getElementById('jenisForm').value;	
 	
 	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/kegiatanolahdata';
-	var param = {KodeDetailSubKomponen:KodeDetailSubKomponen, jenisForm:jenisForm};
+	var param = {KodeSubKomponen:KodeSubKomponen, jenisForm:jenisForm};
 	
 }
 
