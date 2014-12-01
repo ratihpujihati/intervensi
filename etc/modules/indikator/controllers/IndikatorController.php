@@ -301,8 +301,6 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 				
 			}// END PROGRAM KELURAHAN PUSAT
 				
-		
-			
 			$this->view->proses = "2";	
 			$this->view->keterangan = "Indikator";
 			$this->view->hasil = $this->view->formisiantarget ;
