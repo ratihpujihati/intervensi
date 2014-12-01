@@ -84,14 +84,16 @@ class Kegiatan_Service {
 	   }
 	}	
 	
-	public function getSubKomponenDetailListAll() {
+	public function getSubKomponenDetailListAll($KodeSubKomponen) {
 	
 	   $registry = Zend_Registry::getInstance();
 	   $db = $registry->get('db');
 	   try {
 		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		
-			$result = $db->fetchAll("SELECT * FROM m_komponen_sub_detail  order by KodeDetailSubKomponen");		
+			$whereOpt = " where (KodeSubKomponen like '%$KodeSubKomponen%')";
+			if($KodeSubKomponen != "") { $where = $whereOpt;} 
+			
+			$result = $db->fetchAll("SELECT * FROM m_komponen_sub_detail".$where);	
 
 		$jmlResult = count($result);
 		 return $result;

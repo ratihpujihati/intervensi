@@ -628,6 +628,23 @@ class menu_Service {
 	
 	//--------------------------------------------------------------------------------------------------------------------
 	//MENU KELURAHAN
+	public function getKelurahanbyIndikator($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+			
+			$whereOpt = " and (ik.id_indikator like '%$id_indikator%')";
+			if($id_indikator != "") { $where = $whereOpt;} 
+			
+			$result = $db->fetchAll("select k.* from m_kelurahan k, form_isian_kelurahan ik where k.kode_kelurahan=ik.kode_kelurahan and ik.warna_indikator=2 ".$where);
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
 	public function getKelurahan(){
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');

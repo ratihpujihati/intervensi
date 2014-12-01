@@ -1,0 +1,20 @@
+<?
+require_once 'Zend/View.php';
+$ctrlFrm = new Zend_View();
+	$tgl=date("Ymds");
+	
+	$jmlSubKomponenDetailList = count($this->subKomponenDetailList);
+	$subKomponenDetailList['-'] = '--Pilih--';
+	for ($i = 0; $i < $jmlSubKomponenDetailList; $i++) {
+		$subKomponenDetailList[$this->subKomponenDetailList[$i]->KodeDetailSubKomponen] = (string)$this->subKomponenDetailList[$i]->SubKomponenDetail;			 
+	}
+	if($jenisAksi == "Ubah"){
+		$subKomponenDetailAtrib = array("id"=>"KodeDetailSubKomponen", "tabindex"=>"17");
+		
+	}else{
+		$subKomponenDetailAtrib = array("id"=>"KodeDetailSubKomponen", "tabindex"=>"17", "onchange"=>"javascript:generateKodeKegiatan($tgl);");
+		
+	}
+	echo $ctrlFrm->formSelect('KodeDetailSubKomponen', $this->kegiatanMenu['KodeDetailSubKomponen'], $subKomponenDetailAtrib, $subKomponenDetailList);
+
+?>

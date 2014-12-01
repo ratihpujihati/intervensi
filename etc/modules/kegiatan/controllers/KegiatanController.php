@@ -105,11 +105,41 @@ class Kegiatan_KegiatanController extends Zend_Controller_Action {
 		
 		// $this->view->subKomponenList = $this->kegiatan_serv->getSubKomponenListAll();
 		// $this->view->subKomponenDetailList = $this->kegiatan_serv->getSubKomponenDetailListAll();
-		
+		$this->view->kelurahanList = $this->menu_serv->getKelurahan();
+		$this->view->indikatorList = $this->menu_serv->getIndikator();
 		$this->view->subKomponenList = $this->kegiatan_serv->getSubKomponenListAll($this->view->KodeKomponen);
 		$this->view->subKomponenDetailList = $this->kegiatan_serv->getSubKomponenDetailListAll($this->view->KodeSubKomponen);
 		
 	}
+	
+	public function listsubkomponenAction(){
+		$this->view->jenisForm = $this->_getParam('jenisForm');
+		$this->view->KodeKegiatan= $_REQUEST['KodeKegiatan'];
+		
+		$this->view->KodeKomponen= $_GET['KodeKomponen'];
+		
+		$this->view->subKomponenList = $this->kegiatan_serv->getSubKomponenListAll($this->view->KodeKomponen);
+		
+	}
+	
+	public function listsubkomponendetailAction(){
+		$this->view->jenisForm = $this->_getParam('jenisForm');
+		$this->view->KodeKegiatan= $_REQUEST['KodeKegiatan'];
+		
+		$this->view->KodeSubKomponen= $_REQUEST['KodeSubKomponen'];		
+		
+		$this->view->subKomponenDetailList = $this->kegiatan_serv->getSubKomponenDetailListAll($this->view->KodeSubKomponen);
+	}
+	
+	public function listkelurahanAction(){
+		$this->view->jenisForm = $this->_getParam('jenisForm');
+		$this->view->KodeKegiatan= $_REQUEST['KodeKegiatan'];
+		
+		$this->view->id_indikator= $_REQUEST['id_indikator'];	
+		$this->view->kelurahanList = $this->menu_serv->getKelurahanbyIndikator($this->view->id_indikator);
+	}
+	
+	
 	
 	public function simpankegiatanAction(){
 		$KodeKegiatan = $_POST['KodeKegiatan'];
