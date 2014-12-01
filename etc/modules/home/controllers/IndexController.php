@@ -54,7 +54,8 @@ class Home_IndexController extends Zend_Controller_Action {
 		
 		$pengguna = isset($_POST['pengguna']) ? $_POST['pengguna'] : ''; 
 		$password = isset($_POST['password']) ? $_POST['password'] : '';
-		
+		$password = htmlspecialchars(strip_tags(htmlentities(addslashes(trim($_POST['password'])))));
+		$password = md5($password);
 		if ($pengguna && $password) {				
 			$hasiluser = $this->sso_serv->getDataUser1($pengguna,$password);
 			if($hasiluser){
