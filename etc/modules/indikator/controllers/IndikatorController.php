@@ -437,7 +437,18 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$id_indikator= $_REQUEST['id_indikator'];
 		$this->view->id_indikator = $id_indikator;
 		$this->view->indikatorList = $this->menu_serv->getIndikator();
-		$this->view->kelurahanList = $this->menu_serv->getKelurahan();
+		$this->view->kelurahanList = $this->menu_serv->getKelurahan();		
+	}
+	
+	public function cetaklaporandataindikatorAction(){
+		$id_indikator= $_REQUEST['id_indikator'];
+		$kode_kelurahan= $_REQUEST['kode_kelurahan'];
+		$tahun= $_REQUEST['tahun'];
+		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->kode_kelurahan = $kode_kelurahan;
+		$this->view->tahun = $tahun;
+		$this->view->cetak = $this->menu_serv->getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun);		
 	}
 	
 	
