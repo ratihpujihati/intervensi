@@ -39,7 +39,7 @@ class Sso_User_Service {
 		 $ktsandi = ($password);	 
         
 		$sql = "SELECT p.*, i.Instansi FROM pengguna p, m_instansi i where p.pengguna='$pengguna' and p.password='$ktsandi' and p.KodeInstansi=i.KodeInstansi";
-		echo $sql;
+		//echo $sql;
 		$hasil = $db->fetchRow($sql);		
 		return $hasil;
 		 
