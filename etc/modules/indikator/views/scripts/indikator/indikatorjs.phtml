@@ -181,4 +181,22 @@ function indikatorHapus(param1, param2)
 	}
 }  
 
+function pilihIndikator(){
+	id_indikator = document.getElementById('id_indikator').value;
+	var url = '<?php echo $this->basePath; ?>/indikator/indikator/laporandataindikator';
+	var param = {id_indikator:id_indikator};
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function pilihKelurahan(){
+	kode_kelurahan = document.getElementById('kode_kelurahan').value;
+	var url = '<?php echo $this->basePath; ?>/indikator/indikator/laporandataindikator';
+	var param = {kode_kelurahan:kode_kelurahan};
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
 </script>

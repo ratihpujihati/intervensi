@@ -433,6 +433,13 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->render('indikatormenu');	
 	}
 	
+	public function laporandataindikatorAction(){
+		$id_indikator= $_REQUEST['id_indikator'];
+		$this->view->id_indikator = $id_indikator;
+		$this->view->indikatorList = $this->menu_serv->getIndikator();
+		$this->view->kelurahanList = $this->menu_serv->getKelurahan();
+	}
+	
 	
 }
 ?>
