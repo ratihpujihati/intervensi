@@ -1671,6 +1671,25 @@ class menu_Service {
 		}
 	}
 	
+	public function getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchAll("select i.nama_indikator, k.Kelurahan, f.nilai_kelurahan
+							from m_indikator i, m_kelurahan k, form_isian_kelurahan f, kegiatan e
+							where i.id_indikator = f.id_indikator and i.id_indikator = e.id_indikator and
+							f.kode_kelurahan = k.kode_kelurahan and 
+							e.id_indikator = '$id_indikator' and
+							k.kode_kelurahan = '$kode_kelurahan' and
+							date_format(e.JadwalAwal, '%Y') = '$tahun'");
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
 	//---------------------------------------------------------------------------------------------------------------------
 	//INDIKATOR MAXIMUM 1
 	public function getIndikatorMax(){

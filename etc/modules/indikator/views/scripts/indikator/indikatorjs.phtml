@@ -181,22 +181,16 @@ function indikatorHapus(param1, param2)
 	}
 }  
 
-function pilihIndikator(){
-	id_indikator = document.getElementById('id_indikator').value;
-	var url = '<?php echo $this->basePath; ?>/indikator/indikator/laporandataindikator';
-	var param = {id_indikator:id_indikator};
-	jQuery.get(url, param, function(data) {
-		$("div#tableview").html(data);
-	});
+//cetak data laporan indikator
+function cetakLaporanDataIndikator(){
+	$("#cetaklaporandataindikator").ajaxForm(cetaklaporandataindikator_opt);
 }
 
-function pilihKelurahan(){
-	kode_kelurahan = document.getElementById('kode_kelurahan').value;
-	var url = '<?php echo $this->basePath; ?>/indikator/indikator/laporandataindikator';
-	var param = {kode_kelurahan:kode_kelurahan};
-	jQuery.get(url, param, function(data) {
-		$("div#tableview").html(data);
-	});
-}
+var cetaklaporandataindikator_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/cetaklaporandataindikator',
+		type: 'post', 
+		resetForm: false
+};
 
 </script>
