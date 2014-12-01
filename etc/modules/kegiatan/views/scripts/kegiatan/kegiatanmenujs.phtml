@@ -34,10 +34,10 @@ function pilihInstansi(){
 function pilihKomponen(){
 	KodeKomponen = document.getElementById('KodeKomponen').value;
 	jenisForm = document.getElementById('jenisForm').value;	
-	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/kegiatanolahdata';
+	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/listsubkomponen';
 	var param = {KodeKomponen:KodeKomponen, jenisForm:jenisForm};
 	jQuery.get(url, param, function(data) {
-		KodeSubKomponen = document.getElementById('KodeSubKomponen').value;
+		jQuery("#subKomponen").html(data);
 	});
 	
 }
@@ -46,8 +46,11 @@ function pilihSubKomponen(){
 	KodeSubKomponen = document.getElementById('KodeSubKomponen').value;
 	jenisForm = document.getElementById('jenisForm').value;	
 	
-	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/kegiatanolahdata';
+	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/listsubkomponendetail';
 	var param = {KodeSubKomponen:KodeSubKomponen, jenisForm:jenisForm};
+	jQuery.get(url, param, function(data) {
+		jQuery("#subKomponenDetail").html(data);
+	});
 	
 }
 
@@ -59,12 +62,13 @@ function pilihSubKomponenDetail(){
 	
 }
 
-function pilihKelurahan(jenisForm){
-	nama_kelurahan = document.getElementById('nama_kelurahan').value;
-	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/penerimaolahdata';
-	var param = {nama_kelurahan:nama_kelurahan,jenisForm:jenisForm};
+function pilihKelurahan(){
+	
+	id_indikator = document.getElementById('id_indikator').value;
+	var url = '<?php echo $this->basePath; ?>/kegiatan/kegiatan/listkelurahan';
+	var param = {id_indikator:id_indikator};
 	jQuery.get(url, param, function(data) {
-		$("div#tableview").html(data);
+		jQuery("#kelurahan").html(data);
 	});
 }
 

@@ -108,6 +108,36 @@ $ctrlFrm = new Zend_View();
 					</td>
 				</tr>
 				<tr>
+				    <td align="right" width="180">Nama Indikator :</td>
+					<td>	
+						<?
+							$jmlIndikatorList = count($this->indikatorList);
+							$indikatorList['-'] = '--Pilih--';
+							for ($i = 0; $i < $jmlIndikatorList; $i++) {
+								$indikatorList[$this->indikatorList[$i]->id_indikator] = (string)$this->indikatorList[$i]->kode_indikator .".  ". (string)$this->indikatorList[$i]->nama_indikator;				 
+							}	
+							$indikatorAtrib = array("id"=>"id_indikator", "tabindex"=>"17", "onchange"=>"javascript:pilihKelurahan();");																				
+							echo $ctrlFrm->formSelect('id_indikator', $this->laporanIndikator['id_indikator'], $indikatorAtrib, $indikatorList);								
+						?>
+						
+					</td>
+				</tr>
+					<tr>
+				    <td align="right" width="180">Kelurahan</td>
+					<td id="kelurahan">						
+						<?
+						$jmlKelurahanList = count($this->kelurahanList);
+						$kelurahanList['-'] = '--Pilih--';
+						for ($i = 0; $i < $jmlKelurahanList; $i++) {
+						    $kelurahanList[$this->kelurahanList[$i]->kode_kelurahan] = (string)$this->kelurahanList[$i]->Kelurahan;	 
+						}						
+						
+							$komponenAtrib = array("id"=>"kode_kelurahan", "tabindex"=>"17");
+							echo $ctrlFrm->formSelect('kode_kelurahan', $this->laporanIndikator['kode_kelurahan'], $komponenAtrib, $kelurahanList);
+						?>
+					</td>
+				</tr>
+				<tr>
 				    <td align="right" width="180">* Kode Komponen :</td>
 					<td>						
 						<?
@@ -119,7 +149,6 @@ $ctrlFrm = new Zend_View();
 						
 							$komponenAtrib = array("id"=>"KodeKomponen", "tabindex"=>"17", "onChange"=>"pilihKomponen();");
 							echo $ctrlFrm->formSelect('KodeKomponen', $this->kegiatanMenu['KodeKomponen'], $komponenAtrib, $komponenList);
-							echo $this->kegiatanMenu['KodeKomponen'];
 						?>
 					</td>
 				</tr>
@@ -144,7 +173,7 @@ $ctrlFrm = new Zend_View();
 				</tr>
 				<tr>
 				    <td align="right" width="180">* Kode Detail Sub Komponen:</td>
-					<td>
+					<td id="subKomponenDetail">	
 						<?
 						$jmlSubKomponenDetailList = count($this->subKomponenDetailList);
 						$subKomponenDetailList['-'] = '--Pilih--';

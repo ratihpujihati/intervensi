@@ -1,0 +1,14 @@
+<?
+require_once 'Zend/View.php';
+$ctrlFrm = new Zend_View();
+			
+	$jmlKelurahanList = count($this->kelurahanList);
+	$kelurahanList['-'] = '--Pilih--';
+	for ($i = 0; $i < $jmlKelurahanList; $i++) {
+		$kelurahanList[$this->kelurahanList[$i]->kode_kelurahan] = (string)$this->kelurahanList[$i]->Kelurahan;	 
+	}						
+	
+		$komponenAtrib = array("id"=>"kode_kelurahan", "tabindex"=>"17");
+		echo $ctrlFrm->formSelect('kode_kelurahan', $this->laporanIndikator['kode_kelurahan'], $komponenAtrib, $kelurahanList);
+
+?>
