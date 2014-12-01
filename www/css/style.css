@@ -1351,7 +1351,7 @@ P.text {
 	cursor:pointer;
 	}
 	 */
-.edit, .delete, .disposisi, .unread, .read, .reply, .unit, .konsep, .chgpasswd, .respasswd, .view, .filedoc, .prt, .pdf, .tampilForm, .search,.hasil{
+.edit, .delete, .disposisi, .unread, .read, .reply, .unit, .konsep, .chgpasswd, .respasswd, .view, .filedoc, .prt, .pdf, .tampilForm, .search,.hasil,.map{
 	
 	display:inline;
 	width:32px;
@@ -1363,7 +1363,7 @@ P.text {
     margin-right: auto
 }	
 
-.edit:hover, .delete:hover, .disposisi:hover, .unread:hover, .read:hover, .reply:hover, .unit:hover, .konsep, .chgpasswd, .respasswd, .view:hover, .filedoc:hover, .prt:hover, .pdf:hover, .tampilForm:hover, .search:hover,.hasil:hover{
+.edit:hover, .delete:hover, .disposisi:hover, .unread:hover, .read:hover, .reply:hover, .unit:hover, .konsep, .chgpasswd, .respasswd, .view:hover, .filedoc:hover, .prt:hover, .pdf:hover, .tampilForm:hover, .search:hover,.hasil:hover,.map:hover{
 	box-shadow: 0 0 0 4px #ffcc80;
 	background-color: #ffcc80;
 	-webkit-background-clip: padding-box;
@@ -1395,6 +1395,7 @@ P.text {
 	cursor:pointer;
 	}	
 .edit {	margin:0 auto;center; background: transparent url(../icon/edit.png) no-repeat;}
+.map {	margin:0 auto;center; background: transparent url(../icon/map.png) no-repeat;}
 .delete{ margin:0 auto;center; background:  transparent url(../icon/trash.png) no-repeat;}
 .tampilForm{ margin:0 auto;center; background:  transparent url(../icon/lihat.png) no-repeat;}
 .hasil{ margin:0 auto;center; background:  transparent url(../icon/hasil.png) no-repeat;}

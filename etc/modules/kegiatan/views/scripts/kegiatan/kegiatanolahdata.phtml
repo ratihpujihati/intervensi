@@ -119,13 +119,13 @@ $ctrlFrm = new Zend_View();
 						
 							$komponenAtrib = array("id"=>"KodeKomponen", "tabindex"=>"17", "onChange"=>"pilihKomponen();");
 							echo $ctrlFrm->formSelect('KodeKomponen', $this->kegiatanMenu['KodeKomponen'], $komponenAtrib, $komponenList);
-						
+							echo $this->kegiatanMenu['KodeKomponen'];
 						?>
 					</td>
 				</tr>
 				<tr>
 				    <td align="right" width="180">* Kode Sub Komponen :</td>
-					<td>						
+					<td id="subKomponen">						
 						<?
 						$jmlSubKomponenList = count($this->subKomponenList);
 						$subKomponenList['-'] = '--Pilih--';
@@ -196,12 +196,16 @@ $ctrlFrm = new Zend_View();
  $(function() {
 	$( "#JadwalAwal" ).datepicker({
 	  changeMonth: true,
+	  changeYear: true,
+	   minDate: '0',
 	  dateFormat: 'yy-mm-dd'
 	});
 
 	$( "#JadwalAkhir" ).datepicker({
 		 defaultDate: "+1w",
-		changeMonth: true,		 
+		changeMonth: true,	
+		changeYear: true,
+		  minDate: '1',
 		 dateFormat: 'yy-mm-dd'
 	});
 });

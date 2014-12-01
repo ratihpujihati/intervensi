@@ -103,6 +103,17 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$id_indikator = $_REQUEST["id_indikator"];
 		
 		$this->view->id_indikator = $id_indikator;
+		$this->view->namaIndikator = $this->menu_serv->getNamaIndikatorMax($id_indikator);
+		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
+		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
+    }
+	
+	public function indikatormaxpetaAction() {
+		$id_indikator = $this->_getParam("id_indikator");
+	
+		$id_indikator = $_REQUEST["id_indikator"];
+		
+		$this->view->id_indikator = $id_indikator;
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
 		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
@@ -230,6 +241,7 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$id_indikator = $_REQUEST["id_indikator"];
 		
 		$this->view->id_indikator = $id_indikator;
+		$this->view->namaIndikator = $this->menu_serv->getNamaIndikatorMax($id_indikator);
 		$this->view->grafik = $this->menu_serv->getHasil($id_indikator);
 		$this->view->dataHitung = $this->menu_serv->getDataHitung($id_indikator);
     }
