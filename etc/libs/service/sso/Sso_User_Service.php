@@ -22,7 +22,8 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
-         $rabkaklist = $db->fetchAll("SELECT * FROM pengguna where pengguna = '$pengguna' and password=('$password')");		
+		  $ktsandi = md5($password);	 
+         $rabkaklist = $db->fetchAll("SELECT * FROM pengguna where pengguna = '$pengguna' and password=('$ktsandi')");		
 		 
 	     return $rabkaklist;
 	   } catch (Exception $e) {
@@ -35,10 +36,10 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
-		 $ktsandi = md5($password);	 
+		 $ktsandi = ($password);	 
         
-		$sql = "SELECT p.*, i.Instansi FROM pengguna p, m_instansi i where p.pengguna='$pengguna' and p.password=('$password') and p.KodeInstansi=i.KodeInstansi";
-		//echo $sql;
+		$sql = "SELECT p.*, i.Instansi FROM pengguna p, m_instansi i where p.pengguna='$pengguna' and p.password='$ktsandi' and p.KodeInstansi=i.KodeInstansi";
+		echo $sql;
 		$hasil = $db->fetchRow($sql);		
 		return $hasil;
 		 
