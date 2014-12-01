@@ -1,26 +1,29 @@
 <?php
-//Format Tanggal Berbahasa Indonesia 
+//ambil tgl hari ini
+//$tanggal = date("Y-m-d");
+// Array Hari
+$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
+$hari = $array_hari[date('N')];
 
-	// Array Hari
-	$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
-	$hari = $array_hari[date('N')];
+//Format Tanggal 
+$tanggal = date ('j');
 
-	//Format Tanggal 
-	$tanggal = date ('j');
+//Array Bulan 
+$array_bulan = array("01"=>'Januari',"02"=>'Februari',"03"=>'Maret', "04"=>'April', "05"=>'Mei',"06"=> 'Juni',"07"=>'Juli',"08"=>'Agustus',"09"=>'September',"10"=>'Oktober',"11"=> 'November',"12"=>'Desember'); 
+$bulan = $array_bulan[date('n')];
+ 
+//Format Tahun 
+$tahun = date('Y');
 
-	//Array Bulan 
-	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
-	$bulan = $array_bulan[date('n')];
-	 
-	//Format Tahun 
-	$tahun = date('Y');
-
-$nama_file= "Laporan Data Indikator_".date('Y').".xls";
+//echo "<h4>Cimahi, $tanggal</h4>";
+$bulan=$array_bulan[$this->bulan];
 ?>
 
+
 <?php
+	$namafile="Laporan Data Indikator " . $this->tahun ." .xls";
 	header("Content-type: application/octet-stream");
-	header('Content-Disposition: attachment; filename="' . $nama_file . '"');
+	header('Content-Disposition: attachment; filename="' . $namafile . '"');	
 	header("Pragma: no-cache");
 	header("Expires: 0");
 ?>
@@ -46,7 +49,10 @@ $nama_file= "Laporan Data Indikator_".date('Y').".xls";
 	</tr>
 <?php $i++; endforeach; ?>
 </table>
-
+<?php if (count($this->cetak) != 0){ ?>
+	<a  href="<?php echo $this->basePath; ?>/indikator/indikator/cetaklaporandataindikator?id_indikator=<?echo $this->id_indikator;?>&kode_kelurahan=<?echo $this->kode_kelurahan;?>&tahun=<?echo $this->tahun;?>"><div class="download" title="cetak Data"></div> </a>
+<?php } ?>
+<span class="corners-bottom"><span></span></span>
 <?php
 //ambil tgl hari ini
 //$tanggal = date("Y-m-d");
