@@ -461,6 +461,25 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->cetak = $this->menu_serv->getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun);		
 	}
 	
+	public function laporanperkelurahanAction(){
+		$kode_kelurahan= $_REQUEST['kode_kelurahan'];
+		$this->view->kode_kelurahan = $kode_kelurahan;		
+		$this->view->kelurahanList = $this->menu_serv->getKelurahan();		
+	}
+	
+	public function cetaklaporanperkelurahanAction(){
+		$kode_kelurahan= $_REQUEST['kode_kelurahan'];		
+		$this->view->kode_kelurahan = $kode_kelurahan;
+		$this->view->cetak = $this->menu_serv->getLaporanPerKelurahan($kode_kelurahan);		
+		$this->view->namaKelurahan = $this->menu_serv->getNamaKelurahan($kode_kelurahan);		
+	}
+	
+	public function downloadlaporanperkelurahanAction(){
+		$kode_kelurahan= $_REQUEST['kode_kelurahan'];		
+		$this->view->kode_kelurahan = $kode_kelurahan;
+		$this->view->cetak = $this->menu_serv->getLaporanPerKelurahan($kode_kelurahan);		
+		$this->view->namaKelurahan = $this->menu_serv->getNamaKelurahan($kode_kelurahan);		
+	}
 	
 }
 ?>

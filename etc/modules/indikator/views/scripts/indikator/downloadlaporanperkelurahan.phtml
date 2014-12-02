@@ -1,0 +1,48 @@
+
+<?php
+	$namafile="Laporan Kelurahan" . $this->namaKelurahan ." .xls";
+	header("Content-type: application/octet-stream");
+	header('Content-Disposition: attachment; filename="' . $namafile . '"');	
+	header("Pragma: no-cache");
+	header("Expires: 0");
+?>
+
+<h2 class="title">Laporan Kelurahan <?php echo $this->namaKelurahan?></h2>
+<table class="sortable" cellspacing="0" cellpadding="2" border="0" align="center" border="1">
+  <tr align ="center">
+	  <th width=5%>No</th>
+	  <th width=35%>Indikator</th>
+	  <th width=25%>Kegiatan</th>
+	  <th width=20%>Jadwal</th>
+	  <th width=25%>Anggaran</th>
+  </tr>
+<?php $i=1?>
+<?php  foreach($this->cetak as $data) : ?>
+	<tr>
+		<td class="clcenter"><?php echo $i;?></td>		
+		<td class="clcenter"><?php echo $this->escape($data->nama_indikator);?></td>
+		<td class="clcenter"><?php echo $this->escape($data->NamaKegiatan);?></td>			
+		<td class="clcenter"><?php echo $this->escape($data->JadwalAwal);?> s.d <?php echo $this->escape($data->JadwalAkhir);?></td>
+		<td class="clcenter">&nbsp;Rp. <? echo number_format($data->Anggaran, 0, ',', '.');?></td>
+	</tr>
+<?php $i++; endforeach; ?>
+</table>
+<?php
+//ambil tgl hari ini
+//$tanggal = date("Y-m-d");
+// Array Hari
+$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
+$hari = $array_hari[date('N')];
+
+//Format Tanggal 
+$tanggal = date ('j');
+
+//Array Bulan 
+$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+$bulan = $array_bulan[date('n')];
+ 
+//Format Tahun 
+$tahun = date('Y');
+echo "<h4 align='left'>Cimahi, " . $tanggal ." ". $bulan ." ". $tahun."</h4>";
+//echo "<h4>Cimahi, $tanggal</h4>";
+?>

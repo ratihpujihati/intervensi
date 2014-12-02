@@ -21,7 +21,7 @@ $bulan=$array_bulan[$this->bulan];
 
 
 <?php
-	$namafile="Laporan Data Indikator " . $this->tahun ." .xls";
+	$namafile="Laporan Kelurahan_" . $this->namaKelurahan ." .xls";
 	header("Content-type: application/octet-stream");
 	header('Content-Disposition: attachment; filename="' . $namafile . '"');	
 	header("Pragma: no-cache");
@@ -29,26 +29,26 @@ $bulan=$array_bulan[$this->bulan];
 ?>
 <link href="<? echo $this->basePath;?>/css/style.css" rel="stylesheet" type="text/css" />
 
-<h2 class="title">Laporan Data Indikator Tahun <?php echo $this->tahun?></h2>
+<h2 class="title">Laporan Kelurahan <?php echo $this->namaKelurahan?></h2>
 <table class="sortable" cellspacing="0" cellpadding="2" border="0" align="center" border="1">
   <tr align ="center">
-	  <th width=15%>No</th>
-	  <th width=35%>Nama Indikator</th>
-	  <th width=25%>Nama Kelurahan</th>
-	  <th width=20%>Nilai Indikator</th>
-	  <th width=15%>Tahun</th>
+	  <th width=5%>No</th>
+	  <th width=35%>Indikator</th>
+	  <th width=25%>Kegiatan</th>
+	  <th width=20%>Jadwal</th>
+	  <th width=25%>Anggaran</th>
   </tr>
 <?php $i=1?>
 <?php  foreach($this->cetak as $data) : ?>
 	<tr>
 		<td class="clcenter"><?php echo $i;?></td>		
 		<td class="clcenter"><?php echo $this->escape($data->nama_indikator);?></td>
-		<td class="clcenter"><?php echo $this->escape($data->Kelurahan);?></td>			
-		<td class="clcenter"><?php echo $this->escape($data->nilai_kelurahan);?></td>
-		<td class="clcenter"><?php echo $this->tahun?></td>
+		<td class="clcenter"><?php echo $this->escape($data->NamaKegiatan);?></td>			
+		<td class="clcenter"><?php echo $this->escape($data->JadwalAwal);?> s.d <?php echo $this->escape($data->JadwalAkhir);?></td>
+		<td class="clcenter">&nbsp;Rp. <? echo number_format($data->Anggaran, 0, ',', '.');?></td>
 	</tr>
 <?php $i++; endforeach; ?>
 </table>
 <?php if (count($this->cetak) != 0){ ?>
-	<a  href="<?php echo $this->basePath; ?>/indikator/indikator/downloadlaporandataindikator?id_indikator=<?echo $this->id_indikator;?>&kode_kelurahan=<?echo $this->kode_kelurahan;?>&tahun=<?echo $this->tahun;?>"><div class="download" title="cetak Data"></div></a>
+	<a  href="<?php echo $this->basePath; ?>/indikator/indikator/downloadlaporanperkelurahan?kode_kelurahan=<?echo $this->kode_kelurahan;?>"><div class="download" title="cetak Data"></div></a>
 <?php } ?>

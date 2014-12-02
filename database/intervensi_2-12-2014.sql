@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2014 at 09:29 AM
+-- Generation Time: Dec 02, 2014 at 08:18 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `data_penduduk` (
 --
 
 INSERT INTO `data_penduduk` (`NoKK`, `NamaKep`, `Alamat`, `RT`, `RW`, `Dusun`, `KodePos`, `NIK`, `NamaLengkap`, `JK`, `TempatLahir`, `TglLahir`, `NoAkta`, `GolDarah`, `Agama`, `Pekerjaan`, `NamaIbu`, `NamaAyah`, `Status`, `Kelurahan`) VALUES
-('009090909', 'tes', 'tes', 9, 10, 'cimahi', '40132', '0909909', 'ratih', 'Perempuan', 'garut', '2013-11-04', '34343', 'A', 'Islam', 'ttt', 'trtrt', 'trtrt', 'Belum Menikah', 'Cibeber'),
+('009090909', 'tes', 'tes', 9, 10, 'cimahi', '40132', '0909909', 'ratih', 'Perempuan', 'garut', '2013-11-04', '34343', 'A', 'Islam', 'ttt', 'trtrt', 'trtrt', 'Belum Menikah', 'CIBEBER'),
 ('3277020811060392', 'RIZAL SULAEMAN', 'JL WARUNG CONTONG', 2, 9, '-', '40524', '3277000202020001', 'MUHAMMAD MAESA M JELIWANG', 'Laki-laki', 'CIMAHI', '2002-02-02', '-', 'O', 'Islam', '-', 'TITI SUGIYATI', 'RIZAL SULAEMAN', '-', 'SETIAMANAH'),
 ('327702088888888', 'RIZAL SULAEMAN', 'CIBEBER', 9, 8, 'CIBEBER', '877', '3277000202020012', 'TES', 'laki-laki', 'CIMAHI', '2002-02-02', '788888', 'O', 'Islam', 'MAHASISWA', 'NUNUNG', 'UTAR', 'Menikah', 'CIBEBER'),
 ('3277020811060235', 'T. SINAGA', 'JL. WARUNG CONTONG TIMUR NO. 1', 2, 9, 'KP KIHAPIT TIMUR', '40524', '3277000611760001 ', 'NOVIK HOTMAN ', 'Laki-laki', 'CIMAHI ', '2000-01-01', '41.949/1988  ', 'AB', 'KRISTEN ', 'KARYAWAN SWASTA ', 'T. SINAGA ', 'J. SITUMORANG ', 'BELUM KAWIN', 'SETIAMANAH '),
@@ -1604,6 +1604,7 @@ INSERT INTO `form_isian_target` (`id_form_isian_target`, `id_indikator`, `target
 CREATE TABLE IF NOT EXISTS `kegiatan` (
   `KodeKegiatan` varchar(25) NOT NULL,
   `id_indikator` int(25) NOT NULL,
+  `kode_kelurahan` int(20) NOT NULL,
   `NamaKegiatan` varchar(300) NOT NULL,
   `JadwalAwal` date NOT NULL,
   `JadwalAkhir` date NOT NULL,
@@ -1619,15 +1620,15 @@ CREATE TABLE IF NOT EXISTS `kegiatan` (
 -- Dumping data for table `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`KodeKegiatan`, `id_indikator`, `NamaKegiatan`, `JadwalAwal`, `JadwalAkhir`, `KodeInstansi`, `KodeKomponen`, `KodeSubKomponen`, `KodeDetailSubKomponen`, `Anggaran`) VALUES
-('E-0112014010819', 1, 'Dana Bantuan Bulan Februari', '2014-02-03', '2014-02-07', '16', 'E', 'E-04', 'E-011', 135000000),
-('E-0112014010853', 2, 'Dana Bantuan Bulan Januari', '2014-01-06', '2014-01-13', '16', 'E', 'E-04', 'E-011', 134000000),
-('L-0122014010930', 0, 'Perbaikan Jalan', '2014-01-01', '2014-01-08', '18', 'L', 'L-01', 'L-012', 25000000),
-('L-0212014011433', 0, 'Perbaikan Saluran Air', '2014-01-16', '2014-01-23', '18', 'L', 'L-02', 'L-021', 40000000),
-('L-0342014010901', 0, 'Perbaikan Jalan', '2014-01-10', '2014-01-16', '8', 'L', 'L-01', 'L-034', 10000000),
-('L-0412014010833', 0, 'Bedah Rumah Kelurahan Cibeber', '2014-02-10', '2014-02-14', '18', 'L', 'L-04', 'L-041', 150000000),
-('L-0412014091734', 0, 'Bantuan Pendidikan', '2014-09-14', '2014-09-19', '16', 'E', 'L-12', 'L-041', 300000000),
-('S-0242014010806', 0, 'Bedah Rumah Kelurahan Setiamanah', '2014-01-01', '2014-01-03', '18', 'L', 'L-04', 'L-041', 50000000);
+INSERT INTO `kegiatan` (`KodeKegiatan`, `id_indikator`, `kode_kelurahan`, `NamaKegiatan`, `JadwalAwal`, `JadwalAkhir`, `KodeInstansi`, `KodeKomponen`, `KodeSubKomponen`, `KodeDetailSubKomponen`, `Anggaran`) VALUES
+('E-0112014010819', 1, 32770101, 'Dana Bantuan Bulan Februari', '2014-02-03', '2014-02-07', '16', 'E', 'E-04', 'E-011', 135000000),
+('E-0112014010853', 2, 32770101, 'Dana Bantuan Bulan Januari', '2014-01-06', '2014-01-13', '16', 'E', 'E-04', 'E-011', 134000000),
+('L-0122014010930', 0, 0, 'Perbaikan Jalan', '2014-01-01', '2014-01-08', '18', 'L', 'L-01', 'L-012', 25000000),
+('L-0212014011433', 0, 0, 'Perbaikan Saluran Air', '2014-01-16', '2014-01-23', '18', 'L', 'L-02', 'L-021', 40000000),
+('L-0342014010901', 0, 0, 'Perbaikan Jalan', '2014-01-10', '2014-01-16', '8', 'L', 'L-01', 'L-034', 10000000),
+('L-0412014010833', 0, 0, 'Bedah Rumah Kelurahan Cibeber', '2014-02-10', '2014-02-14', '18', 'L', 'L-04', 'L-041', 150000000),
+('L-0412014091734', 0, 0, 'Bantuan Pendidikan', '2014-09-14', '2014-09-19', '16', 'E', 'L-12', 'L-041', 300000000),
+('S-0242014010806', 0, 0, 'Bedah Rumah Kelurahan Setiamanah', '2014-01-01', '2014-01-03', '18', 'L', 'L-04', 'L-041', 50000000);
 
 -- --------------------------------------------------------
 

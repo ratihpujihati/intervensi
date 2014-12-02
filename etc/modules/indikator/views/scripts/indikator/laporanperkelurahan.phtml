@@ -1,0 +1,61 @@
+<?php
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+require_once "indikatorjs.phtml";
+$referensi = Menu_Service::getInstance();
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+		
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+
+<div class="navlink">
+<a href="#" class="home" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/home');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Laporan Per Kelurahan</h2>		
+		<div class="space-line"></div>	
+	</div>
+	
+	<form method="post" name="cetaklaporanperkelurahan" id="cetaklaporanperkelurahan" accept-charset=utf-8>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">						
+				<tr>
+				    <td align="right" width="180">Kelurahan</td>
+					<td>						
+						<?
+						$jmlKelurahanList = count($this->kelurahanList);
+						$kelurahanList['-'] = '--Pilih--';
+						for ($i = 0; $i < $jmlKelurahanList; $i++) {
+						    $kelurahanList[$this->kelurahanList[$i]->kode_kelurahan] = (string)$this->kelurahanList[$i]->Kelurahan;	 
+						}						
+						
+							$komponenAtrib = array("id"=>"kode_kelurahan", "tabindex"=>"17");
+							echo $ctrlFrm->formSelect('kode_kelurahan', $this->laporanIndikator['kode_kelurahan'], $komponenAtrib, $kelurahanList);
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="left">							
+							<input type="submit" value="Cetak" onClick="cetakLaporanPerKelurahan();">
+						</div>
+					</td>
+				</tr>				
+			</table>
+		</form>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

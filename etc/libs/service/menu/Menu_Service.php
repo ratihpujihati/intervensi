@@ -1690,6 +1690,35 @@ class menu_Service {
 		   }
 	}
 	
+	public function getLaporanPerKelurahan($kode_kelurahan){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchAll("SELECT i.kode_indikator, i.nama_indikator, k.NamaKegiatan, k.JadwalAwal, k.JadwalAkhir, k.Anggaran, l.Kelurahan 
+										FROM m_indikator i, kegiatan k, m_kelurahan l
+										WHERE i.id_indikator = k.id_indikator 
+										AND l.kode_kelurahan = k.kode_kelurahan AND l.kode_kelurahan = '$kode_kelurahan'");
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
+	public function getNamaKelurahan($kode_kelurahan){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchOne("SELECT Kelurahan FROM m_kelurahan WHERE kode_kelurahan = '$kode_kelurahan'");
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
 	//---------------------------------------------------------------------------------------------------------------------
 	//INDIKATOR MAXIMUM 1
 	public function getIndikatorMax(){

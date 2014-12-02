@@ -193,6 +193,18 @@ var cetaklaporandataindikator_opt = {
 		resetForm: false
 };
 
+//cetak laporan per kelurahan
+function cetakLaporanPerKelurahan(){
+	$("#cetaklaporanperkelurahan").ajaxForm(cetaklaporanperkelurahan_opt);
+}
+
+var cetaklaporanperkelurahan_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/cetaklaporanperkelurahan',
+		type: 'post', 
+		resetForm: false
+};
+
 
 
 </script>
