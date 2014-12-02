@@ -637,7 +637,7 @@ class menu_Service {
 			$whereOpt = " and (ik.id_indikator like '%$id_indikator%')";
 			if($id_indikator != "") { $where = $whereOpt;} 
 			
-			$result = $db->fetchAll("select k.* from m_kelurahan k, form_isian_kelurahan ik where k.kode_kelurahan=ik.kode_kelurahan and ik.warna_indikator=2 ".$where);
+			$result = $db->fetchAll("select k.* , ik.warna_indikator from m_kelurahan k, form_isian_kelurahan ik where k.kode_kelurahan=ik.kode_kelurahan and ik.warna_indikator=2 ".$where);
 		     return $result;
 		   } catch (Exception $e) {
 	         echo $e->getMessage().'<br>';
