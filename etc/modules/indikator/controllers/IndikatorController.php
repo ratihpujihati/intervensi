@@ -450,6 +450,16 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->tahun = $tahun;
 		$this->view->cetak = $this->menu_serv->getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun);		
 	}
+	public function downloadlaporandataindikatorAction(){
+		$id_indikator= $_REQUEST['id_indikator'];
+		$kode_kelurahan= $_REQUEST['kode_kelurahan'];
+		$tahun= $_REQUEST['tahun'];
+		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->kode_kelurahan = $kode_kelurahan;
+		$this->view->tahun = $tahun;
+		$this->view->cetak = $this->menu_serv->getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun);		
+	}
 	
 	
 }

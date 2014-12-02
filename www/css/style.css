@@ -34,6 +34,18 @@ body {
 	}
 
 	
+.download {
+	float:center;
+	background: transparent url(../images/ExcelDownloadIcon.png) no-repeat;
+	width:50px;
+	margin:50;
+	margin:5px 0;
+	height:50px;
+	padding:0 1px;
+	border:0px solid;
+	cursor:pointer;
+}
+	
 div,td {
 	line-height:120%;
 	vertical-align:top;
@@ -1367,9 +1379,9 @@ P.text {
 	box-shadow: 0 0 0 4px #ffcc80;
 	background-color: #ffcc80;
 	-webkit-background-clip: padding-box;
-	-moz-border-radius: 700px;
+	-moz-border-radius: 200px;
 	-moz-background-clip: padding;
-	border-radius: 700px;
+	border-radius: 200px;
 	background-clip: padding-box;
 	transition: background 0.2s, color 0.2s;    
 	-webkit-transition: background 0.2s, color 0.2s;    

@@ -27,32 +27,27 @@ $bulan=$array_bulan[$this->bulan];
 	header("Pragma: no-cache");
 	header("Expires: 0");
 ?>
-<link href="<? echo $this->basePath;?>/css/style.css" rel="stylesheet" type="text/css" />
 
 <h2 class="title">Laporan Data Indikator Tahun <?php echo $this->tahun?></h2>
 <table class="sortable" cellspacing="0" cellpadding="2" border="0" align="center" border="1">
   <tr align ="center">
-	  <th width=15%>No</th>
-	  <th width=35%>Nama Indikator</th>
-	  <th width=25%>Nama Kelurahan</th>
-	  <th width=20%>Nilai Indikator</th>
-	  <th width=15%>Tahun</th>
+	  <th>No</th>
+	  <th>Nama Indikator</th>
+	  <th>Nama Kelurahan</th>
+	  <th>Nilai Indikator</th>
+	  <th>Tahun</th>
   </tr>
 <?php $i=1?>
 <?php  foreach($this->cetak as $data) : ?>
 	<tr>
-		<td class="clcenter"><?php echo $i;?></td>		
-		<td class="clcenter"><?php echo $this->escape($data->nama_indikator);?></td>
-		<td class="clcenter"><?php echo $this->escape($data->Kelurahan);?></td>			
-		<td class="clcenter"><?php echo $this->escape($data->nilai_kelurahan);?></td>
-		<td class="clcenter"><?php echo $this->tahun?></td>
+		<td><?php echo $i;?></td>		
+		<td><?php echo $this->escape($data->nama_indikator);?></td>
+		<td><?php echo $this->escape($data->Kelurahan);?></td>			
+		<td><?php echo $this->escape($data->nilai_kelurahan);?></td>
+		<td><?php echo $this->tahun?></td>
 	</tr>
 <?php $i++; endforeach; ?>
 </table>
-<?php if (count($this->cetak) != 0){ ?>
-	<a  href="<?php echo $this->basePath; ?>/indikator/indikator/downloadlaporandataindikator?id_indikator=<?echo $this->id_indikator;?>&kode_kelurahan=<?echo $this->kode_kelurahan;?>&tahun=<?echo $this->tahun;?>"><div class="download" title="cetak Data"></div></a>
-<?php } ?>
-
 <?php
 //ambil tgl hari ini
 //$tanggal = date("Y-m-d");
