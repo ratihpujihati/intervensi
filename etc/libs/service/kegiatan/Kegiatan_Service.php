@@ -109,6 +109,8 @@ class Kegiatan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("KodeKegiatan" => $dataMasukan['KodeKegiatan'],
+								"id_indikator" => $dataMasukan['id_indikator'],
+								"kode_kelurahan" => $dataMasukan['kode_kelurahan'],
 								"NamaKegiatan" => $dataMasukan['NamaKegiatan'],
 								"JadwalAwal" => $dataMasukan['JadwalAwal'],
 								"JadwalAkhir" => $dataMasukan['JadwalAkhir'],
@@ -156,11 +158,11 @@ class Kegiatan_Service {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 			$where = " and KodeKegiatan = '$KodeKegiatan' ";
 			if($KodeInstansi==0){
-				$sqlProses = "select k.KodeKegiatan, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
+				$sqlProses = "select k.KodeKegiatan,k.id_indikator,k.kode_kelurahan, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
 				k.JadwalAkhir, k.KodeKomponen, k.KodeSubKomponen, k.KodeDetailSubKomponen, 
 				k.Anggaran, i.Instansi from kegiatan k, m_instansi i where k.KodeInstansi=i.KodeInstansi";
 			}else{
-				$sqlProses = "select k.KodeKegiatan, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
+				$sqlProses = "select k.KodeKegiatan,k.id_indikator,k.kode_kelurahan, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
 				k.JadwalAkhir, k.KodeKomponen, k.KodeSubKomponen, k.KodeDetailSubKomponen, 
 				k.Anggaran, i.Instansi from kegiatan k, m_instansi i where k.KodeInstansi=i.KodeInstansi 
 				and k.KodeInstansi='$KodeInstansi'";
@@ -168,6 +170,8 @@ class Kegiatan_Service {
 			$sqlData = $sqlProses.$where;
 			$result = $db->fetchRow($sqlData);	
 			$hasilAkhir = array("KodeKegiatan"  	=>(string)$result->KodeKegiatan,
+								"id_indikator"  		=>(string)$result->id_indikator,
+								"kode_kelurahan"  		=>(string)$result->kode_kelurahan,
 								"NamaKegiatan"  		=>(string)$result->NamaKegiatan,
 								"JadwalAwal"  		=>(string)$result->JadwalAwal,
 								"JadwalAkhir"  		=>(string)$result->JadwalAkhir,
@@ -189,7 +193,9 @@ class Kegiatan_Service {
 		$db = $registry->get('db');
 		try {
 		$db->beginTransaction();
-		$paramInput = array("KodeKegiatan" => $dataMasukan['KodeKegiatan'],
+		$paramInput = array(
+							"id_indikator" => $dataMasukan['id_indikator'],
+							"kode_kelurahan" => $dataMasukan['kode_kelurahan'],
 							"NamaKegiatan" => $dataMasukan['NamaKegiatan'],
 							"JadwalAwal" => $dataMasukan['JadwalAwal'],
 							"JadwalAkhir" => $dataMasukan['JadwalAkhir'],
@@ -200,7 +206,7 @@ class Kegiatan_Service {
 							"Anggaran" => $dataMasukan['Anggaran']);
 			
 			$where[] = " KodeKegiatan = '".$dataMasukan['KodeKegiatan']."'";
-			
+			var_dump($paramInput);
 			$db->update('kegiatan',$paramInput, $where);
 			$db->commit();			
 			return 'sukses';
@@ -267,11 +273,11 @@ class Kegiatan_Service {
 			if($katakunciCari != "") { $where = $whereOpt;} 
 			$order = " order by k.JadwalAkhir desc";
 			if($KodeInstansi == 0){
-				$sqlProses = "select k.KodeKegiatan, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
+				$sqlProses = "select k.KodeKegiatan,k.kode_kelurahan,k.id_indikator, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
 				k.JadwalAkhir, k.KodeKomponen, k.KodeSubKomponen, k.KodeDetailSubKomponen, 
 				k.Anggaran, i.Instansi from kegiatan k, m_instansi i where k.KodeInstansi=i.KodeInstansi".$where;
 			}else{
-				$sqlProses = "select k.KodeKegiatan, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
+				$sqlProses = "select k.KodeKegiatan,k.kode_kelurahan,k.id_indikator, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
 				k.JadwalAkhir, k.KodeKomponen, k.KodeSubKomponen, k.KodeDetailSubKomponen, 
 				k.Anggaran, i.Instansi from kegiatan k, m_instansi i where k.KodeInstansi=i.KodeInstansi 
 				and k.KodeInstansi=$KodeInstansi".$where;
@@ -283,11 +289,13 @@ class Kegiatan_Service {
 				$hasilAkhir = $db->fetchOne($sqlTotal);
 			}else{
 				$sqlData = $sqlProses.$order." limit $xLimit offset $xOffset";
-				$result = $db->fetchAll($sqlData);				
+				$result = $db->fetchAll($sqlData);	
 			}
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array("KodeKegiatan"  =>(string)$result[$j]->KodeKegiatan,
+										"id_indikator"  =>(string)$result[$j]->id_indikator,
+										"kode_kelurahan"  =>(string)$result[$j]->kode_kelurahan,
 										"NamaKegiatan"  =>(string)$result[$j]->NamaKegiatan,
 										"JadwalAwal"  	=>(string)$result[$j]->JadwalAwal,
 										"JadwalAkhir"  	=>(string)$result[$j]->JadwalAkhir,

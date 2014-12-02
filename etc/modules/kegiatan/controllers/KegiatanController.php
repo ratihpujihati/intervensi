@@ -143,6 +143,8 @@ class Kegiatan_KegiatanController extends Zend_Controller_Action {
 	
 	public function simpankegiatanAction(){
 		$KodeKegiatan = $_POST['KodeKegiatan'];
+		$id_indikator = $_POST['id_indikator'];
+		$kode_kelurahan = $_POST['kode_kelurahan'];
 		$NamaKegiatan = $_POST['NamaKegiatan'];
 		$JadwalAwal = $_POST['JadwalAwal'];
 		$JadwalAkhir = $_POST['JadwalAkhir'];
@@ -153,6 +155,9 @@ class Kegiatan_KegiatanController extends Zend_Controller_Action {
 		$Anggaran = $_POST['Anggaran'];
 		
 		$dataMasukan = array("KodeKegiatan" => $KodeKegiatan,
+							 "id_indikator" => $id_indikator,
+							 "kode_kelurahan" => $kode_kelurahan,
+							 "NamaKegiatan" => $NamaKegiatan,
 							 "NamaKegiatan" => $NamaKegiatan,
 							 "JadwalAwal" => $JadwalAwal,
 							 "JadwalAkhir" => $JadwalAkhir,
@@ -173,6 +178,8 @@ class Kegiatan_KegiatanController extends Zend_Controller_Action {
 	
 	public function simpankegiataneditAction(){
 		$KodeKegiatan = $_POST['KodeKegiatan'];
+		$id_indikator = $_POST['id_indikator'];
+		$kode_kelurahan = $_POST['kode_kelurahan'];
 		$NamaKegiatan = $_POST['NamaKegiatan'];
 		$JadwalAwal = $_POST['JadwalAwal'];
 		$JadwalAkhir = $_POST['JadwalAkhir'];
@@ -182,7 +189,10 @@ class Kegiatan_KegiatanController extends Zend_Controller_Action {
 		$KodeDetailSubKomponen = $_POST['KodeDetailSubKomponen'];
 		$Anggaran = $_POST['Anggaran'];
 		
-		$dataMasukan = array("KodeKegiatan" => $KodeKegiatan,
+			$dataMasukan = array("KodeKegiatan" => $KodeKegiatan,
+							 "id_indikator" => $id_indikator,
+							 "kode_kelurahan" => $kode_kelurahan,
+							 "NamaKegiatan" => $NamaKegiatan,
 							 "NamaKegiatan" => $NamaKegiatan,
 							 "JadwalAwal" => $JadwalAwal,
 							 "JadwalAkhir" => $JadwalAkhir,

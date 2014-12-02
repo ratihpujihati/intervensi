@@ -26,7 +26,7 @@ $ctrlFrm = new Zend_View();
 ?>
 		
 <div class="navlink">
-<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+<a href="#" class="home" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/home');">Halaman Utama</a>
 </div>
 <div class="panel">
 	<div class="inner">
@@ -117,7 +117,7 @@ $ctrlFrm = new Zend_View();
 								$indikatorList[$this->indikatorList[$i]->id_indikator] = (string)$this->indikatorList[$i]->kode_indikator .".  ". (string)$this->indikatorList[$i]->nama_indikator;				 
 							}	
 							$indikatorAtrib = array("id"=>"id_indikator", "tabindex"=>"17", "onchange"=>"javascript:pilihKelurahan();");																				
-							echo $ctrlFrm->formSelect('id_indikator', $this->laporanIndikator['id_indikator'], $indikatorAtrib, $indikatorList);								
+							echo $ctrlFrm->formSelect('id_indikator', $this->kegiatanMenu['id_indikator'], $indikatorAtrib, $indikatorList);								
 						?>
 						
 					</td>
@@ -133,7 +133,7 @@ $ctrlFrm = new Zend_View();
 						}						
 						
 							$komponenAtrib = array("id"=>"kode_kelurahan", "tabindex"=>"17");
-							echo $ctrlFrm->formSelect('kode_kelurahan', $this->laporanIndikator['kode_kelurahan'], $komponenAtrib, $kelurahanList);
+							echo $ctrlFrm->formSelect('kode_kelurahan', $this->kegiatanMenu['kode_kelurahan'], $komponenAtrib, $kelurahanList);
 						?>
 					</td>
 				</tr>
