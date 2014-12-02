@@ -35,7 +35,7 @@ class Kegiatan_Service {
 	   $db = $registry->get('db');
 	   try {
 		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll('SELECT * FROM m_instansi i, pengguna p where i.KodeInstansi=p.KodeInstansi order by Instansi');
+		$result = $db->fetchAll('SELECT * FROM m_instansi i, pengguna p where i.KodeInstansi=p.KodeInstansi and i.KodeInstansi != 0 order by Instansi');
 				
 		 
          $jmlResult = count($result);
