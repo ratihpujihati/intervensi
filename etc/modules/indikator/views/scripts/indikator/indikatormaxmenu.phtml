@@ -64,11 +64,11 @@ source: availableTags
 										
 				echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
 				?>
-				<input type="text" name="carii" id="carii" onkeypress="cariIndikatorMax()">
+				<input type="text" name="carii">
 				<?
 			         $atribSubmit = array("onclick"=>"javascript:cariIndikatorMax();");
-			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;"; ?>
-					 <div onClick="javascript:cariIndikatorMax('cari','<? echo $id_indikator;?>');" class="search" title="Cari Indikator"></div>
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;"; 
+				?>
 				
 			</form>
 		</div>
