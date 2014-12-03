@@ -1671,6 +1671,7 @@ class menu_Service {
 		}
 	}
 	
+	//Laporan data indikator
 	public function getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun){
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -1690,6 +1691,7 @@ class menu_Service {
 		   }
 	}
 	
+	//Laporan per kelurahan
 	public function getLaporanPerKelurahan($kode_kelurahan){
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -1712,6 +1714,35 @@ class menu_Service {
 		try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
 				$result = $db->fetchOne("SELECT Kelurahan FROM m_kelurahan WHERE kode_kelurahan = '$kode_kelurahan'");
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
+	//Laporan per Indikator
+	public function getLaporanPerIndikator($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchAll("SELECT i.kode_indikator, i.nama_indikator, k.Kelurahan, f.nilai_kelurahan
+										FROM m_indikator i, m_kelurahan k, form_isian_kelurahan f
+										WHERE i.id_indikator = f.id_indikator AND k.kode_kelurahan = f.kode_kelurahan AND i.id_indikator = '$id_indikator'");
+		     return $result;
+		   } catch (Exception $e) {
+	         echo $e->getMessage().'<br>';
+		     return 'Data tidak ada <br>';
+		   }
+	}
+	
+	public function getNamaIndikator($id_indikator){
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchOne("SELECT nama_indikator FROM m_indikator WHERE id_indikator = '$id_indikator'");
 		     return $result;
 		   } catch (Exception $e) {
 	         echo $e->getMessage().'<br>';

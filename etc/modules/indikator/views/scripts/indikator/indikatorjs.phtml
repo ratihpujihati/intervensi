@@ -205,6 +205,17 @@ var cetaklaporanperkelurahan_opt = {
 		resetForm: false
 };
 
+//cetak laporan per indikator
+function cetakLaporanPerIndikator(){
+	$("#cetaklaporanperindikator").ajaxForm(cetaklaporanperindikator_opt);
+}
+
+var cetaklaporanperindikator_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/indikator/indikator/cetaklaporanperindikator',
+		type: 'post', 
+		resetForm: false
+};
 
 
 </script>

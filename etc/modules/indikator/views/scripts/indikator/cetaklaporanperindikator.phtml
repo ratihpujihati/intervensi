@@ -1,0 +1,50 @@
+<?php
+//ambil tgl hari ini
+//$tanggal = date("Y-m-d");
+// Array Hari
+$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
+$hari = $array_hari[date('N')];
+
+//Format Tanggal 
+$tanggal = date ('j');
+
+//Array Bulan 
+$array_bulan = array("01"=>'Januari',"02"=>'Februari',"03"=>'Maret', "04"=>'April', "05"=>'Mei',"06"=> 'Juni',"07"=>'Juli',"08"=>'Agustus',"09"=>'September',"10"=>'Oktober',"11"=> 'November',"12"=>'Desember'); 
+$bulan = $array_bulan[date('n')];
+ 
+//Format Tahun 
+$tahun = date('Y');
+
+//echo "<h4>Cimahi, $tanggal</h4>";
+$bulan=$array_bulan[$this->bulan];
+?>
+
+
+<?php
+	$namafile="Laporan_" . $this->namaIndikator ." .xls";
+	header("Content-type: application/octet-stream");
+	header('Content-Disposition: attachment; filename="' . $namafile . '"');	
+	header("Pragma: no-cache");
+	header("Expires: 0");
+?>
+<link href="<? echo $this->basePath;?>/css/style.css" rel="stylesheet" type="text/css" />
+
+<h2 class="title"><?php echo $this->namaIndikator?></h2>
+<table class="sortable" cellspacing="0" cellpadding="2" border="0" align="center" border="1">
+  <tr align ="center">
+	  <th width=5%>No</th>
+	  <th width=35%>Kelurahan</th>
+	  <th width=25%>Nilai</th>
+  </tr>
+<?php $i=1?>
+<?php  foreach($this->cetak as $data) : ?>
+	<tr>
+		<td class="clcenter"><?php echo $i;?></td>		
+		<td class="clcenter"><?php echo $this->escape($data->Kelurahan);?></td>
+		<td class="clcenter"><?php echo $this->escape($data->nilai_kelurahan);?></td>	
+	</tr>
+<?php $i++; endforeach; ?>
+</table>
+<?php if (count($this->cetak) != 0){ ?>
+	<a  href="<?php echo $this->basePath; ?>/indikator/indikator/downloadlaporanperindikator?id_indikator=<?echo $this->id_indikator;?>"><div class="download" title="cetak Data"></div></a>
+<?php } ?>

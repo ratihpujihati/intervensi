@@ -433,9 +433,8 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->render('indikatormenu');	
 	}
 	
+	//Laporan data indikator
 	public function laporandataindikatorAction(){
-		$id_indikator= $_REQUEST['id_indikator'];
-		$this->view->id_indikator = $id_indikator;
 		$this->view->indikatorList = $this->menu_serv->getIndikator();
 		$this->view->kelurahanList = $this->menu_serv->getKelurahan();		
 	}
@@ -461,9 +460,8 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->cetak = $this->menu_serv->getLaporanDataIndikator($id_indikator, $kode_kelurahan, $tahun);		
 	}
 	
-	public function laporanperkelurahanAction(){
-		$kode_kelurahan= $_REQUEST['kode_kelurahan'];
-		$this->view->kode_kelurahan = $kode_kelurahan;		
+	//Laporan Per Kelurahan
+	public function laporanperkelurahanAction(){	
 		$this->view->kelurahanList = $this->menu_serv->getKelurahan();		
 	}
 	
@@ -481,5 +479,23 @@ class Indikator_IndikatorController extends Zend_Controller_Action {
 		$this->view->namaKelurahan = $this->menu_serv->getNamaKelurahan($kode_kelurahan);		
 	}
 	
+	//Laporan Per Indikator
+	public function laporanperindikatorAction(){	
+		$this->view->indikatorList = $this->menu_serv->getIndikator();		
+	}
+	
+	public function cetaklaporanperindikatorAction(){
+		$id_indikator= $_REQUEST['id_indikator'];		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->cetak = $this->menu_serv->getLaporanPerIndikator($id_indikator);		
+		$this->view->namaIndikator = $this->menu_serv->getNamaIndikator($id_indikator);		
+	}
+	
+	public function downloadlaporanperindikatorAction(){
+		$id_indikator= $_REQUEST['id_indikator'];		
+		$this->view->id_indikator = $id_indikator;
+		$this->view->cetak = $this->menu_serv->getLaporanPerIndikator($id_indikator);		
+		$this->view->namaIndikator = $this->menu_serv->getNamaIndikator($id_indikator);		
+	}
 }
 ?>
