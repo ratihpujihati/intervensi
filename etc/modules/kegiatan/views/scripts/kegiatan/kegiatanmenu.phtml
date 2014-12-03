@@ -59,6 +59,8 @@ $numToDisplay = $this->numToDisplay;
 				<th width=17.5% class="sorted order2 sortable">Kegiatan</th> 
 				<th width=12% class="sorted order2 sortable">Jadwal</th> 
 				<th width=12.5% class="sorted order2 sortable">Instansi</th> 
+				<th width=4% class="sorted order2 sortable">Indikator</th> 
+				<th width=4% class="sorted order2 sortable">Kelurahan</th> 
 				<th width=4% class="sorted order2 sortable">Komponen</th> 
 				<th width=4% class="sorted order2 sortable">Komponen Sub</th> 
 				<th width=4% class="sorted order2 sortable">Komponen Sub Detail</th> 
@@ -80,6 +82,8 @@ $numToDisplay = $this->numToDisplay;
 					$NamaKegiatan = $this->escape($val['NamaKegiatan']); 
 					$JadwalAwal = $this->escape($val['JadwalAwal']); 
 					$Instansi = $this->escape($val['Instansi']); 				
+					$kode_indikator = $this->escape($val['kode_indikator']); 				
+					$Kelurahan = $this->escape($val['Kelurahan']); 				
 					$KodeKomponen = $this->escape($val['KodeKomponen']); 				
 					$KodeSubKomponen = $this->escape($val['KodeSubKomponen']); 				
 					$KodeDetailSubKomponen = $this->escape($val['KodeDetailSubKomponen']); 				
@@ -103,6 +107,8 @@ $numToDisplay = $this->numToDisplay;
 					<td class="clleft">&nbsp;<? echo $NamaKegiatan;?></td>
 					<td class="clcenter">&nbsp;<? echo $JadwalAwal;?> s.d <? echo $JadwalAkhir;?></td>										
 					<td class="clleft">&nbsp;<? echo $Instansi;?></td>										
+					<td class="clleft">&nbsp;<? echo $kode_indikator;?></td>										
+					<td class="clleft">&nbsp;<? echo $Kelurahan;?></td>										
 					<td class="clcenter">&nbsp;<? echo $KodeKomponen;?></td>										
 					<td class="clcenter">&nbsp;<? echo $KodeSubKomponen;?></td>										
 					<td class="clcenter">&nbsp;<? echo $KodeDetailSubKomponen;?></td>										

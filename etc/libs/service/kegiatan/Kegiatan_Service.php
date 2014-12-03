@@ -273,14 +273,17 @@ class Kegiatan_Service {
 			if($katakunciCari != "") { $where = $whereOpt;} 
 			$order = " order by k.JadwalAkhir desc";
 			if($KodeInstansi == 0){
-				$sqlProses = "select k.KodeKegiatan,k.kode_kelurahan,k.id_indikator, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
+				$sqlProses = "select k.KodeKegiatan,kel.Kelurahan,ind.kode_indikator, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
 				k.JadwalAkhir, k.KodeKomponen, k.KodeSubKomponen, k.KodeDetailSubKomponen, 
-				k.Anggaran, i.Instansi from kegiatan k, m_instansi i where k.KodeInstansi=i.KodeInstansi".$where;
+				k.Anggaran, i.Instansi 
+				FROM kegiatan k, m_instansi i, m_indikator ind , m_kelurahan kel 
+				WHERE k.KodeInstansi=i.KodeInstansi and ind.id_indikator=k.id_indikator and k.kode_kelurahan=kel.kode_kelurahan ".$where;
 			}else{
-				$sqlProses = "select k.KodeKegiatan,k.kode_kelurahan,k.id_indikator, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
+				$sqlProses = "select k.KodeKegiatan,kel.Kelurahan,ind.kode_indikator, k.NamaKegiatan, k.JadwalAwal,k.KodeInstansi,
 				k.JadwalAkhir, k.KodeKomponen, k.KodeSubKomponen, k.KodeDetailSubKomponen, 
-				k.Anggaran, i.Instansi from kegiatan k, m_instansi i where k.KodeInstansi=i.KodeInstansi 
-				and k.KodeInstansi=$KodeInstansi".$where;
+				k.Anggaran, i.Instansi FROM kegiatan k, m_instansi i, m_indikator ind , m_kelurahan kel  
+				WHERE k.KodeInstansi=i.KodeInstansi and ind.id_indikator=k.id_indikator and k.kode_kelurahan=kel.kode_kelurahan  
+				and k.KodeInstansi=$KodeInstansi ".$where;
 			}				
 			$sqlProses1 = $sqlProses.$order;
 			
@@ -294,8 +297,8 @@ class Kegiatan_Service {
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array("KodeKegiatan"  =>(string)$result[$j]->KodeKegiatan,
-										"id_indikator"  =>(string)$result[$j]->id_indikator,
-										"kode_kelurahan"  =>(string)$result[$j]->kode_kelurahan,
+										"kode_indikator"  =>(string)$result[$j]->kode_indikator,
+										"Kelurahan"  =>(string)$result[$j]->Kelurahan,
 										"NamaKegiatan"  =>(string)$result[$j]->NamaKegiatan,
 										"JadwalAwal"  	=>(string)$result[$j]->JadwalAwal,
 										"JadwalAkhir"  	=>(string)$result[$j]->JadwalAkhir,
