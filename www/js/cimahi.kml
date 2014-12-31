@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Style id="s1">
+      <LineStyle>
+        <color>7f0000ff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>7f0000ff</color>
+        <colorMode>normal</colorMode>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <name>All isolation countries</name>
+    <description>All isolation countries</description>
+
+
+
+    <Placemark>
+      <styleUrl>#s1</styleUrl>
+      <name>Indonesia</name>
+      <Polygon>
+      <tessellate>1</tessellate>
+        <extrude>1</extrude>
+        <altitudeMode>clampedToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>102.4918975830078,1.259721994400024,0 102.3088989257813,1.420554995536804,0 102.1374969482422,1.448055028915405,0 102.0785980224609,1.485000014305115,0 101.9944000244141,1.600000023841858,0 102.0065994262695,1.619166970252991,0 102.4349975585938,1.527500033378601,0 102.4779968261719,1.502221941947937,0 102.4954986572266,1.436308026313782,0 102.504997253418,1.273888945579529,0 102.4918975830078,1.259721994400024,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#s1</styleUrl>
+      <name>Ecuador</name>
+      <Polygon>
+      <tessellate>1</tessellate>
+        <extrude>1</extrude>
+        <altitudeMode>clampedToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>-90.61167907714844,-0.3755556046962738,0 -90.77166748046875,-0.344166785478592,0 -90.87222290039063,-0.2652778923511506,0 -90.79332733154297,-0.149444505572319,0 -90.77362060546876,-0.1550000011920929,0 -90.58556365966797,-0.2455555945634842,0 -90.55029296875,-0.3091666996479035,0 -90.61167907714844,-0.3755556046962738,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+
+      </Polygon>
+    </Placemark>
+    </Document>
+    </kml>

@@ -61,9 +61,8 @@ $numToDisplay = $this->numToDisplay;
 				<th width=12.5% class="sorted order2 sortable">Instansi</th> 
 				<th width=4% class="sorted order2 sortable">Indikator</th> 
 				<th width=4% class="sorted order2 sortable">Kelurahan</th> 
-				<th width=4% class="sorted order2 sortable">Komponen</th> 
-				<th width=4% class="sorted order2 sortable">Komponen Sub</th> 
-				<th width=4% class="sorted order2 sortable">Komponen Sub Detail</th> 
+				<th width=3% class="sorted order2 sortable">Komponen</th> 
+				<th width=3% class="sorted order2 sortable">Komponen Sub</th> 
 				<th width=15% class="sorted order2 sortable">Anggaran</th> 
 				<th width=5% colspan="3"  class="nosort">Tindakan</th>
 				
@@ -110,8 +109,7 @@ $numToDisplay = $this->numToDisplay;
 					<td class="clleft">&nbsp;<? echo $kode_indikator;?></td>										
 					<td class="clleft">&nbsp;<? echo $Kelurahan;?></td>										
 					<td class="clcenter">&nbsp;<? echo $KodeKomponen;?></td>										
-					<td class="clcenter">&nbsp;<? echo $KodeSubKomponen;?></td>										
-					<td class="clcenter">&nbsp;<? echo $KodeDetailSubKomponen;?></td>										
+					<td class="clcenter">&nbsp;<? echo $KodeSubKomponen;?></td>												
 					<td class="clleft">&nbsp;Rp. <? echo number_format($Anggaran, 0, ',', '.');?></td>										
 					<td><div onClick="PenerimaForm('<? echo $KodeKegiatan;?>');" class="view" title="Lihat Penerima"></div></td>
 					<td><div onClick="KegiatanForm('update','<? echo $KodeKegiatan;?>');" class="edit" title="Ubah Data"></div></td>
